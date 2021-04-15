@@ -10,8 +10,9 @@
   font-size: small;
 }
 .btn-danger:hover{
-  color: black;
+  color: red;
   background-color: white;
+  font-weight: bold;
 }
 .pFooter{
   font-style: normal;
