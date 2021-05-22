@@ -23,4 +23,8 @@ public interface OrderManagementDao {
     public OrderProduct findById(int id);
     
     public List<OrderProduct> getAll();
+    
+    public List<OrderProduct> getOrdersByDate(String date);
+    
+    public List<OrderProduct> getOrdersUnpaid();
 }

@@ -24,4 +24,7 @@ public interface OrderManagementService {
     
     public List<OrderProduct> getAll();
     
+    public List<OrderProduct> getOrdersByDate(String date);
+    
+    public List<OrderProduct> getOrdersUnpaid();
 }

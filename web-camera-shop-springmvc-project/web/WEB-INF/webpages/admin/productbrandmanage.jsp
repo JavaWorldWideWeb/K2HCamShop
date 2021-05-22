@@ -73,7 +73,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger" >Xóa</button>
-                                <input type="hidden" name="id" id="id">
+                                <input type="text" name="id" id="id">
                             </div>
                         </form>
                     </div>

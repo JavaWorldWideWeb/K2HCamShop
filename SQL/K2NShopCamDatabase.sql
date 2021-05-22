@@ -34,12 +34,13 @@ CREATE TABLE UserShop(
 	Username varchar(50),
 	Role varchar(50),
 	Address varchar(50),
-	Birthday datetime,
+	Birthday date,
 	FullName varchar(50),
 	Img varchar(255),
 	PhoneNumber varchar(50),
 )
 GO
+
 CREATE TABLE Comment(
 	CommentID int identity primary key,
 	UserID int FOREIGN KEY REFERENCES UserShop(UserID) ON DELETE CASCADE ,
@@ -51,7 +52,7 @@ CREATE TABLE Comment(
 GO
 CREATE TABLE [OrderProduct](
 	OrderID int identity primary key,
-	DateOrder Datetime ,
+	DateOrder Date,
 	StatusOrder varchar(50),
 	TotalMoney float,
 	UserID int FOREIGN KEY REFERENCES UserShop(UserID),
@@ -71,3 +72,10 @@ CREATE TABLE Contact(
 	ContactEmail varchar(50),
 	ContactMessage varchar(255)
 )
+GO
+
+insert OrderProduct values (getDate(), 'chua thanh toan', 100000, 1);
+insert OrderProduct values ('2020-06-16', 'thanh toan', 50000, 1);
+
+select * from OrderProduct where DateOrder = '2021-05-22'
+update UserShop set FullName = 'NguyenThanhHoai'

@@ -45,5 +45,15 @@ public class OrderManagementServiceImpl implements OrderManagementService{
     public List<OrderProduct> getAll() {
         return orderManagementDao.getAll();
     }
+
+    @Override
+    public List<OrderProduct> getOrdersByDate(String date) {
+        return orderManagementDao.getOrdersByDate(date);
+    }
+
+    @Override
+    public List<OrderProduct> getOrdersUnpaid() {
+        return orderManagementDao.getOrdersUnpaid();
+    }
     
 }

@@ -5,6 +5,9 @@
  */
 package sv.iuh.project.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -113,6 +116,52 @@ public class OrderManagementDAOImpl implements OrderManagementDao{
         try {
             transaction = session.beginTransaction();
             Query query = session.createQuery("FROM OrderProduct");
+            List<OrderProduct> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<OrderProduct> getOrdersByDate(String date) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();         
+            Query query = session.createQuery("FROM OrderProduct WHERE dateOrder = :dateOrder");
+            query.setString("dateOrder", date);
+            List<OrderProduct> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<OrderProduct> getOrdersUnpaid() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();         
+            Query query = session.createQuery("FROM OrderProduct WHERE statusOrder = :statusOrder");
+            query.setString("statusOrder", "chua thanh toan");
             List<OrderProduct> list = query.list();
             transaction.commit();
             return list;
