@@ -3,7 +3,7 @@
     Created on : May 19, 2021, 8:18:03 PM
     Author     : Tuan Khang
 --%>
-
+<%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -13,7 +13,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<c:url value="/resources/Css/Header.css"/>" rel='stylesheet' type='text/css'/>
-
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link href="<c:url value="/resources/Css/Header.css"/>" rel='stylesheet' type='text/css'/>

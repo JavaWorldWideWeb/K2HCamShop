@@ -7,7 +7,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-        xsi:schemaLocation="
+       xsi:schemaLocation="
                   http://www.springframework.org/schema/beans
                   http://www.springframework.org/schema/beans/spring-beans.xsd
                   http://www.springframework.org/schema/context
@@ -32,11 +32,17 @@
           p:prefix="/WEB-INF/webpages/"
           p:suffix=".jsp" 
     />
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
     <!--
     The index controller.
     -->
     <bean id="ProductBrandDao" class="sv.iuh.project.dao.ProductBrandDAOImpl" />
     <bean id="ProductBrandService" class="sv.iuh.project.service.ProductBrandServiceImpl" />
+    <bean id="ProductCategoryService" class="sv.iuh.project.service.ProductCategoryServiceImpl" />
+    <bean id="ProductCategoryDao" class="sv.iuh.project.dao.ProductCategoryDaoImpl" />
+     <bean id="ProductDaoService" class="sv.iuh.project.service.ProductServiceImpl" />
+    <bean id="ProductDao" class="sv.iuh.project.dao.ProductDaoImpl" />
+
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
     <mvc:annotation-driven />
 </beans>

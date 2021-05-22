@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@include file="dashboard.jsp" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +34,7 @@
                         <a class="nav-link" href="Dashboard.html">Trang chủ <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="Product.html">
+                        <a class="nav-link " href="<c:url value="/product/showproductuser"/>">
                             Các sản phẩm
                         </a>
                     </li>
@@ -57,7 +57,7 @@
                         <a class="nav-link" href="#">Đăng kí</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../Admin/index.html">Admin</a>
+                        <a class="nav-link" href="<c:url value="/admin"/>">Admin</a>
                     </li>
                 </ul>
             </div>

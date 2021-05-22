@@ -22,19 +22,12 @@
 
         <link rel="icon" href="<c:url value="/resources/images/LoadLogo.png"/>">
     </head>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-            $('table .delete').on('click', function () {
-                var id = $(this).parent().find("#id").val();
-                $('#myModal #id').val(id);
-            });
-        });
-    </script>
+    
     <body>
         <!-- partial -->
+        
         <div class="main-panel">
-
+            
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">QUẢN LÝ THƯƠNG HIỆU</h4>
@@ -72,7 +65,7 @@
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-                        <form action="<c:url value="/productbrand/remove"/>">
+                        <form action="<c:url value="/productbrand/remove"/>" >
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <h4 class="modal-title">Cảnh báo thương hiệu này sẽ bị xóa !!!</h4>
@@ -96,5 +89,14 @@
         <script src="<c:url value="/resources/js/off-canvas.js"/>"></script>
         <script src="<c:url value="/resources/js/dashboard.js"/>"></script>
         <script src="<c:url value="/resources/js/misc.js"/>"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('table .delete').on('click', function () {
+                var id = $(this).parent().find("#id").val();
+                $('#myModal #id').val(id);
+            });
+        });
+    </script>
     </body>
 </html>

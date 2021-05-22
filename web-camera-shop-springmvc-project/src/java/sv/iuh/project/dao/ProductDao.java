@@ -5,25 +5,26 @@
  */
 package sv.iuh.project.dao;
 
+import java.util.List;
 import sv.iuh.project.model.Product;
+import sv.iuh.project.model.ProductBrand;
+import sv.iuh.project.model.ProductCategory;
 
 /**
  *
  * @author Tuan Khang
  */
 public interface ProductDao {
-     // create
-    public boolean create(Product object);
-
+    public List<Product> getAll();
+    
     // update
     public boolean update(Product object);
 
     // delete
     public boolean delete(Product object);
 
-//    // find by id
-//    public Category findById(int categoryId);
-//
-//    // load list category
-//    public List<Category> getAll();
+    // find by id
+    public Product findById(int categoryId);
+    
+    public boolean create(Product object);
 }

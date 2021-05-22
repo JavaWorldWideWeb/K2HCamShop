@@ -78,7 +78,6 @@ public class ProductBrandManage {
         if (p != null) {
             productBrandService.delete(p);
         }
-        System.out.println("sv.iuh.project.controller.ProductBrandManage.viewProductRemove()" + id);
         mm.put("list", productBrandService.getAll());
         return "admin/productbrandmanage";
     }

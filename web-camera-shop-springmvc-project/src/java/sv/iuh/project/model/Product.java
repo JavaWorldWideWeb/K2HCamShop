@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -70,6 +71,17 @@ public class Product implements Serializable {
     private ProductCategory productCategoryID;
 
     public Product() {
+    }
+
+    public Product(String productName, Integer price, Integer quantity, String color, String description, String img, ProductBrand productBrandID, ProductCategory productCategoryID) {
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+        this.color = color;
+        this.description = description;
+        this.img = img;
+        this.productBrandID = productBrandID;
+        this.productCategoryID = productCategoryID;
     }
 
     public Product(Integer productID) {

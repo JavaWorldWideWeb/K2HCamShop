@@ -5,12 +5,20 @@
  */
 package sv.iuh.project.controller;
 
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.portlet.ModelAndView;
 import sv.iuh.project.model.ProductBrand;
 import sv.iuh.project.service.ProductBrandService;
@@ -22,12 +30,12 @@ import sv.iuh.project.service.ProductBrandService;
 @Controller
 public class Test {
 
-    @Autowired
-    private ProductBrandService productBrandService;
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String viewHome(ModelMap mm) {
-        mm.put("listCategory", productBrandService.getAll());
+        return "user/dashboard";
+    }
+    @RequestMapping("/admin")
+    public String adminDashboard(){
         return "admin/dashboard";
     }
 }

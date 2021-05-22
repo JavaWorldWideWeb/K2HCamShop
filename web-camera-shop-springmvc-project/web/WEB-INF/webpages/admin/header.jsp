@@ -21,18 +21,9 @@
         <link rel="stylesheet" href="<c:url value="/resources/vendors/chartist/chartist.min.css"/>" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="icon" href="<c:url value="/resources/images/LoadLogo.png"/>">
-        <script src="<c:url value="/resources/vendors/js/vendor.bundle.base.js"/>"></script>
-        <script src="<c:url value="/resources/vendors/chart.js/Chart.min.js"/>"></script>
-        <script src="<c:url value="/resources/vendors/moment/moment.min.js"/>"></script>
-        <script src="<c:url value="/resources/vendors/daterangepicker/daterangepicker.js"/>"></script>
-        <script src="<c:url value="/resources/vendors/chartist/chartist.min.js"/>"></script>
-        <script src="<c:url value="/resources/js/off-canvas.js"/>"></script>
-        <script src="<c:url value="/resources/js/dashboard.js"/>"></script>
-        <script src="<c:url value="/resources/js/misc.js"/>"></script>
         <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
     </head>
     <body>
-
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex align-items-center">
@@ -108,6 +99,7 @@
                                     class="badge badge-pill badge-danger">1</span></a>
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Tin nhắn</a>
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Hoạt động</a>
+                            <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Hoạt động</a>
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Đăng xuất</a>
                         </div>
                     </li>
@@ -152,7 +144,7 @@
                         <span class="nav-link">Quản lý</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="<c:url value="/product/show"/>">
                             <span class="menu-title">Quản lý sản phẩm</span>
                             <i class="icon-camera menu-icon"></i>
                         </a>
@@ -170,7 +162,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="<c:url value="/productcategory/show"/>">
                             <span class="menu-title">Quản lý loại sản phẩm</span>
                             <i class="icon-list menu-icon"></i>
                         </a>

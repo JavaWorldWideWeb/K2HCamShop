@@ -19,14 +19,9 @@
         <link rel="stylesheet" href="<c:url value="/resources/vendors/flag-icon-css/css/flag-icon.min.css"/>" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<c:url value="/resources/vendors/daterangepicker/daterangepicker.css"/>" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<c:url value="/resources/vendors/chartist/chartist.min.css"/>" rel='stylesheet' type='text/css'>
-
         <link rel="icon" href="<c:url value="/resources/images/LoadLogo.png"/>">
     </head>
-    <script>
-        $(document).ready(function () {
-            $('.toast').toast('show');
-        });
-    </script>
+    
     <body>
         <!-- partial -->
         <div class="main-panel">
@@ -46,7 +41,6 @@
                     </div>
                 </c:if>
             </div>
-
             <div class="card">
                 <div class="card-body">
 
@@ -79,5 +73,10 @@
         <script src="<c:url value="/resources/js/off-canvas.js"/>"></script>
         <script src="<c:url value="/resources/js/dashboard.js"/>"></script>
         <script src="<c:url value="/resources/js/misc.js"/>"></script>
+        <script>
+        $(document).ready(function () {
+            $('.toast').toast('show');
+        });
+    </script>
     </body>
 </html>
