@@ -150,7 +150,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="<c:url value="/orderManagement/show"/>">
                             <span class="menu-title">Quản lý đơn hàng</span>
                             <i class="icon-basket-loaded menu-icon"></i>
                         </a>
