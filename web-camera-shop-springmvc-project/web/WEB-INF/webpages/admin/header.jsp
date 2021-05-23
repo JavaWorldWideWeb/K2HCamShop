@@ -98,7 +98,7 @@
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> Thông tin của tôi <span
                                     class="badge badge-pill badge-danger">1</span></a>
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Tin nhắn</a>
-                            <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Hoạt động</a>
+                            <a class="dropdown-item" href="<c:url value="/"/>"><i class="dropdown-item-icon icon-energy text-primary"></i> Quay về trang chính</a>
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Hoạt động</a>
                             <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Đăng xuất</a>
                         </div>

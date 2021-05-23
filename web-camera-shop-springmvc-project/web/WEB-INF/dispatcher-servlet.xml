@@ -40,11 +40,12 @@
     <bean id="ProductBrandService" class="sv.iuh.project.service.ProductBrandServiceImpl" />
     <bean id="ProductCategoryService" class="sv.iuh.project.service.ProductCategoryServiceImpl" />
     <bean id="ProductCategoryDao" class="sv.iuh.project.dao.ProductCategoryDaoImpl" />
-     <bean id="ProductDaoService" class="sv.iuh.project.service.ProductServiceImpl" />
+    <bean id="ProductDaoService" class="sv.iuh.project.service.ProductServiceImpl" />
     <bean id="ProductDao" class="sv.iuh.project.dao.ProductDaoImpl" />
     <bean id="OrderManagementService" class="sv.iuh.project.service.OrderManagementServiceImpl" />
     <bean id="OrderManagementDao" class="sv.iuh.project.dao.OrderManagementDAOImpl" />
-
+    <bean id="LoginService" class="sv.iuh.project.service.LoginServiceImpl" />
+    <bean id="LoginDao" class="sv.iuh.project.dao.LoginDaoImpl" />
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
     <mvc:annotation-driven />
 </beans>

@@ -44,6 +44,8 @@ public class ProductBrand implements Serializable {
     private String productBrandName;
     @Column(name = "NationalProduction", length = 50)
     private String nationalProduction;
+    @Column(name = "img", length = 200)
+    private String img;
     @OneToMany(mappedBy = "productBrandID")
     private List<Product> productList;
 
@@ -52,6 +54,14 @@ public class ProductBrand implements Serializable {
 
     public ProductBrand(Integer productBrandID) {
         this.productBrandID = productBrandID;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public Integer getProductBrandID() {

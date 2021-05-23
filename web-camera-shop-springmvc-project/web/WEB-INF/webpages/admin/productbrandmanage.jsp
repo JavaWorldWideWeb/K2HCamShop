@@ -42,6 +42,7 @@
                                 <th>Mã thương hiệu</th>
                                 <th>Tên thương hiệu</th>
                                 <th>Quốc gia</th>
+                                <th>Logo</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -51,6 +52,7 @@
                                     <td>${pb.productBrandID}</td>
                                     <td>${pb.productBrandName}</td>
                                     <td>${pb.nationalProduction}</td>
+                                    <td><img src="${pageContext.request.contextPath}/imgbrand/${pb.img}" style="border-radius: 0px;width: 150px;height: 80px"></td>
                                     <td><a href="#" class="delete" data-toggle="modal" data-target="#myModal"><i class="fas fa-trash" style="color: red" data-toggle
                                                                                                                  ="tooltip" title="Delete"></i></a>
                                         <input type="hidden" name="id" id="id" value="${pb.productBrandID}">
@@ -73,7 +75,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-danger" >Xóa</button>
-                                <input type="text" name="id" id="id">
+                                <input type="hidden" name="id" id="id">
                             </div>
                         </form>
                     </div>

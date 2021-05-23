@@ -42,14 +42,16 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/show")
-    public String viewAdmin(ModelMap mm) {
+    public String viewAdmin(ModelMap mm,HttpSession session) {
         mm.put("list", productService.getAll());
+        mm.put("user", session.getAttribute("userlogin"));
         return "admin/productmanage";
     }
 
     @RequestMapping("/showproductuser")
     public String viewProduct(ModelMap mm) {
         mm.put("list", productService.getAll());
+        mm.put("listbrand", productBrandService.getAll());
         return "user/product";
     }
 
@@ -61,13 +63,15 @@ public class ProductController {
         int price = Integer.parseInt(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String color = request.getParameter("color");
+        String description= request.getParameter("des");
         ProductBrand productBrand = productBrandService.findById(Integer.parseInt(request.getParameter("brand")));
         ProductCategory productCategory = productCategoryService.findById(Integer.parseInt(request.getParameter("cate")));
-        Product product = new Product(name, price, quantity, color, color, saveFile(photo), productBrand, productCategory);
+        String warranTyperiod=request.getParameter("warranTyperiod");
+        Product product= new Product(name, price, quantity, color, description, warranTyperiod, saveFile(photo), productBrand, productCategory);
         if ("".equals(request.getParameter("id"))) {
             productService.create(product);
             mm.put("success", "Thêm thành công");
-            return "admin/productform";
+            return "redirect:/product/showform";
         } else {
             int id = Integer.parseInt(request.getParameter("id"));
             product.setProductID(id);
@@ -106,7 +110,7 @@ public class ProductController {
             try {
                 byte[] bytes = file.getBytes();
                 String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "assets/user/img");
+                File dir = new File(rootPath + File.separator + "assets/user/imgproduct");
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }

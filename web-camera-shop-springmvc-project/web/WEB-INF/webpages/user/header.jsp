@@ -4,6 +4,7 @@
     Author     : Tuan Khang
 --%>
 
+<%@page import="sv.iuh.project.model.UserShop"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -14,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <header>
+        <header>
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-4"><img src="<c:url value="/resources/Image/K2NCamShop.png"/>" style="width: 40%;" /></div>
@@ -31,7 +32,7 @@
             <div class="collapse navbar-collapse" id="navbarsExample05">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="Dashboard.html">Trang chủ <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="<c:url value="/"/>">Trang chủ <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link " href="<c:url value="/product/showproductuser"/>">
@@ -39,7 +40,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="About.html">Giới thiệu về chúng tôi</a>
+                        <a class="nav-link" href="<c:url value="/about"/>">Giới thiệu về chúng tôi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Liên hệ</a>
@@ -49,16 +50,28 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Đăng nhập</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Đăng kí</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/admin"/>">Admin</a>
-                    </li>
+                    <%
+                        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+                    %>
+                    <c:set var = "usershop" scope = "session" value = "<%=userShop%>"/>
+                    <c:if test="${usershop!=null}">
+                        <c:catch var="userShop">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<c:url value="/login/logout"/>"><%=userShop.getFullName()%></a>
+                            </li>
+                        </c:catch>
+                    </c:if>
+                    <c:if test="${usershop==null}">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/login"/>">Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Đăng kí</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<c:url value="/admin"/>">Admin</a>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </nav>

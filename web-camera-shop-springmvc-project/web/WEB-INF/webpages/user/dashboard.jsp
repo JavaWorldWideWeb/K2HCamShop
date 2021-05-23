@@ -59,12 +59,10 @@
             <h3 align="center" style="font-weight: bold;">THƯƠNG HIỆU MÁY ẢNH</h3>
         </div>
         <div class="row">
-            <div class="col-2"><a href=""><img src="../Image/Logo/canon.jpeg" style="width: 100%;"></a></div>
-            <div class="col-2"><a href=""><img src="../Image/Logo/kodak.png" style="width: 100%;"></a></div>
-            <div class="col-2"><a href=""><img src="../Image/Logo/Nikon.jpg" style="width: 100%;"></a></div>
-            <div class="col-2"><a href=""><img src="../Image/Logo/sony.jpg" style="width: 100%;"></a></div>
-            <div class="col-2"><a href=""><img src="../Image/Logo/panasonic.jpg" style="width: 100%;"></a></div>
-            <div class="col-2"><a href=""><img src="../Image/Logo/olympus.jpg" style="width: 100%;"></a></div>
+            <c:forEach items="${listbrand}" var="lb">
+                 <div class="col-2"><a href=""><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
+            </c:forEach>
+           
         </div>
 
         <div style="padding:10px">

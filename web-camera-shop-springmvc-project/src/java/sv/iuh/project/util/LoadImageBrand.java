@@ -10,34 +10,32 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.nio.file.Files;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.URIDereferencer;
 
 /**
  *
  * @author Tuan Khang
  */
-@WebServlet(urlPatterns = "/image/*")
-public class LoadImage extends HttpServlet {
-    private String imagePath;
+@WebServlet(urlPatterns = "/imgbrand/*")
+public class LoadImageBrand extends HttpServlet {
 
-
+   private String imagePath;
     @Override
     public void init() throws ServletException {
-        imagePath=System.getProperty("catalina.home")+File.separator+"assets/user/imgproduct";
+        imagePath=System.getProperty("catalina.home")+File.separator+"assets/user/imgbrand";
     }
-    
+   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String requestImage=request.getPathInfo();
+         String requestImage=request.getPathInfo();
         if(requestImage==null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            System.err.println("eeeee");
             return;
         }
         File image=new File(imagePath,URLDecoder.decode(requestImage, "UTF-8"));
@@ -52,5 +50,4 @@ public class LoadImage extends HttpServlet {
         response.setHeader("Content-Length", String.valueOf(image.length()));
         Files.copy(image.toPath(), response.getOutputStream());
     }
-
 }

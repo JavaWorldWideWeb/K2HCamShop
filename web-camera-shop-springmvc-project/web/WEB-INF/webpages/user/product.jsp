@@ -22,27 +22,23 @@
     <body>
         <div class="container-custom" style="margin-top: 20px;">
             <div class="row">
-                <div class="col-2"><a href=""><img src="../Image/Logo/kodak.png" style="width: 100%;"></a></div>
-                <div class="col-2"><a href=""><img src="../Image/Logo/canon.jpeg" style="width: 100%;"></a></div>
-                <div class="col-2"><a href=""><img src="../Image/Logo/sony.jpg" style="width: 100%;"></a></div>
-                <div class="col-2"><a href=""><img src="../Image/Logo/Nikon.jpg" style="width: 100%;"></a></div>
-                <div class="col-2"><a href=""><img src="../Image/Logo/panasonic.jpg" style="width: 100%;"></a></div>
-                <div class="col-2"><a href=""><img src="../Image/Logo/olympus.jpg" style="width: 100%;"></a></div>
+                <c:forEach items="${listbrand}" var="lb">
+                    <div class="col-2"><a href=""><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
+                        </c:forEach>
             </div>
         </div>
         <div class="container-custom" style="padding-top: 20px;">
             <div class="row">
-                <div class="col-3">
+                <div class="col-3" style="border-right: 1px gray solid;">
                     <form action="/action_page.php">
                         <div class="row">
-                            <div class="col-9">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="email" placeholder="Nhập từ khóa tìm kiếm"
-                                           name="email" autocomplete="off">
+                            <div class="col-11">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="submit">Go</button>  
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-3">
-                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -82,7 +78,7 @@
 
                     </form>
                 </div>
-                <div class="col-9">
+                <div class="col-9" >
                     <div>
                         <h4>Các sản phẩm</h4>
                     </div>
@@ -124,6 +120,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        
+
     </body>
 </html>

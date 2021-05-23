@@ -45,7 +45,7 @@
                 <div class="card-body">
 
                     <h4 class="card-title">Nhập thông tin thương hiệu</h4>
-                    <form method="Post" class="forms-sample" action="<c:url value="/productbrand/save"/>">
+                    <form method="Post" class="forms-sample" action="<c:url value="/productbrand/save"/>" enctype="multipart/form-data">
                         <c:catch var="productBrand">
                             <input type="text" class="form-control" hidden="true" value="${productBrand.productBrandID}" id="exampleInputUsername1" name="id" placeholder="Nhập tên thương hiệu">
                             <div class="form-group">
@@ -56,6 +56,10 @@
                             <div class="form-group">
                                 <label for="exampleInputConfirmPassword1">Quốc Gia</label>
                                 <input type="text" class="form-control" id="exampleInputConfirmPassword1" value="${productBrand.nationalProduction}" name="nation" placeholder="Nhập quốc gia">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputConfirmPassword1">Logo</label>
+                                <input type="file" class="form-control" value="${product.img}" name="image">
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Lưu</button>
                             <button class="btn btn-light" type="reset">Hủy</button>

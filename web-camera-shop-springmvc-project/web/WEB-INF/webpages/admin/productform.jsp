@@ -63,8 +63,16 @@
                                 <input type="text" class="form-control"  value="${product.color}" name="color" placeholder="Nhập màu sắc">
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputConfirmPassword1">Thời gian bảo hành</label>
+                                <select class="form-control form-control-sm" name="warranTyperiod">
+                                        <option value="${product.warranTyperiod}" hidden="true" selected="true">${product.warranTyperiod}</option>
+                                        <option value="1 tháng">1 Tháng</option>
+                                        <option value="2 tháng">2 Tháng</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputConfirmPassword1">Hình Ảnh</label>
-                                <input type="file" class="form-control" value="${product.img}" name="image">
+                                <input type="file" class="form-control" value="${pageContext.request.contextPath}/imgbrand/${product.img}" name="image">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlSelect3">Thương Hiệu</label>
@@ -86,7 +94,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleTextarea1">Mô tả</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4" name=""></textarea>
+                                <textarea class="form-control" id="exampleTextarea1" rows="4" name="des"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary mr-2">Lưu</button>
                             <button class="btn btn-light" type="reset">Hủy</button>

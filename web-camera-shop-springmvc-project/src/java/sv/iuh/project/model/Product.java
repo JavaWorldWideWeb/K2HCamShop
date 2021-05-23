@@ -57,6 +57,8 @@ public class Product implements Serializable {
     private String color;
     @Column(name = "Description", length = 50)
     private String description;
+    @Column(name = "WarranTyperiod", length = 50)
+    private String warranTyperiod;
     @Column(name = "img", length = 255)
     private String img;
     @OneToMany(mappedBy = "productID")
@@ -73,15 +75,20 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(String productName, Integer price, Integer quantity, String color, String description, String img, ProductBrand productBrandID, ProductCategory productCategoryID) {
+    public Product(String productName, Integer price, Integer quantity, String color, String description, String warranTyperiod, String img, ProductBrand productBrandID, ProductCategory productCategoryID) {
         this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.color = color;
         this.description = description;
+        this.warranTyperiod = warranTyperiod;
         this.img = img;
         this.productBrandID = productBrandID;
         this.productCategoryID = productCategoryID;
+    }
+    
+    public String getWarranTyperiod() {
+        return warranTyperiod;
     }
 
     public Product(Integer productID) {

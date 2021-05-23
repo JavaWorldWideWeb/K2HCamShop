@@ -29,6 +29,9 @@
 
             <div class="card">
                 <div class="card-body">
+                    <c:catch var="user">
+                        <p>${user.username}</p>
+                    </c:catch>
                     <h4 class="card-title">QUẢN LÝ LOẠI SẢN PHẨM</h4>
                     <p class="card-description"><code>DANH SÁCH LOẠI SẢN PHẨM </code> 
                     </p>
