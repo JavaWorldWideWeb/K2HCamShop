@@ -12,6 +12,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .nav-item:hover .sub-icon1{
+                display:block;
+                text-decoration: none;
+                color: blue;
+            }
+        </style>
     </head>
     <body>
          <header>
@@ -47,7 +54,36 @@
                 </ul>
                 <ul class="navbar-nav" style="padding-right: 7vw;">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+                        <div class="cart">
+                            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+                            <span><c:out value="${sessionScope.myCartNum}"/></span>
+                        </div>
+                        <ul class="sub-icon1 list" style="color: white; display: none">
+                            <h3>Recently added items (<c:out value="${sessionScope.myCartNum}"/>)</h3>
+                                <div class="shopping_cart">
+                                    <c:forEach var="map" items="${sessionScope.myCartItems}">
+                                        <div class="cart_box">
+                                            <div class="message">
+                                                <div class="alert-close"> </div> 
+                                                <div class="list_img"><img src="${pageContext.request.contextPath}/resources/pages/images/14.jpg" class="img-responsive" alt=""></div>
+                                                <div class="list_desc"><h4><a href="#"><c:out value="${map.value.product.productName}"/></a></h4><c:out value="${map.value.quantity}"/> x
+                                                    $<c:out value="${map.value.product.productPrice}"/> = <span class="actual"> $<c:out value="${map.value.quantity * map.value.product.productPrice}"/></span></div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <div class="total">
+                                    <div class="total_left">Total: </div>
+                                    <div class="total_right">$<c:out value="${sessionScope.myCartTotal}"/></div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                                <div class="login_buttons">
+                                    <div class="check_button"><a href="checkout.html">Check out</a></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Đăng nhập</a>
