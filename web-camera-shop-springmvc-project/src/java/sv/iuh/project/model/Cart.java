@@ -10,6 +10,8 @@ package sv.iuh.project.model;
  * @author Thanh Hoai
  */
 public class Cart {
+
+    private static final long serialVersionUID = 1L;
     private Product product;
     private int quantity;
 
@@ -36,5 +38,5 @@ public class Cart {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
 }

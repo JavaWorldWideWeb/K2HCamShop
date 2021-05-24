@@ -33,7 +33,7 @@ public class ControllerCart {
     public String viewHome(ModelMap mm){
         return "user/cart";
     }
-    @RequestMapping(value = "/add/{productID}.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/add/{productID}", method = RequestMethod.GET)
     public String viewAdd(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
@@ -56,7 +56,7 @@ public class ControllerCart {
         session.setAttribute("myCartItems", cartItems);
         session.setAttribute("myCartTotal", totalPrice(cartItems));
         session.setAttribute("myCartNum", cartItems.size());
-        return "user/dashboard";
+        return "redirect:/";
     }
     
     @RequestMapping(value = "/sub/{productId}.html", method = RequestMethod.GET)
@@ -68,10 +68,15 @@ public class ControllerCart {
         session.setAttribute("myCartItems", cartItems);
         return "user/cart";
     }
-    
+    //trước remove không có /
+    //giờ thêm /
+    //giờ xóa / bỏ hình đi có khi xóa được
+    //hử đi t nghĩ k phải do hình đâu
+    //move/{productId} cái này mình đặt productId thành tên khác dc hôn 
 @RequestMapping(value = "/remove/{productId}.html", method = RequestMethod.GET)
-    public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productId") long productId) {
+    public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productId") int productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
+        System.out.println(productId);
         if (cartItems == null) {
             cartItems = new HashMap<>();
         }

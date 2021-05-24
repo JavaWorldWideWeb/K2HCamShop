@@ -50,7 +50,12 @@ public class LoadImage extends HttpServlet {
         response.reset();
         response.setContentType(contentType);
         response.setHeader("Content-Length", String.valueOf(image.length()));
-        Files.copy(image.toPath(), response.getOutputStream());
+        try {
+                    Files.copy(image.toPath(), response.getOutputStream());
+        } catch (Exception e) {
+            System.out.println("");
+        }
+        
     }
 
 }

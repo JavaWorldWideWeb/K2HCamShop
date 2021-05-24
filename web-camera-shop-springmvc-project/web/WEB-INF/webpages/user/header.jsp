@@ -67,8 +67,8 @@
                 <ul class="navbar-nav" style="padding-right: 7vw;">
                     <li class="dropdown" style="position: relative; display: inline-block;">
                         <div class="cart">
-                            <a class="nav-link" href="<c:url value="/cart/show"/>"><i class="fas fa-shopping-cart"></i></a>
-                            <span><c:out value="${sessionScope.myCartNum}"/></span>
+                            <a class="nav-link" href="<c:url value="/cart/show"/>"><i class="fas fa-shopping-cart" style="color: white"> <span style="color: red"><c:out value="${sessionScope.myCartNum}"/></span></i></a>
+         
                         </div>
                         <div class="dropdown-content">
                             <ul class="sub-icon1 list">
