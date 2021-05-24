@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -162,13 +163,14 @@
                                 Giá bán
                             </div>
                             <div class="col-8" style="color: red;padding-top: 20px;">
-                                <b>$ ${p.price}</b>
+                                <fmt:formatNumber type = "number" 
+                                                              maxFractionDigits = "3" value = "${p.price}"/> VND
                             </div>
                             <div class="col-4" style="padding-top: 20px;">
                                 Bảo hành
                             </div>
                             <div class="col-8" style="padding-top: 20px;">
-                                <b>12 Tháng</b>
+                                <b>${p.warranTyperiod}</b>
                             </div>
                             <div class="col-4" style="padding-top: 20px;">
                                 Xuất xứ
@@ -185,8 +187,8 @@
                                     </div>
                                 </div>
                                 <div class="col-12" style="margin-top: 30px;">
-                                    <button type="submit" class="btn btn-danger"
-                                            style="width: 200px; height: 50px; font-size: large ; ">Mua
+                                    <button type="submit" class="btn btn-warning"
+                                            style="width: 200px; height: 50px; font-size: large ; font-weight: bold">Mua
                                         ngay &nbsp;<i class="fas fa-shopping-cart"></i></button>
                                 </div>
                             </form>
@@ -200,23 +202,7 @@
                         <b>MÔ TẢ SẢN PHẨM</b>
                     </div>
                     <div class="col-12" style="padding-top: 20px;">
-                        Thêm bộ máy ảnh canon 50d bán chuyên chuyên nghiệp cho các bạn yêu thích chụp ảnh. 50d cho chất ảnh đẹp
-                        và
-                        sắc nét, màn
-                        hình hiển thị ảnh rõ đẹp, máy có ngoại hình khá 94%, các chức năng hoạt động hoàn hảo. phụ kiện kèm theo
-                        đầy
-                        đủ,
-                        lens 18-55mm 95% AF tốt, ảnh sắc nét, kính trong đẹp không rể tre hay móc.
-                        Các tính năng nổi bật của Canon 50D:
-                        Cảm biến CMOS APS-C 15.1 Mp
-                        Độ nhạy sáng ISO của Canon 50D từ 100-3200, mở rộng lên đến ISO 12800
-                        Canon 50D trang bị bộ xử lý ảnh DIGIC 4
-                        Tốc độ chụp 6,3 hình/giây
-                        Hệ thống lấy nét 9 điểm độ nhạy cao (9 cross-type sensor)
-                        Canon 50D có 3 chế độ lưu trữ ảnh RAW linh động
-                        Màn hình LCD 3", chế độ chụp ảnh thực Live-view, công nghệ Face Detection
-                        Hệ thống chống bụi cho sensor
-                        Thân máy Canon 50D bằng hợp kim Magnesium alloy, chống bụi và chống thấm nước
+                        ${p.description}
                     </div>
                 </div>
             </div>

@@ -3,9 +3,11 @@
     Created on : May 22, 2021, 4:48:06 PM
     Author     : Tuan Khang
 --%>
+<%@page import="java.text.DecimalFormat"%>
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -85,18 +87,26 @@
                     <div class="row">
                         <c:forEach items="${list}" var="p">
                             <div class="col-3">
-                                <div class="card" style="width:100%; margin-top: 10px;">
-                                    <img class="card-img-top" src="${pageContext.request.contextPath}/image/${p.img}" alt="Card image"
-                                         style="width:100%;height: 25vh">
-                                    <div class="card-body">
-                                        <h5 class="card-title" style="color: gray">${p.productName}</h5>
-                                        <p class="card-text"><b>$ ${p.price}</b></p>
-                                        <a href="<c:url value="/product/detail?id=${p.productID}"/>">Xem chi tiết</a> <br>
-                                        <a href=" #" class="btn btn-danger">MUA NGAY</a>
+                                <div class="card"> <img src="${pageContext.request.contextPath}/image/${p.img}" class="card-img-top" width="100%" height="160vh">
+                                    <div class="card-body pt-0 px-0">
+                                        <div class="d-flex flex-row justify-content-between mb-0 px-3"> <small class="text-muted mt-1">Giá Bán</small>
+                                            <h6><fmt:formatNumber type = "number" 
+                                                              maxFractionDigits = "3" value = "${p.price}"/> VND</h6>
+                                        </div>
+                                        <hr class="mt-2 mx-3">
+                                        <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                                            <div class="d-flex flex-column"><span class="text-muted">Xuất xứ</span><small class="text-muted"></small></div>
+                                            <div class="d-flex flex-column">
+                                                <h6 class="mb-0">${p.productBrandID.nationalProduction}</h6><small class="text-muted text-right">(Quốc gia)</small>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted key pl-3">&#10025; Sản phẩm chính hãng </small>
+                                        <div class="mx-3 mt-3 mb-2"><a href="" class="btn btn-warning btn-block"><small><b><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</small></b></a></div> <small class="d-flex justify-content-center text-muted"><a href="<c:url value="/product/detail?id=${p.productID}"/>" style="color: black;font-weight: bold">Xem chi tiết sản phẩm</a></small>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
+
                     </div>
                 </div>
             </div>

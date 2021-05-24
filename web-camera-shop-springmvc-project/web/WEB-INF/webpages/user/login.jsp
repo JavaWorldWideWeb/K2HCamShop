@@ -45,7 +45,7 @@
                 <button type="submit" class="btn btn-warning" style="width: 100%">Đăng nhập</button>
             </form>
         </div>
-        <footer style="background-color: black; color: white; height: 200px; padding-left: 50px; margin-top: 100px;">
+        <footer style="background-color: black; color: white; height: 200px; padding-left: 50px; margin-top: 110px;">
             <div class="row">
                 <div class="col-9">
                     <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>

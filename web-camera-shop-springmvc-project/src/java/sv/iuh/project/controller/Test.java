@@ -5,13 +5,14 @@
  */
 package sv.iuh.project.controller;
 
-
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.ProductBrandService;
 
 /**
@@ -23,21 +24,37 @@ public class Test {
 
     @Autowired
     private ProductBrandService productBrandService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String viewHome(ModelMap mm,HttpSession session) {
+    public String viewHome(ModelMap mm, HttpSession session) {
         mm.put("listbrand", productBrandService.getAll());
         return "user/dashboard";
     }
+
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String viewAbout(ModelMap mm) {
         return "user/about";
     }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String viewLogin(ModelMap mm) {
         return "user/login";
     }
+
     @RequestMapping("/admin")
-    public String adminDashboard(){
-        return "admin/dashboard";
+    public String adminDashboard(HttpSession session) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                return "admin/dashboard";
+            } else {
+                return "redirect:/";
+            }
+        }else{
+            return "redirect:/";
+        }
     }
 }
