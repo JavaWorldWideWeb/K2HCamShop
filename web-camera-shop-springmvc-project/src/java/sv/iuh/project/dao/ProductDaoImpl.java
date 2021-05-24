@@ -5,6 +5,7 @@
  */
 package sv.iuh.project.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -128,4 +129,50 @@ public class ProductDaoImpl implements ProductDao{
         }
         return null;
     }
+    @Override
+    public List<Product> getListNav(int start, int limit) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Product");
+            query.setFirstResult(start);
+            query.setMaxResults(limit);
+            List<Product> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public Long totalItem() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("select count(p) from Product p");
+            Long count=(Long) query.list().get(0);
+            transaction.commit();
+            return count;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
+    
 }

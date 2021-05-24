@@ -27,4 +27,6 @@ public interface ProductDao {
     public Product findById(int categoryId);
     
     public boolean create(Product object);
+    public List<Product> getListNav(int start, int limit);
+    public Long totalItem();
 }

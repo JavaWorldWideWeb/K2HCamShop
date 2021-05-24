@@ -45,7 +45,7 @@
                         <a class="nav-link" href="<c:url value="/"/>">Trang chủ <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="<c:url value="/product/showproductuser"/>">
+                        <a class="nav-link " href="<c:url value="/product/productpage"/>">
                             Các sản phẩm
                         </a>
                     </li>

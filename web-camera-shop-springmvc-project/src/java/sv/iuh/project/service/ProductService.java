@@ -25,4 +25,7 @@ public interface ProductService {
 
     // find by id
     public Product findById(int categoryId);
+    //get by nav
+    public List<Product> getListNav(int start, int limit);
+     public Long totalItem();
 }

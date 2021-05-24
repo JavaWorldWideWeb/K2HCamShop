@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +43,7 @@ public class ProductController {
     private ProductService productService;
 
     @RequestMapping("/show")
-    public String viewAdmin(ModelMap mm,HttpSession session) {
+    public String viewAdmin(ModelMap mm, HttpSession session) {
         mm.put("list", productService.getAll());
         mm.put("user", session.getAttribute("userlogin"));
         return "admin/productmanage";
@@ -55,6 +56,23 @@ public class ProductController {
         return "user/product";
     }
 
+    //Phan trang
+    @RequestMapping(value = "/productpage", method = RequestMethod.GET)
+    public String viewProductList(ModelMap mm, HttpSession session) {
+        mm.put("list", productService.getListNav(0, 8));
+        mm.put("totalItem", productService.totalItem()/8);
+        
+        return "user/product";
+    }
+
+    @RequestMapping(value = "/productpage/{page}", method = RequestMethod.GET)
+    public String viewProductListByPage(ModelMap mm, HttpSession session, @PathVariable("page") int page) {
+        mm.put("list", productService.getListNav((page - 1) * 8, 8));
+        mm.put("totalItem", productService.totalItem()/8);
+        return "user/product";
+    }
+
+    //Luu san pham
     @RequestMapping(value = "save", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,
             @RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
@@ -63,11 +81,11 @@ public class ProductController {
         int price = Integer.parseInt(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String color = request.getParameter("color");
-        String description= request.getParameter("des");
+        String description = request.getParameter("des");
         ProductBrand productBrand = productBrandService.findById(Integer.parseInt(request.getParameter("brand")));
         ProductCategory productCategory = productCategoryService.findById(Integer.parseInt(request.getParameter("cate")));
-        String warranTyperiod=request.getParameter("warranTyperiod");
-        Product product= new Product(name, price, quantity, color, description, warranTyperiod, saveFile(photo), productBrand, productCategory);
+        String warranTyperiod = request.getParameter("warranTyperiod");
+        Product product = new Product(name, price, quantity, color, description, warranTyperiod, saveFile(photo), productBrand, productCategory);
         if ("".equals(request.getParameter("id"))) {
             productService.create(product);
             mm.put("success", "Thêm thành công");
@@ -131,6 +149,7 @@ public class ProductController {
         return null;
     }
 //User
+
     @RequestMapping(value = "remove")
     public String viewRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
         Product p = productService.findById(id);
@@ -140,6 +159,7 @@ public class ProductController {
         mm.put("list", productService.getAll());
         return "admin/productmanage";
     }
+
     @RequestMapping(value = "/detail")
     public String showDetailProduct(ModelMap mm, @RequestParam("id") int id) {
 

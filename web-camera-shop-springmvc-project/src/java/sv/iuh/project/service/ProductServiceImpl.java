@@ -44,4 +44,12 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(int categoryId) {
         return productDao.findById(categoryId);
     }
+    @Override
+    public List<Product> getListNav(int start, int limit) {
+        return productDao.getListNav(start, limit);
+    }
+    @Override
+    public Long totalItem() {
+        return productDao.totalItem();
+    }
 }

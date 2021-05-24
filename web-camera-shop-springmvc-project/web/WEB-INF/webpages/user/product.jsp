@@ -86,7 +86,7 @@
                     </div>
                     <div class="row">
                         <c:forEach items="${list}" var="p">
-                            <div class="col-3">
+                            <div class="col-3" style="padding-top: 10px">
                                 <div class="card"> <img src="${pageContext.request.contextPath}/image/${p.img}" class="card-img-top" width="100%" height="160vh">
                                     <div class="card-body pt-0 px-0">
                                         <div class="d-flex flex-row justify-content-between mb-0 px-3"> <small class="text-muted mt-1">Giá Bán</small>
@@ -106,7 +106,11 @@
                                 </div>
                             </div>
                         </c:forEach>
-
+                        <div class="col-12" align="center" style="padding-top: 10px">
+                            <c:forEach var="i" begin="0" end="${totalItem}">    
+                                <a class="btn btn-success" href="${pageContext.request.contextPath}/product/productpage/${i+1}"><c:out value="${i+1}"/></a>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
             </div>
