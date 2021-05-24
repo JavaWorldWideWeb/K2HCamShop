@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sv.iuh.project.model.Product;
 import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.ProductBrandService;
+import sv.iuh.project.service.ProductService;
 
 /**
  *
@@ -24,10 +26,13 @@ public class Test {
 
     @Autowired
     private ProductBrandService productBrandService;
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String viewHome(ModelMap mm, HttpSession session) {
         mm.put("listbrand", productBrandService.getAll());
+        mm.put("newproduct", productService.getNewProduct());
         return "user/dashboard";
     }
 

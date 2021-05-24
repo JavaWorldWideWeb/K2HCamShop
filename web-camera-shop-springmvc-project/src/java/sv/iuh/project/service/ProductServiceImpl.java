@@ -52,4 +52,9 @@ public class ProductServiceImpl implements ProductService {
     public Long totalItem() {
         return productDao.totalItem();
     }
+
+    @Override
+    public List<Product> getNewProduct() {
+        return productDao.getNewProduct();
+    }
 }

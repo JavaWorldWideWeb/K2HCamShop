@@ -13,11 +13,13 @@ import sv.iuh.project.model.Product;
  * @author Tuan Khang
  */
 public interface ProductService {
+
     // create
     public boolean create(Product object);
-    
+
     public List<Product> getAll();
-     // update
+    // update
+
     public boolean update(Product object);
 
     // delete
@@ -25,7 +27,11 @@ public interface ProductService {
 
     // find by id
     public Product findById(int categoryId);
+
     //get by nav
     public List<Product> getListNav(int start, int limit);
-     public Long totalItem();
+
+    public Long totalItem();
+
+    public List<Product> getNewProduct();
 }

@@ -16,6 +16,7 @@ import sv.iuh.project.model.ProductCategory;
  */
 public interface ProductDao {
     public List<Product> getAll();
+    public List<Product> getNewProduct();
     
     // update
     public boolean update(Product object);

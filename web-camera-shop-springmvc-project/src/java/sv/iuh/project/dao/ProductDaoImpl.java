@@ -45,6 +45,30 @@ public class ProductDaoImpl implements ProductDao{
         return null;
         
     }
+     @Override
+    public List<Product> getNewProduct() {
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Product order by productID desc");
+            query.setMaxResults(8);
+            List<Product> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+        
+    }
     @Override
     public boolean create(Product object) {
         Session session = HibernateUtil.getSessionFactory().openSession();

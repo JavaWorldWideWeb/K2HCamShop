@@ -30,7 +30,7 @@
     </style>
 
     <body>
-       
+
         <div id="demo" class="carousel slide" data-ride="carousel">
             <ul class="carousel-indicators">
                 <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -60,9 +60,9 @@
         </div>
         <div class="row">
             <c:forEach items="${listbrand}" var="lb">
-                 <div class="col-2"><a href=""><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
-            </c:forEach>
-           
+                <div class="col-2"><a href=""><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
+                    </c:forEach>
+
         </div>
 
         <div style="padding:10px">
@@ -130,57 +130,27 @@
         <div class="container" align="center" style="padding-bottom: 20px;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-3">
-                        <div class="card" style="width:100%">
-                            <img class="card-img-top" src="../Image/Product/canon1.jpg" alt="Card image" style="width:100%">
-                            <div class="card-body">
-                                <h4 class="card-title">CANON EOS M50</h4>
-                                <p class="card-text">Some example text some example text. John Doe is an architect and
-                                    engineer</p>
-                                <a href="#">Xem chi tiết</a> <br>
-                                <a href=" #" class="btn btn-danger">MUA NGAY</a>
-
+                    <c:forEach items="${newproduct}" var="p">
+                        <div class="col-3" style="padding-top: 10px">
+                            <div class="card"> <img src="${pageContext.request.contextPath}/image/${p.img}" class="card-img-top" width="100%" height="160vh">
+                                <div class="card-body pt-0 px-0">
+                                    <div class="d-flex flex-row justify-content-between mb-0 px-3"> <small class="text-muted mt-1">Giá Bán</small>
+                                        <h6><fmt:formatNumber type = "number" 
+                                                              maxFractionDigits = "3" value = "${p.price}"/> VND</h6>
+                                    </div>
+                                    <hr class="mt-2 mx-3">
+                                    <div class="d-flex flex-row justify-content-between px-3 pb-4">
+                                        <div class="d-flex flex-column"><span class="text-muted">Xuất xứ</span><small class="text-muted"></small></div>
+                                        <div class="d-flex flex-column">
+                                            <h6 class="mb-0">${p.productBrandID.nationalProduction}</h6><small class="text-muted text-right">(Quốc gia)</small>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted key pl-3">&#10025; Sản phẩm chính hãng </small>
+                                    <div class="mx-3 mt-3 mb-2"><a href="" class="btn btn-warning btn-block"><small><b><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</small></b></a></div> <small class="d-flex justify-content-center text-muted"><a href="<c:url value="/product/detail?id=${p.productID}"/>" style="color: black;font-weight: bold">Xem chi tiết sản phẩm</a></small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card" style="width:100%">
-                            <img class="card-img-top" src="../Image/Product/canon1.jpg" alt="Card image" style="width:100%">
-                            <div class="card-body">
-                                <h4 class="card-title">CANON EOS M50</h4>
-                                <p class="card-text">Some example text some example text. John Doe is an architect and
-                                    engineer</p>
-                                <a href="#">Xem chi tiết</a> <br>
-                                <a href=" #" class="btn btn-danger">MUA NGAY</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card" style="width:100%">
-                            <img class="card-img-top" src="../Image/Product/canon1.jpg" alt="Card image" style="width:100%">
-                            <div class="card-body">
-                                <h4 class="card-title">CANON EOS M50</h4>
-                                <p class="card-text">Some example text some example text. John Doe is an architect and
-                                    engineer</p>
-                                <a href="#">Xem chi tiết</a> <br>
-                                <a href=" #" class="btn btn-danger">MUA NGAY</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="card" style="width:100%">
-                            <img class="card-img-top" src="../Image/Product/canon1.jpg" alt="Card image" style="width:100%">
-                            <div class="card-body">
-                                <h4 class="card-title">CANON EOS M50</h4>
-                                <p class="card-text">Some example text some example text. John Doe is an architect and
-                                    engineer</p>
-                                <a href="#">Xem chi tiết</a> <br>
-                                <a href=" #" class="btn btn-danger">MUA NGAY</a>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
