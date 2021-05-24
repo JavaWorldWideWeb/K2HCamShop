@@ -28,6 +28,11 @@ public class ControllerCart {
     
     @Autowired
     private ProductService productService;
+    
+    @RequestMapping("/show")
+    public String viewHome(ModelMap mm){
+        return "user/cart";
+    }
     @RequestMapping(value = "/add/{productID}.html", method = RequestMethod.GET)
     public String viewAdd(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
@@ -51,7 +56,7 @@ public class ControllerCart {
         session.setAttribute("myCartItems", cartItems);
         session.setAttribute("myCartTotal", totalPrice(cartItems));
         session.setAttribute("myCartNum", cartItems.size());
-        return "user/cart";
+        return "user/dashboard";
     }
     
     @RequestMapping(value = "/sub/{productId}.html", method = RequestMethod.GET)
@@ -64,7 +69,7 @@ public class ControllerCart {
         return "user/cart";
     }
     
-    @RequestMapping(value = "remove/{productId}.html", method = RequestMethod.GET)
+@RequestMapping(value = "/remove/{productId}.html", method = RequestMethod.GET)
     public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productId") long productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
@@ -76,7 +81,7 @@ public class ControllerCart {
         session.setAttribute("myCartItems", cartItems);
         session.setAttribute("myCartTotal", totalPrice(cartItems));
         session.setAttribute("myCartNum", cartItems.size());
-        return "pages/cart";
+        return "user/cart";
     }
     
     public double totalPrice(HashMap<Integer, Cart> cartItems) {

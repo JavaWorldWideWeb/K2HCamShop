@@ -33,7 +33,7 @@
                     <button type="button" class="btn btn-primary btn-fw" style="float:right;">
                         <font style="vertical-align: inherit;">
                         <font style="vertical-align: inherit;">Tạo đơn hàng</font></font></button>
-                    <br/>/><br/>
+                    <br/><br/>
                     
                     <div class="tab">
                         <button class="tablinks" onclick="showContent(event, 'AllOrders')" id="defaultOpen">Tất cả đơn hàng</button>
