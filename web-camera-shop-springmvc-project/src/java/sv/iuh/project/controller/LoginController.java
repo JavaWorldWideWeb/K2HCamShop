@@ -36,7 +36,7 @@ public class LoginController {
         }
         session.setAttribute("userlogin", user);
         mm.addAttribute("user",session.getAttribute("userlogin"));
-        return "user/dashboard";
+        return "redirect:/";
     }
     @RequestMapping(value = "logout")
     public String doLogout(ModelMap mm, HttpSession session, HttpServletRequest request) {

@@ -140,8 +140,8 @@ public class ControllerCart {
         return "user/checkout";
     }
 
-    @RequestMapping(value = "/checkout.html", method = RequestMethod.POST)
-    public String viewCheckout(ModelMap mm, HttpSession session) {
+    @RequestMapping(value = "/orderItems.html", method = RequestMethod.POST)
+    public String orderItems(ModelMap mm, HttpSession session) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
             cartItems = new HashMap<>();
@@ -149,7 +149,8 @@ public class ControllerCart {
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setDateOrder(new Timestamp(new Date().getTime()));
         orderProduct.setStatusOrder("Chưa thanh toan");
-        orderProduct.setUserID(new UserShop(1));
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        orderProduct.setUserID(userShop);
         orderProduct.setTotalMoney(totalPrice(cartItems));
         orderManagementService.create(orderProduct);
         for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {

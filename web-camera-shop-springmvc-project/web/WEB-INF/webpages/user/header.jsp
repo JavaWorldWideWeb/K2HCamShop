@@ -10,6 +10,7 @@
 <%@page import="sv.iuh.project.model.UserShop"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -111,13 +112,14 @@
                                 <hr />
                                 <p>
                                     <span style="color:#6d6767">Thành Tiền</span>
-                                    <span style="float:right; color:red; font-weight:bold; font-size: 16px"><c:out value="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}"/> VNĐ </span>
-                                    <br />
-                                    <i style="float: right; color:#2c2929; font-size: 10px">(Đã bao gồm thuế VAT nếu có)</i>
-                                </p>
+                                    <span style="float:right; color:red; font-weight:bold; font-size: 16px"><fmt:formatNumber type = "number" maxFractionDigits = "3" value ="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}" /> VNĐ</span>
                                 <br />
-                                <button type="button" class="btn btn-primary btn-block">Tiến hành đặt hàng</button>
+                                <i style="float: right; color:#2c2929; font-size: 10px">(Đã bao gồm thuế VAT nếu có)</i>
+                                </p>
+
+
                                 <div class="clearfix"></div>
+
                             </ul>
                         </div>
                     </li>

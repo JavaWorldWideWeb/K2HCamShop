@@ -67,7 +67,7 @@
                 </a>
             </div>
 
-            <form method="Post" action="<c:url value="/cart/checkout.html"/>">
+            <form method="Post" action="<c:url value="/cart/orderItems.html"/>">
                 <div class="row" id="cart">
                     <div class="col-lg-8" id="cartlist">
                         <div class="cart_product_inner">
@@ -132,12 +132,12 @@
                             <div class="container" style="background-color:#f5f5f5; padding-top: 10px; padding-bottom:20px; margin-top: 10px">
                                 <p>
                                     <span style="color:#6d6767">Tạm tính</span>
-                                    <span style="float:right; color:black; font-weight:bold"><c:out value="${sessionScope.myCartTotal}" /> VNĐ</span>
+                                    <span style="float:right; color:black; font-weight:bold"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${sessionScope.myCartTotal}" /> VNĐ</span>
                                 </p>
                                 <hr />
                                 <p>
                                     <span style="color:#6d6767">Thành Tiền</span>
-                                    <span style="float:right; color:red; font-weight:bold; font-size: 22px"><c:out value="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}"/> VNĐ </span>
+                                    <span style="float:right; color:red; font-weight:bold; font-size: 22px"><fmt:formatNumber type = "number" maxFractionDigits = "3" value ="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}" /> VNĐ </span>
                                     <br />
                                     <i style="float: right; color:#2c2929; font-size: 13px">(Đã bao gồm thuế VAT nếu có)</i>
                                 </p>

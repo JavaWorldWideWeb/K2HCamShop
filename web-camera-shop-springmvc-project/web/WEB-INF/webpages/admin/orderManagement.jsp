@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -60,7 +61,8 @@
                                       <td>${od.dateOrder}</td>
                                       <td>${od.userID.fullName}</td>
                                       <td>${od.statusOrder}</td>
-                                      <td>${od.totalMoney}</td>
+                                      <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${od.totalMoney}" /></td>
+                                      
                                       <td>
                                            <a class="detail" href="#" data-toggle="modal" data-target="#myModal" >xem chi tiết</a>
                                       </td>
