@@ -44,6 +44,8 @@
     <bean id="ProductDao" class="sv.iuh.project.dao.ProductDaoImpl" />
     <bean id="OrderManagementService" class="sv.iuh.project.service.OrderManagementServiceImpl" />
     <bean id="OrderManagementDao" class="sv.iuh.project.dao.OrderManagementDAOImpl" />
+    <bean id="OrderDetailService" class="sv.iuh.project.service.OrderDetailServiceImpl" />
+    <bean id="OrderDetailDao" class="sv.iuh.project.dao.OrderDetailDAOImpl" />
     <bean id="LoginService" class="sv.iuh.project.service.LoginServiceImpl" />
     <bean id="LoginDao" class="sv.iuh.project.dao.LoginDaoImpl" />
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>

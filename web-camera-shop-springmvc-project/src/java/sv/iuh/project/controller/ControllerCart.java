@@ -5,17 +5,24 @@
  */
 package sv.iuh.project.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sv.iuh.project.model.Cart;
+import sv.iuh.project.model.OrderDetail;
+import sv.iuh.project.model.OrderProduct;
 import sv.iuh.project.model.Product;
+import sv.iuh.project.service.OrderDetailService;
+import sv.iuh.project.service.OrderManagementService;
 import sv.iuh.project.service.ProductService;
 
 /**
@@ -28,6 +35,12 @@ public class ControllerCart {
 
     @Autowired
     private ProductService productService;
+    
+    @Autowired
+    private OrderManagementService orderManagementService;
+    
+    @Autowired
+    private OrderDetailService orderDetailService;
 
     @RequestMapping("/show")
     public String viewHome(ModelMap mm) {
@@ -118,6 +131,30 @@ public class ControllerCart {
         session.setAttribute("myCartItems", cartItems);
         session.setAttribute("myCartTotal", totalPrice(cartItems));
         session.setAttribute("myCartNum", cartItems.size());
+        return "user/cart";
+    }
+
+    @RequestMapping(value = "/checkout.html", method = RequestMethod.POST)
+    public String viewCheckout(ModelMap mm, HttpSession session, @ModelAttribute("orderProduct") OrderProduct orderProduct) {
+        HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
+        if (cartItems == null) {
+            cartItems = new HashMap<>();
+        }
+        orderProduct.setDateOrder(new Timestamp(new Date().getTime()));
+        orderProduct.setStatusOrder("paid");
+        orderManagementService.create(orderProduct);
+        for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrderID(orderProduct);
+            orderDetail.setProductID(entry.getValue().getProduct());
+            orderDetail.setQuantity(entry.getValue().getQuantity());
+            orderDetail.setStatusOrderDetail("paid");
+            orderDetailService.create(orderDetail);
+        }
+        cartItems = new HashMap<>();
+        session.setAttribute("myCartItems", cartItems);
+        session.setAttribute("myCartTotal", 0);
+        session.setAttribute("myCartNum", 0);
         return "user/cart";
     }
 

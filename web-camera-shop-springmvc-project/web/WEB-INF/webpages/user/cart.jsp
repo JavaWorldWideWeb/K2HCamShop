@@ -90,7 +90,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <p style="color:red; font-weight:bold; margin-bottom: -5px;"><c:out value="${map.value.product.price}" /> VND</p>
-                                                        
+
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <a href="${pageContext.request.contextPath}/cart/decrease/${map.value.product.productID}.html">
@@ -100,7 +100,7 @@
                                                         <a href="${pageContext.request.contextPath}/cart/increase/${map.value.product.productID}.html">
                                                             <input type="button" class="increase" value="+" style="margin-left:-6px" />
                                                         </a>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,8 +143,9 @@
                         </div>
 
                         <br />
-                        <button type="button" class="btn btn-primary btn-block">Tiến hành đặt hàng</button>
-
+                        <a href="<c:url value="/user/checkout.html"/>">
+                            <button type="button" class="btn btn-primary btn-block">Tiến hành đặt hàng</button>
+                        </a>
                     </div>
                 </div>
             </div>
