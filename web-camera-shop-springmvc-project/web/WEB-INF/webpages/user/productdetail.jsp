@@ -178,7 +178,7 @@
                             <div class="col-8" style="padding-top: 20px;">
                                 <b>${p.productBrandID.nationalProduction}</b>
                             </div>
-                            <form action="">
+                            <form action="${pageContext.request.contextPath}/cart/add/${p.productID}.html">
                                 <div class="col-12">
                                     <div class="qty mt-5">
                                         <span class="minus bg-dark"><i class="fas fa-minus"></i></span>

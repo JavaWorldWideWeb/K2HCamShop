@@ -23,23 +23,96 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            li {
+                color: red;
+            }
+
+            .cart_product_inner button {
+                width: 20%;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+
+            .cart_product_inner img{
+                width: 80px;
+                height: 80px;
+            }
+
+            #empty img, #empty button{
+                width: 20%;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+        </style>
     </head>
     <body>
-    <form:form method="POST" action="${pageContext.request.contextPath}/cart/checkout.html" modelAttribute="receipt">
-        <h3>Want to work with me?</h3>
-        <div>
-            <span>Your Name</span>
-            <form:input path="receiptName"  />
+        </br></br>
+        <div class="container">
+            <div class="row" id="cart">
+                <div class="col-lg-7" id="cartlist" style="background-color: GhostWhite">
+                    <h4>Danh sách sản phẩm</h4>
+                    <div class="cart_product_inner">
+                        <c:forEach var="map" items="${sessionScope.myCartItems}">
+                            <div class="container" style="border: 1px solid LightGray; padding:10px 5px 10px 15px;">
+                                <div class="row">
+
+                                    <div class="col-lg-3">
+                                        <img src="${pageContext.request.contextPath}/image/${map.value.product.img}" />
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <a href="<c:url value="/product/detail?id=${map.value.product.productID}"/>" style="color:black; "><c:out value="${map.value.product.productName}"/></a>
+                                        <br /><br />
+                                        <div class="row" style="margin-right: -60px;">
+                                            <p style="color:red; font-weight:bold; margin-left: 20px">
+                                                <c:out value="${map.value.quantity}" /> x 
+                                                <c:out value="${map.value.product.price}" /> = 
+                                                <c:out value="${map.value.product.price}" /> VND
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                        </c:forEach>
+                     <hr />
+                     <p>
+                                <span style="color:#6d6767">Tạm tính</span>
+                                <span style="float:right; color:black; font-weight:bold"><c:out value="${sessionScope.myCartTotal}" /> VNĐ</span>
+                            </p>
+                            <hr />
+                            <p>
+                                <span style="color:#6d6767">Thành Tiền</span>
+                                <span style="float:right; color:red; font-weight:bold; font-size: 22px"><c:out value="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}"/> VNĐ </span>
+                                <br />
+                                <i style="float: right; color:#2c2929; font-size: 13px">(Đã bao gồm thuế VAT nếu có)</i>
+                            </p>
+                    </div>
+                </div>
+                <div class="col-lg-4" style="margin-left:30px;" id="cartlist">
+                    <h4>Thông tin khách hàng</h4>
+                    <div style="background-color:#f5f5f5; padding: 10px 10px 10px 10px">
+                        <form action="/action_page.php">
+                            <div class="form-group">
+                                <label for="email">:</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                            </div>
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <span>Your Email</span>	
-            <form:input path="receiptMail"  />
-        </div>
-        <div>
-            <span>Your Address</span>	
-            <form:input path="receiptAddress"  />
-        </div>
-        <input type="submit" value="SEND" >	
-    </form:form>
-</body>
+    </body>
 </html>

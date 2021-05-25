@@ -21,6 +21,7 @@ import sv.iuh.project.model.Cart;
 import sv.iuh.project.model.OrderDetail;
 import sv.iuh.project.model.OrderProduct;
 import sv.iuh.project.model.Product;
+import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.OrderDetailService;
 import sv.iuh.project.service.OrderManagementService;
 import sv.iuh.project.service.ProductService;
@@ -35,10 +36,10 @@ public class ControllerCart {
 
     @Autowired
     private ProductService productService;
-    
+
     @Autowired
     private OrderManagementService orderManagementService;
-    
+
     @Autowired
     private OrderDetailService orderDetailService;
 
@@ -134,14 +135,22 @@ public class ControllerCart {
         return "user/cart";
     }
 
+    @RequestMapping("/checkoutshow")
+    public String viewPaid(ModelMap mm) {
+        return "user/checkout";
+    }
+
     @RequestMapping(value = "/checkout.html", method = RequestMethod.POST)
-    public String viewCheckout(ModelMap mm, HttpSession session, @ModelAttribute("orderProduct") OrderProduct orderProduct) {
+    public String viewCheckout(ModelMap mm, HttpSession session) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
             cartItems = new HashMap<>();
         }
+        OrderProduct orderProduct = new OrderProduct();
         orderProduct.setDateOrder(new Timestamp(new Date().getTime()));
-        orderProduct.setStatusOrder("paid");
+        orderProduct.setStatusOrder("Chưa thanh toan");
+        orderProduct.setUserID(new UserShop(1));
+        orderProduct.setTotalMoney(totalPrice(cartItems));
         orderManagementService.create(orderProduct);
         for (Map.Entry<Integer, Cart> entry : cartItems.entrySet()) {
             OrderDetail orderDetail = new OrderDetail();
