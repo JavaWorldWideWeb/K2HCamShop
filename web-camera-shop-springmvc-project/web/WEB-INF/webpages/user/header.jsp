@@ -10,6 +10,7 @@
 <%@page import="sv.iuh.project.model.UserShop"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,10 +18,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <style>
-            .nav-item:hover .sub-icon1{
-                display:block;
-                text-decoration: none;
-                color: blue;
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 300px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
             }
         </style>
     </head>
@@ -57,11 +66,12 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav" style="padding-right: 7vw;">
-                    <li class="nav-item">
+                    <li class="dropdown" style="position: relative; display: inline-block;">
                         <div class="cart">
-                            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
-                            <span><c:out value="${sessionScope.myCartNum}"/></span>
+                            <a class="nav-link" href="<c:url value="/cart/show"/>"><i class="fas fa-shopping-cart" style="color: white"> <span id="cart_count" style="color: red"><c:out value="${sessionScope.myCartNum}"/></span></i></a>
+
                         </div>
+<<<<<<< HEAD
                         <ul class="sub-icon1 list" style="color: white; display: none">
                             <h3>Recently added items (<c:out value="${sessionScope.myCartNum}"/>)</h3>
                             <div class="shopping_cart">
@@ -88,6 +98,59 @@
                             </div>
                             <div class="clearfix"></div>
                         </ul>
+=======
+                        <div class="dropdown-content">
+                            <ul class="sub-icon1 list" style="margin-left: -30px">
+                                <h5>Giỏ hàng (<c:out value="${sessionScope.myCartNum}"/>)</h5>
+                                <div class="shopping_cart">
+                                    <c:forEach var="map" items="${sessionScope.myCartItems}">
+                                        <div class="container" style="background-color:#f5f5f5; padding:10px 5px 10px 15px;">
+                                            <div class="row">
+
+                                                <div class="col-lg-2">
+                                                    <img src="${pageContext.request.contextPath}/image/${map.value.product.img}" style="width: 40px; height: 50px;"/>
+                                                </div>
+                                                <div class="col-lg-10">
+                                                    <a href="<c:url value="/product/detail?id=${map.value.product.productID}"/>" style="color:black; "><c:out value="${map.value.product.productName}"/></a>
+                                                    </br>
+                                                    <b><c:out value="${map.value.quantity}" /> x <c:out value="${map.value.product.price}" /></b>
+                                                    <div class="row" style="margin-right: -60px;">
+                                                        <div class="col-lg-3">
+                                                            <span style="color:blue; font-size: 14px"><a href="${pageContext.request.contextPath}/cart/remove/${map.value.product.productID}.html">Xóa</a></span>
+
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <p style="color:red; font-weight:bold; margin-bottom: -5px;"><c:out value="${map.value.product.price}" /> VND</p>
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <br/>
+                                    </c:forEach>
+                                </div>
+                                <hr />
+                                <p>
+                                    <span style="color:#6d6767">Thành Tiền</span>
+                                    <span style="float:right; color:red; font-weight:bold; font-size: 16px"><fmt:formatNumber type = "number" maxFractionDigits = "3" value ="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}" /> VNĐ</span>
+                                <br />
+                                <i style="float: right; color:#2c2929; font-size: 10px">(Đã bao gồm thuế VAT nếu có)</i>
+                                </p>
+
+
+                                <div class="clearfix"></div>
+
+                            </ul>
+                        </div>
+>>>>>>> 97c673da1c53258b0c4b78ef7d08772d689f3fbb
                     </li>
                     <%
                         UserShop userShop = (UserShop) session.getAttribute("userlogin");
@@ -115,4 +178,14 @@
             </div>
         </nav>
     </body>
+
+    <script>
+        var count = document.getElementById("cart_count").innerHTML;
+        if (count == 0) {
+            document.getElementById("cart_count").style.display = 'none';
+        } else {
+            document.getElementById("cart_count").style.display = 'inline-block';
+
+        }
+    </script>
 </html>

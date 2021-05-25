@@ -6,7 +6,11 @@
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<<<<<<< HEAD
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
+=======
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+>>>>>>> 97c673da1c53258b0c4b78ef7d08772d689f3fbb
 <!DOCTYPE html>
 <html>
     <head>
@@ -147,7 +151,8 @@
                                         </div>
                                     </div>
                                     <small class="text-muted key pl-3">&#10025; Sản phẩm chính hãng </small>
-                                    <div class="mx-3 mt-3 mb-2"><a href="" class="btn btn-warning btn-block"><small><b><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</small></b></a></div> <small class="d-flex justify-content-center text-muted"><a href="<c:url value="/product/detail?id=${p.productID}"/>" style="color: black;font-weight: bold">Xem chi tiết sản phẩm</a></small>
+                                    <div class="mx-3 mt-3 mb-2"><a href="${pageContext.request.contextPath}/cart/add/${p.productID}.html" class="btn btn-warning btn-block"><small><b><i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG</small></b></a></div> 
+                                    <small class="d-flex justify-content-center text-muted"><a href="<c:url value="/product/detail?id=${p.productID}"/>" style="color: black;font-weight: bold">Xem chi tiết sản phẩm</a></small>
                                 </div>
                             </div>
                         </div>

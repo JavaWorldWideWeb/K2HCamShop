@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +34,7 @@
                     <button type="button" class="btn btn-primary btn-fw" style="float:right;">
                         <font style="vertical-align: inherit;">
                         <font style="vertical-align: inherit;">Tạo đơn hàng</font></font></button>
-                    <br/>/><br/>
+                    <br/><br/>
                     
                     <div class="tab">
                         <button class="tablinks" onclick="showContent(event, 'AllOrders')" id="defaultOpen">Tất cả đơn hàng</button>
@@ -60,7 +61,8 @@
                                       <td>${od.dateOrder}</td>
                                       <td>${od.userID.fullName}</td>
                                       <td>${od.statusOrder}</td>
-                                      <td>${od.totalMoney}</td>
+                                      <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${od.totalMoney}" /></td>
+                                      
                                       <td>
                                            <a class="detail" href="#" data-toggle="modal" data-target="#myModal" >xem chi tiết</a>
                                       </td>
