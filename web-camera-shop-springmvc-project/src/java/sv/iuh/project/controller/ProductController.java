@@ -44,8 +44,15 @@ public class ProductController {
 
     @RequestMapping("/show")
     public String viewAdmin(ModelMap mm, HttpSession session) {
-        mm.put("list", productService.getAll());
-        mm.put("user", session.getAttribute("userlogin"));
+        mm.put("list", productService.getListNav(0, 6));
+        mm.put("totalItem", productService.totalItem() / 6);
+        return "admin/productmanage";
+    }
+
+    @RequestMapping(value = "/show/{page}", method = RequestMethod.GET)
+    public String viewProductAdminByPage(ModelMap mm, HttpSession session, @PathVariable("page") int page) {
+        mm.put("list", productService.getListNav((page - 1) * 6, 6));
+        mm.put("totalItem", productService.totalItem() / 6);
         return "admin/productmanage";
     }
 
@@ -59,16 +66,17 @@ public class ProductController {
     //Phan trang
     @RequestMapping(value = "/productpage", method = RequestMethod.GET)
     public String viewProductList(ModelMap mm, HttpSession session) {
+        mm.put("listbrand", productBrandService.getAll());
         mm.put("list", productService.getListNav(0, 8));
-        mm.put("totalItem", productService.totalItem()/8);
-        
+        mm.put("totalItem", productService.totalItem() / 8);
         return "user/product";
     }
 
     @RequestMapping(value = "/productpage/{page}", method = RequestMethod.GET)
     public String viewProductListByPage(ModelMap mm, HttpSession session, @PathVariable("page") int page) {
+        mm.put("listbrand", productBrandService.getAll());
         mm.put("list", productService.getListNav((page - 1) * 8, 8));
-        mm.put("totalItem", productService.totalItem()/8);
+        mm.put("totalItem", productService.totalItem() / 8);
         return "user/product";
     }
 

@@ -39,83 +39,145 @@
                     </div>
                 </c:if>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <c:catch var="product">
-                        <h4 class="card-title">Nhập thông tin thương hiệu</h4>
-                        <form method="Post" class="forms-sample" action="<c:url value="/product/save"/>" enctype="multipart/form-data">
-                            <input type="text" class="form-control" hidden="true" value="${product.productID}" id="exampleInputUsername1" name="id" placeholder="Nhập tên thương hiệu">
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Tên Sản Phẩm</label>
-                                <input type="text" class="form-control"  value="${product.productName}" name="name" placeholder="Nhập tên sản phẩm">
-                            </div>
+            <div class="col-12 grid-margin">
+                <c:catch var="product" >
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Lưu thông tin sản phẩm</h4>
+                            <form class="form-sample" autocomplete="off" action="<c:url value="/product/save"/>" enctype="multipart/form-data" method="post">
+                                <p class="card-description"> Thông tin sản phẩm </p>
+                                <div class="row">
+                                    <input type="hidden" class="form-control" value="${product.productID}" name="id" placeholder="Nhập tên sản phẩm" />
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" required="" class="form-control" value="${product.productName}" name="name" placeholder="Nhập tên sản phẩm" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" required="" class="form-control" value="${product.price}" name="price" placeholder="Nhập giá sản phẩm"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Số lượng sản phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" required="" class="form-control" value="${product.quantity}" name="quantity" placeholder="Nhập số lượng" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" required class="form-control"  value="${product.color}" name="color" placeholder="Nhập màu sản phẩm"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Loại Sản Phẩm</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" required name="cate">
+                                                    <c:forEach items="${listcate}" var="pc">
+                                                        <option value="${product.productCategoryID.productCategoryID}" hidden="true" selected="true">${product.productCategoryID.productCategoryName}</option>
+                                                        <option value="${pc.productCategoryID}">${pc.productCategoryName}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div class="form-group">
-                                <label for="exampleInputConfirmPassword1">Giá Sản Phẩm</label>
-                                <input type="text" class="form-control"  value="${product.price}" name="price" placeholder="Nhập giá sản phẩm">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputConfirmPassword1">Số Lượng Sản Phẩm</label>
-                                <input type="text" class="form-control"  value="${product.quantity}" name="quantity" placeholder="Nhập số lượng">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputConfirmPassword1">Màu</label>
-                                <input type="text" class="form-control"  value="${product.color}" name="color" placeholder="Nhập màu sắc">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputConfirmPassword1">Thời gian bảo hành</label>
-                                <select class="form-control form-control-sm" name="warranTyperiod">
-                                        <option value="${product.warranTyperiod}" hidden="true" selected="true">${product.warranTyperiod}</option>
-                                        <option value="1 tháng">1 Tháng</option>
-                                        <option value="2 tháng">2 Tháng</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputConfirmPassword1">Hình Ảnh</label>
-                                <input type="file" class="form-control" value="${pageContext.request.contextPath}/imgbrand/${product.img}" name="image">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect3">Thương Hiệu</label>
-                                <select class="form-control form-control-sm" name="brand">
-                                    <c:forEach items="${listbrand}" var="pb">
-                                        <option value="${product.productBrandID.productBrandID}" hidden="true" selected="true">${product.productBrandID.productBrandName}</option>
-                                        <option value="${pb.productBrandID}">${pb.productBrandName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect3">Loại Sản Phẩm</label>
-                                <select class="form-control form-control-sm" name="cate">
-                                    <c:forEach items="${listcate}" var="pc">
-                                        <option value="${product.productCategoryID.productCategoryID}" hidden="true" selected="true">${product.productCategoryID.productCategoryName}</option>
-                                        <option value="${pc.productCategoryID}">${pc.productCategoryName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleTextarea1">Mô tả</label>
-                                <textarea class="form-control" id="exampleTextarea1" rows="4" name="des"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary mr-2">Lưu</button>
-                            <button class="btn btn-light" type="reset">Hủy</button>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Hình Ảnh</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="form-control" required value="${pageContext.request.contextPath}/imgbrand/${product.img}" name="image" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Thương Hiệu</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" required="true" name="brand">
+                                                    <c:forEach items="${listbrand}" var="pb">
+                                                        <option value="${product.productBrandID.productBrandID}" hidden="true" selected="true">${product.productBrandID.productBrandName}</option>
+                                                        <option value="${pb.productBrandID}">${pb.productBrandName}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Thời gian bảo hành (Tháng)</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" required class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Mô tả</label>
+                                            <div class="col-sm-9">
+                                                <textarea class="form-control"  id="exampleTextarea1" rows="10" name="des"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                       
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label"></label>
+                                            <div class="col-sm-9">
+                                                <button type="submit" class="btn btn-danger mr-2">Lưu</button>
+                                                <button class="btn btn-light" type="reset">Hủy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                        </div>
+                        
+                        
                         </form>
-                    </c:catch>
+                    </div>
                 </div>
-            </div>
+            </c:catch>
         </div>
     </div>
-    <script src="<c:url value="/resources/vendors/js/vendor.bundle.base.js"/>"></script>
-    <script src="<c:url value="/resources/vendors/chart.js/Chart.min.js"/>"></script>
-    <script src="<c:url value="/resources/vendors/moment/moment.min.js"/>"></script>
-    <script src="<c:url value="/resources/vendors/daterangepicker/daterangepicker.js"/>"></script>
-    <script src="<c:url value="/resources/vendors/chartist/chartist.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/off-canvas.js"/>"></script>
-    <script src="<c:url value="/resources/js/dashboard.js"/>"></script>
-    <script src="<c:url value="/resources/js/misc.js"/>"></script>
-    <script>
-        $(document).ready(function () {
-            $('.toast').toast('show');
-        });
-    </script>
+</div>
+</div>
+</div>
+<script src="<c:url value="/resources/vendors/js/vendor.bundle.base.js"/>"></script>
+<script src="<c:url value="/resources/vendors/chart.js/Chart.min.js"/>"></script>
+<script src="<c:url value="/resources/vendors/moment/moment.min.js"/>"></script>
+<script src="<c:url value="/resources/vendors/daterangepicker/daterangepicker.js"/>"></script>
+<script src="<c:url value="/resources/vendors/chartist/chartist.min.js"/>"></script>
+<script src="<c:url value="/resources/js/off-canvas.js"/>"></script>
+<script src="<c:url value="/resources/js/dashboard.js"/>"></script>
+<script src="<c:url value="/resources/js/misc.js"/>"></script>
+<script>
+    $(document).ready(function () {
+        $('.toast').toast('show');
+    });
+</script>
 </body>
 </html>

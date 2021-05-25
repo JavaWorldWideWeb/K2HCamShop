@@ -68,12 +68,17 @@
                                     <td><a href="#" class="delete" data-toggle="modal" data-target="#myModal"><i class="fas fa-trash" style="color: red" data-toggle
                                                                                                                  ="tooltip" title="Delete"></i></a>
                                         <input type="hidden" name="id" id="id" value="${p.productID}">
-                                        <a href="showformupdate?id=${p.productID}" title="Detail"><i class="fas fa-pen-square"></i></a>
+                                        <a href="${pageContext.request.contextPath}/product/showformupdate?id=${p.productID}" title="Detail"><i class="fas fa-pen-square"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
+                    <div class="col-12" align="center" style="padding-top: 10px">
+                        <c:forEach var="i" begin="0" end="${totalItem}">    
+                            <a class="btn btn-danger" href="${pageContext.request.contextPath}/product/show/${i+1}"><c:out value="${i+1}"/></a>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
             <div class="modal fade" id="myModal">
@@ -92,8 +97,10 @@
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
+
         <!-- main-panel ends -->
         <script src="<c:url value="/resources/vendors/js/vendor.bundle.base.js"/>"></script>
         <script src="<c:url value="/resources/vendors/chart.js/Chart.min.js"/>"></script>
