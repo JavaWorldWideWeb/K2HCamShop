@@ -71,34 +71,6 @@
                             <a class="nav-link" href="<c:url value="/cart/show"/>"><i class="fas fa-shopping-cart" style="color: white"> <span id="cart_count" style="color: red"><c:out value="${sessionScope.myCartNum}"/></span></i></a>
 
                         </div>
-<<<<<<< HEAD
-                        <ul class="sub-icon1 list" style="color: white; display: none">
-                            <h3>Recently added items (<c:out value="${sessionScope.myCartNum}"/>)</h3>
-                            <div class="shopping_cart">
-                                <c:forEach var="map" items="${sessionScope.myCartItems}">
-                                    <div class="cart_box">
-                                        <div class="message">
-                                            <div class="alert-close"> </div> 
-                                            <div class="list_img"><img src="${pageContext.request.contextPath}/resources/pages/images/14.jpg" class="img-responsive" alt=""></div>
-                                            <div class="list_desc"><h4><a href="#"><c:out value="${map.value.product.productName}"/></a></h4><c:out value="${map.value.quantity}"/> x
-                                                $<c:out value="${map.value.product.productPrice}"/> = <span class="actual"> $<c:out value="${map.value.quantity * map.value.product.productPrice}"/></span></div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                            <div class="total">
-                                <div class="total_left">Total: </div>
-                                <div class="total_right">$<c:out value="${sessionScope.myCartTotal}"/></div>
-                                <div class="clearfix"> </div>
-                            </div>
-                            <div class="login_buttons">
-                                <div class="check_button"><a href="checkout.html">Check out</a></div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </ul>
-=======
                         <div class="dropdown-content">
                             <ul class="sub-icon1 list" style="margin-left: -30px">
                                 <h5>Giỏ hàng (<c:out value="${sessionScope.myCartNum}"/>)</h5>
@@ -150,7 +122,6 @@
 
                             </ul>
                         </div>
->>>>>>> 97c673da1c53258b0c4b78ef7d08772d689f3fbb
                     </li>
                     <%
                         UserShop userShop = (UserShop) session.getAttribute("userlogin");

@@ -6,11 +6,7 @@
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<<<<<<< HEAD
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt"%>
-=======
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
->>>>>>> 97c673da1c53258b0c4b78ef7d08772d689f3fbb
 <!DOCTYPE html>
 <html>
     <head>
