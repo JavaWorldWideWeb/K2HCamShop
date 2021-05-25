@@ -23,17 +23,18 @@ import sv.iuh.project.service.ProductService;
  * @author Thanh Hoai
  */
 @Controller
-@RequestMapping(value="/cart")
+@RequestMapping(value = "/cart")
 public class ControllerCart {
-    
+
     @Autowired
     private ProductService productService;
-    
+
     @RequestMapping("/show")
-    public String viewHome(ModelMap mm){
+    public String viewHome(ModelMap mm) {
         return "user/cart";
     }
-    @RequestMapping(value = "/add/{productID}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/add/{productID}.html", method = RequestMethod.GET)
     public String viewAdd(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
@@ -58,9 +59,44 @@ public class ControllerCart {
         session.setAttribute("myCartNum", cartItems.size());
         return "redirect:/";
     }
-    
+
+    @RequestMapping(value = "/increase/{productID}.html", method = RequestMethod.GET)
+    public String increaseQuantityInCart(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
+        HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
+        if (cartItems == null) {
+            cartItems = new HashMap<>();
+        }
+        Product product = productService.findById(productId);
+        Cart item = cartItems.get(productId);
+        item.setProduct(product);
+        item.setQuantity(item.getQuantity() + 1);
+        cartItems.put(productId, item);
+        session.setAttribute("myCartItems", cartItems);
+        session.setAttribute("myCartTotal", totalPrice(cartItems));
+        session.setAttribute("myCartNum", cartItems.size());
+        return "user/cart";
+    }
+
+    @RequestMapping(value = "/decrease/{productID}.html", method = RequestMethod.GET)
+    public String decreaseQuantityInCart(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
+        HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
+        if (cartItems == null) {
+            cartItems = new HashMap<>();
+        }
+        Product product = productService.findById(productId);
+        Cart item = cartItems.get(productId);
+        item.setProduct(product);
+        item.setQuantity(item.getQuantity() - 1);
+        cartItems.put(productId, item);
+
+        session.setAttribute("myCartItems", cartItems);
+        session.setAttribute("myCartTotal", totalPrice(cartItems));
+        session.setAttribute("myCartNum", cartItems.size());
+        return "user/cart";
+    }
+
     @RequestMapping(value = "/sub/{productId}.html", method = RequestMethod.GET)
-    public String viewUpdate(ModelMap mm, HttpSession session, @PathVariable("productId") long productId) {
+    public String viewUpdate(ModelMap mm, HttpSession session, @PathVariable("productId") int productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         if (cartItems == null) {
             cartItems = new HashMap<>();
@@ -68,12 +104,8 @@ public class ControllerCart {
         session.setAttribute("myCartItems", cartItems);
         return "user/cart";
     }
-    //trước remove không có /
-    //giờ thêm /
-    //giờ xóa / bỏ hình đi có khi xóa được
-    //hử đi t nghĩ k phải do hình đâu
-    //move/{productId} cái này mình đặt productId thành tên khác dc hôn 
-@RequestMapping(value = "/remove/{productId}.html", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/remove/{productId}.html", method = RequestMethod.GET)
     public String viewRemove(ModelMap mm, HttpSession session, @PathVariable("productId") int productId) {
         HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
         System.out.println(productId);
@@ -88,7 +120,7 @@ public class ControllerCart {
         session.setAttribute("myCartNum", cartItems.size());
         return "user/cart";
     }
-    
+
     public double totalPrice(HashMap<Integer, Cart> cartItems) {
         int count = 0;
         for (Map.Entry<Integer, Cart> list : cartItems.entrySet()) {

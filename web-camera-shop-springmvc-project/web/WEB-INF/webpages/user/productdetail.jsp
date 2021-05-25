@@ -114,9 +114,9 @@
             -ms-user-select: none;
         }
 
-        input {
+        input{
             border: 0;
-            width: 1%;
+            width: 1px;
         }
 
         input::-webkit-outer-spin-button,

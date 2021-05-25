@@ -9,7 +9,7 @@ package sv.iuh.project.model;
  *
  * @author Thanh Hoai
  */
-public class Cart {
+public class Cart{
 
     private static final long serialVersionUID = 1L;
     private Product product;

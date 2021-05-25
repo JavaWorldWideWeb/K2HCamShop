@@ -40,7 +40,12 @@
                 height: 140px;
             }
 
-
+            #empty img, #empty button{
+                width: 20%;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
         </style>
     </head>
     <body>
@@ -50,11 +55,20 @@
         <div class="container">
             <h4>
                 GIỎ HÀNG
-                <span id="cart_count" style="font-weight:normal; font-size:16px; color: slategray">(<c:out value="${sessionScope.myCartNum}"/> sản phẩm)</span>
+                <span id="" style="font-weight:normal; font-size:16px; color: slategray">(<span id="cart_count"><c:out value="${sessionScope.myCartNum}"/></span> sản phẩm)</span>
             </h4
             <br/> <br/> <br/>
-            <div class="row">
-                <div class="col-lg-8" >
+
+            <div id="empty">
+                <img src="<c:url value="/resources/Image/cart.png" />" />
+                <p style="font-weight: bold; text-align: center">Không có sản phẩm nào trong giỏ hàng của bạn.</p>
+                <a href="<c:url value="/"/>" style="text-decoration: none">
+                    <button type="button" class="btn btn-warning" style="width: 20%; border: none; font-weight: bold;" onclick="dieu_huong()">Tiếp tục mua sắm</button>
+                </a>
+            </div>
+
+            <div class="row" id="cart">
+                <div class="col-lg-8" id="cartlist">
                     <div class="cart_product_inner">
                         <c:forEach var="map" items="${sessionScope.myCartItems}">
                             <div class="container" style="background-color:#f5f5f5; padding:10px 5px 10px 15px;">
@@ -64,11 +78,11 @@
                                         <img src="${pageContext.request.contextPath}/image/${map.value.product.img}" />
                                     </div>
                                     <div class="col-lg-8">
-                                        <a href="#" style="color:black; "><c:out value="${map.value.product.productName}"/></a>
+                                        <a href="<c:url value="/product/detail?id=${map.value.product.productID}"/>" style="color:black; "><c:out value="${map.value.product.productName}"/></a>
                                         <br /><br />
                                         <div class="row" style="margin-right: -60px;">
                                             <div class="col-lg-5">
-                                                <p style="color:orange">Chỉ cón 4 sản phẩm</p>
+                                                <p style="color:orange">Chỉ cón <Span id="quantityProduct"><c:out value="${map.value.product.quantity}" /></Span> sản phẩm</p>
                                                 <span style="color:blue; font-size: 14px"><a href="${pageContext.request.contextPath}/cart/remove/${map.value.product.productID}.html">Xóa</a></span>
                                                 <span style="margin-left:20px; color:blue; font-size: 14px">Để dành mua sau</span>
                                             </div>
@@ -76,29 +90,35 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <p style="color:red; font-weight:bold; margin-bottom: -5px;"><c:out value="${map.value.product.price}" /> VND</p>
-                                                        <del style="font-size:12px; color:gray">5.200.000 VND</del>
-                                                        <span style="font-size:12px; color:gray">| -9.6%</span>
+                                                        
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <input type="button" id="decrease" value="-" style="margin-right:-6px" />
-                                                        <input type="tel" id="quantity" name="quantity" value="<c:out value="${map.value.quantity}"/>" style="text-align: center" size="1" onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <= 57))" />
-                                                        <input type="button" id="increase" value="+" style="margin-left:-6px" />
+                                                        <a href="${pageContext.request.contextPath}/cart/decrease/${map.value.product.productID}.html">
+                                                            <input type="button" class="decrease" value="-" style="margin-right:-6px" />
+                                                        </a>
+                                                        <input type="tel" class="quantity" name="quantity" value="<c:out value="${map.value.quantity}"/>" style="text-align: center" size="1" onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <= 57))" />
+                                                        <a href="${pageContext.request.contextPath}/cart/increase/${map.value.product.productID}.html">
+                                                            <input type="button" class="increase" value="+" style="margin-left:-6px" />
+                                                        </a>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-         
+
                                 </div>
                             </div>
                             <br/>
                         </c:forEach>
                         <div class="container" style="margin-top: 100px; padding:10px 5px 10px 15px;">
-                            <button type="button" class="btn btn-warning" style="width: 50%; height: 45px; border: none; font-weight: bold;" onclick="dieu_huong()">Tiếp tục mua sắm</button>
+                            <a href="<c:url value="/"/>" style="text-decoration: none">
+                                <button type="button" class="btn btn-warning" style=" width: 50%; height: 45px; border: none; font-weight: bold;">Tiếp tục mua sắm</button>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4" style="margin-left:-15px">
+                <div class="col-lg-4" style="margin-left:-15px;" id="cartlist">
                     <div class="cart_total_price">
 
                         <div class="container" style="background-color:#f5f5f5; padding-top: 10px;">
@@ -129,13 +149,23 @@
                 </div>
             </div>
         </div>    
-        <div class="clearfix"></div>
-    </div>
-    <div class="clearfix"></div>
 
-</div>
 
-<br/><br/>
+        <br/><br/>
 
-</body>
+        <script>
+            var count = document.getElementById("cart_count").innerHTML;
+            if (count == '') {
+                document.getElementById("cart_count").innerHTML = '0';
+                count = 0;
+            }
+            if (count == '0') {
+                document.getElementById("empty").style.display = 'block';
+                document.getElementById("cart").style.display = 'none';
+            } else {
+                document.getElementById("empty").style.display = 'none';
+                document.getElementById("cartlist").style.display = 'block';
+            }
+        </script>
+    </body>
 </html>
