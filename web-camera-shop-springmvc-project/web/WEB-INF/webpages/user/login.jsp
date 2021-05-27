@@ -29,6 +29,13 @@
                     </div>
                 </c:if>
             </c:catch>
+            <c:catch var="success">
+                <c:if test="${success!=null}">
+                    <div class="alert alert-success">
+                        <strong>Tài khoản đã được đăng kí!</strong> ${success}
+                    </div>
+                </c:if>
+            </c:catch>
             <form action="<c:url value="/login/user"/>" method="Post">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -42,8 +49,13 @@
                     </div>
                     <input type="password" class="form-control" required="true" placeholder="Username" id="usr" name="pass">
                 </div>
-                <button type="submit" class="btn btn-warning" style="width: 100%">Đăng nhập</button>
+                <button type="submit" class="btn btn-warning" style="width: 100%;font-weight: bold">Đăng nhập</button>
             </form>
+                <div>
+                    <br>
+                    <p>Bạn chưa có tài khoản ?</p>
+                    <a href="<c:url value="/register"/>">Đăng kí tại đây</a>
+                </div>
         </div>
         <footer style="background-color: black; color: white; height: 200px; padding-left: 50px; margin-top: 110px;">
             <div class="row">

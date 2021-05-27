@@ -19,87 +19,124 @@
         <link href="<c:url value="/resources/register/signup.css"/>" rel='stylesheet' type='text/css'/>
         <link rel="icon" href="<c:url value="/resources/Image/LoadLogo.png"/>">
     </head>
+    <style>
+        span{
+            margin-left: 5px;
+        }
+        i {
+            margin-right: 5px;
+        }
+    </style>
     <body>
-        <div class="container-custom" style="margin-top: 20px;">
+        <div class="row" style="padding-top: 50px;padding-bottom: 50px;">
+            <div class="col-12">
+                <div class="container"  style="width: 50%;border: 1px #DFE5E2 solid;border-radius:5%; height: auto" >
+                    <div align="center ">
+                        <img src="<c:url value="/resources/Image/LoadLogo.png"/>" style="border-radius: 50%"  width="10%" />
+                        <div class="title">ĐĂNG KÍ</div>
+                    </div>
 
-            <div class="row">
-                <div class="col-12">
+                    <form action="<c:url value="/register/save"/>" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"><i class="fas fa-pen"></i></span>Tên đầy đủ:</label>
+                                    <input class="form-control"type="text" required placeholder="Nhập họ tên" name="tendaydu" autocomplete="off">
 
-                    <div class="container">
-                        <div class="title">Đăng kí</div>
-                        <form action="<c:url value="/register/save"/>" method="POST" enctype="multipart/form-data">
-                            <div class="user-detail">
-                                <div class="input-box">
-                                    <i class="fas fa-pen"></i></span>
-                                    <span class="details">Tên đầy đủ</span>
-
-                                    <input type="text" placeholder="nhập họ tên" name="tendaydu">
                                 </div>
+                            </div>
 
-                                <div class="input-box">
-                                    <i class="fas fa-user-alt"></i></span>
-                                    <span class="details">Tên đăng nhập </span>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"> <i class="fas fa-user-alt"></i><span class="details">Tên đăng nhập </span></label>
+                                    <input class="form-control" type="text" required placeholder="Nhập tên đăng nhập " name="tendangnhap" autocomplete="off">
 
-                                    <input type="text" placeholder="nhập tên đăng nhập " name="tendangnhap">
                                 </div>
-
-                                <div class="input-box">
-                                    <i class="fas fa-key"></i>
-                                    <span class="details">Mật khẩu </span>
-                                    <input type="password" placeholder="nhập mật khẩu" name="matkhau">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"><i class="fas fa-key"></i></span>Mật khẩu:</label>
+                                    <input class="form-control" type="password" required placeholder="Nhập mật khẩu" name="matkhau" autocomplete="off">
                                 </div>
-                                <div class="input-box">
-                                    <i class="fas fa-envelope-square"></i>
-                                    <span class="details">Email </span>
-                                    <input type="text" placeholder="nhập email" name="email">
-                                </div>
-                                <div class="input-box">
-                                    <i class="fas fa-undo"></i>
-                                    <span class="details">Xác nhận mật khẩu </span>
-                                    <input type="password" placeholder="nhập lại mật khẩu" >
-                                </div>
-                                <div class="input-box">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <span class="details"> Số điện thoại </span>
-                                    <input type="text" placeholder="nhập số điện thoại" name="sodt">
-                                </div>
+                            </div>
 
-                                <div class="input-box">
-                                    <i class="fas fa-calendar"></i>
-                                    <span class="details"> Ngày sinh </span>
-                                    <input type="date" placeholder="nhập số điện thoại" name="ngaysinh">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"> <i class="fas fa-envelope-square"></i><span class="details">Email </span></label>
+                                    <input class="form-control" type="email" required placeholder="Nhập email" name="email" autocomplete="off">
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"><i class="fas fa-key"></i></span>Xác nhận mật khẩu:</label>
+                                    <input class="form-control" type="password" required placeholder="Nhập lại mật khẩu" autocomplete="off">
+                                </div>
+                            </div>
 
-                                <div class="input-box">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"> <i class="fas fa-mobile-alt"></i><span class="details">Số điện thoại </span></label>
+                                    <input class="form-control" required placeholder="Nhập số điện thoại" name="sodt" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"> <i class="fas fa-calendar"></i></span>Chọn ngày sinh:</label>
+                                    <input class="form-control" type="date" required  name="ngaysinh" autocomplete="off">
+                                </div>
+                            </div>
 
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="pwd"> <i class="fas fa-user"></i><span class="details">Hình ảnh </span></label>
+                                    <input class="form-control" type="file" required placeholder="nhập số điện thoại" name="sodt" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
 
-                                    <i class="fas fa-home"></i>
-                                    <span class="details"> Địa chỉ </span>
-                                    <select name="calc_shipping_provinces" required="">
+                        <div class="input-box">
+                            <i class="fas fa-home"></i>
+                            <span class="details"> Địa chỉ </span>
+
+                            <div class="row">
+                                <div class="col-4">
+                                    <input class="form-control" type="text" required placeholder="Nhập địa chỉ" name="diachi">
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control" name="calc_shipping_provinces" required="">
                                         <option value="tinh">Tỉnh / Thành phố</option>
-                                    </select>
-                                    <select name="calc_shipping_district" required="">
+                                    </select>                                    
+                                </div>
+                                <div class="col-4">
+                                    <select class="form-control" name="calc_shipping_district" required="">
                                         <option value="quan">Quận / Huyện</option>
                                     </select>
-                                    <input class="billing_address_1" name="" type="hidden" value="">
-                                    <input class="billing_address_2" name="" type="hidden" value="">
-                                    <input type="text" placeholder="nhập địa chỉ" name="diachi">
-
                                 </div>
-
-
                             </div>
-                            <div class="button">
-                                <input type="submit" value="Đăng kí">
+                            <div class="row">
+                                <div class="col-12">
+                                    <br>
+                                    <button class="btn btn-warning" type="submit" style="width: 100%; font-weight: bold">Đăng kí</button>
+                                </div>
                             </div>
-                        </form>
-                    </div>
+
+                            <input class="billing_address_1" name="" type="hidden" value="">
+                            <input class="billing_address_2" name="" type="hidden" value="">
+                        </div>
                 </div>
+                </form>
             </div>
         </div>
-        
-        <footer style="background-color: black; color: white; height: 200px; padding-left: 50px;">
-            <div class="row">
+    </div>
+
+    <footer style="background-color: black; color: white; height: 200px; padding-left: 50px;">
+        <div class="row">
             <div class="col-9">
                 <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
                 <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
@@ -112,15 +149,86 @@
                 <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
             </div>
         </div>
-         </footer>
+    </footer>
 
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js' ></script>
-       
-        <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js' ></script>
 
-    </body>
+    <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+    <script>//<![CDATA[
+        if (address_2 = localStorage.getItem('address_2_saved')) {
+            $('select[name="calc_shipping_district"] option').each(function () {
+                if ($(this).text() == address_2) {
+                    $(this).attr('selected', '')
+                }
+            })
+            $('input.billing_address_2').attr('value', address_2)
+        }
+        if (district = localStorage.getItem('district')) {
+            $('select[name="calc_shipping_district"]').html(district)
+            $('select[name="calc_shipping_district"]').on('change', function () {
+                var target = $(this).children('option:selected')
+                target.attr('selected', '')
+                $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                address_2 = target.text()
+                $('input.billing_address_2').attr('value', address_2)
+                district = $('select[name="calc_shipping_district"]').html()
+                localStorage.setItem('district', district)
+                localStorage.setItem('address_2_saved', address_2)
+            })
+        }
+        $('select[name="calc_shipping_provinces"]').each(function () {
+            var $this = $(this),
+                    stc = ''
+            c.forEach(function (i, e) {
+                e += +1
+                stc += '<option value=' + e + '>' + i + '</option>'
+                $this.html('<option value="">Tỉnh / Thành phố</option>' + stc)
+                if (address_1 = localStorage.getItem('address_1_saved')) {
+                    $('select[name="calc_shipping_provinces"] option').each(function () {
+                        if ($(this).text() == address_1) {
+                            $(this).attr('selected', '')
+                        }
+                    })
+                    $('input.billing_address_1').attr('value', address_1)
+                }
+                $this.on('change', function (i) {
+                    i = $this.children('option:selected').index() - 1
+                    var str = '',
+                            r = $this.val()
+                    if (r != '') {
+                        arr[i].forEach(function (el) {
+                            str += '<option value="' + el + '">' + el + '</option>'
+                            $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>' + str)
+                        })
+                        var address_1 = $this.children('option:selected').text()
+                        var district = $('select[name="calc_shipping_district"]').html()
+                        localStorage.setItem('address_1_saved', address_1)
+                        localStorage.setItem('district', district)
+                        $('select[name="calc_shipping_district"]').on('change', function () {
+                            var target = $(this).children('option:selected')
+                            target.attr('selected', '')
+                            $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                            var address_2 = target.text()
+                            $('input.billing_address_2').attr('value', address_2)
+                            district = $('select[name="calc_shipping_district"]').html()
+                            localStorage.setItem('district', district)
+                            localStorage.setItem('address_2_saved', address_2)
+                        })
+                    } else {
+                        $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>')
+                        district = $('select[name="calc_shipping_district"]').html()
+                        localStorage.setItem('district', district)
+                        localStorage.removeItem('address_1_saved', address_1)
+                    }
+                })
+            })
+        })
+        //]]></script>
+</body>
 </html>

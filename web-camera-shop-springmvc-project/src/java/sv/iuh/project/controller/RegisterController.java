@@ -47,8 +47,8 @@ public class RegisterController {
         String email = request.getParameter("email");
         String phone = request.getParameter("sodt");
         Date birth =  Date.valueOf(request.getParameter("ngaysinh"));
-        String tinh = request.getParameter("tinh");
-        String quan = request.getParameter("quan");
+        String tinh = request.getParameter("calc_shipping_provinces");
+        String quan = request.getParameter("calc_shipping_district");
         String diachi = request.getParameter("diachi");
         String address = " DiaChi " + diachi + " - Huyen/Quan " + quan + "- Tinh " + tinh;
         UserShop userShop = new UserShop();
@@ -65,7 +65,7 @@ public class RegisterController {
         
             registerService.create(userShop);
 //            mm.put("listUserShop", registerService.getAll());
-//            mm.put("success", "Thêm thành công");
+            mm.put("success", "Bạn đã đăng kí thành công vui lòng đăng nhập !!!");
             return "user/login";
        
     }
