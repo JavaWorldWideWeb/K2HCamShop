@@ -48,6 +48,9 @@
     <bean id="OrderDetailDao" class="sv.iuh.project.dao.OrderDetailDAOImpl" />
     <bean id="LoginService" class="sv.iuh.project.service.LoginServiceImpl" />
     <bean id="LoginDao" class="sv.iuh.project.dao.LoginDaoImpl" />
+    
+     <bean id="RegisterService" class="sv.iuh.project.service.RegisterServiceImpl" />
+    <bean id="RegisterDao" class="sv.iuh.project.dao.RegisterImpl" />
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
     <mvc:annotation-driven />
 </beans>
