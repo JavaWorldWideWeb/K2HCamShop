@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng kí</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../Css/Header.css">
+<link rel="stylesheet" href="../Css/body.css">
+<link rel="stylesheet" href="../Css/signup.css">
+<link rel="icon" href="../Image/LoadLogo.png">
+<script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+</head>
+   
+
+<body>
+  
+    <header>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-4"><img src="../Image/K2NCamShop.png" style="width: 40%;" /></div>
+    
+            <div class="col-7" align="right" style="margin-top: 5vh;"></div>
+        </div>
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05"
+            aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarsExample05">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="Dashboard.html">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link " href="Product.html">
+                        Các sản phẩm
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="About.html">Giới thiệu về chúng tôi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liên hệ</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav" style="padding-right: 7vw;">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Login.html">Đăng nhập</a>
+                </li>
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Đăng kí</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../Admin/index.html">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+  <div class="row">
+    <div class="col-12">
+  
+    <div class="container">
+        <div class="title">Đăng kí</div>
+        <form action="">
+            <div class="user-detail">
+                <div class="input-box">
+                    <i class="fas fa-pen"></i></span>
+                    <span class="details">Tên đầy đủ</span>
+    
+                    <input type="text" placeholder="nhập họ tên">
+                </div>
+    
+                <div class="input-box">
+                    <i class="fas fa-user-alt"></i></span>
+                    <span class="details">Tên đăng nhập </span>
+    
+                    <input type="text" placeholder="nhập tên đăng nhập ">
+                </div>
+    
+                <div class="input-box">
+                    <i class="fas fa-key"></i>
+                    <span class="details">Mật khẩu </span>
+                    <input type="password" placeholder="nhập mật khẩu">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-envelope-square"></i>
+                    <span class="details">Email </span>
+                    <input type="text" placeholder="nhập email">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-undo"></i>
+                    <span class="details">Xác nhận mật khẩu </span>
+                    <input type="password" placeholder="nhập lại mật khẩu">
+                </div>
+                <div class="input-box">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span class="details"> Số điện thoại </span>
+                    <input type="text" placeholder="nhập số điện thoại">
+                </div>
+    
+                <div class="input-box">
+                    <i class="fas fa-calendar"></i>
+                    <span class="details"> Ngày sinh </span>
+                    <input type="date" placeholder="nhập số điện thoại">
+                </div>
+    
+                <div class="input-box">
+
+                       
+                        <i class="fas fa-home"></i>
+                        <span class="details"> Địa chỉ </span>
+                        <select name="calc_shipping_provinces" required="">
+                            <option value="">Tỉnh / Thành phố</option>
+                        </select>
+                        <select name="calc_shipping_district" required="">
+                            <option value="">Quận / Huyện</option>
+                        </select>
+                        <input class="billing_address_1" name="" type="hidden" value="">
+                        <input class="billing_address_2" name="" type="hidden" value="">
+                        <input type="text" placeholder="nhập địa chỉ">
+                        
+                  </div>
+               
+
+            </div>
+            <div class="button">
+                <input type="submit" value="Đăng kí">
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+    <footer style="background-color: black; color: white; height: 200px; padding-left: 50px;">
+        <div class="row">
+            <div class="col-9">
+                <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
+                <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
+                <p class="pFooter">Điện thoại: 0976553787 - Email: K2NCamShop@gmail.vn </p>
+                <p class="pFooter">&copy Copyright 2021</p>
+            </div>
+            <div class="col-3" style="padding-top: 20px;">
+                <a href=""><img src="../Image/Logo/fb.png" style="width: 10%;"></a>
+                <a href=""><img src="../Image/Logo/yt.png" style="width: 10%;"></a>
+                <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>//<![CDATA[
+        if (address_2 = localStorage.getItem('address_2_saved')) {
+            $('select[name="calc_shipping_district"] option').each(function () {
+                if ($(this).text() == address_2) {
+                    $(this).attr('selected', '')
+                }
+            })
+            $('input.billing_address_2').attr('value', address_2)
+        }
+        if (district = localStorage.getItem('district')) {
+            $('select[name="calc_shipping_district"]').html(district)
+            $('select[name="calc_shipping_district"]').on('change', function () {
+                var target = $(this).children('option:selected')
+                target.attr('selected', '')
+                $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                address_2 = target.text()
+                $('input.billing_address_2').attr('value', address_2)
+                district = $('select[name="calc_shipping_district"]').html()
+                localStorage.setItem('district', district)
+                localStorage.setItem('address_2_saved', address_2)
+            })
+        }
+        $('select[name="calc_shipping_provinces"]').each(function () {
+            var $this = $(this),
+                stc = ''
+            c.forEach(function (i, e) {
+                e += +1
+                stc += '<option value=' + e + '>' + i + '</option>'
+                $this.html('<option value="">Tỉnh / Thành phố</option>' + stc)
+                if (address_1 = localStorage.getItem('address_1_saved')) {
+                    $('select[name="calc_shipping_provinces"] option').each(function () {
+                        if ($(this).text() == address_1) {
+                            $(this).attr('selected', '')
+                        }
+                    })
+                    $('input.billing_address_1').attr('value', address_1)
+                }
+                $this.on('change', function (i) {
+                    i = $this.children('option:selected').index() - 1
+                    var str = '',
+                        r = $this.val()
+                    if (r != '') {
+                        arr[i].forEach(function (el) {
+                            str += '<option value="' + el + '">' + el + '</option>'
+                            $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>' + str)
+                        })
+                        var address_1 = $this.children('option:selected').text()
+                        var district = $('select[name="calc_shipping_district"]').html()
+                        localStorage.setItem('address_1_saved', address_1)
+                        localStorage.setItem('district', district)
+                        $('select[name="calc_shipping_district"]').on('change', function () {
+                            var target = $(this).children('option:selected')
+                            target.attr('selected', '')
+                            $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                            var address_2 = target.text()
+                            $('input.billing_address_2').attr('value', address_2)
+                            district = $('select[name="calc_shipping_district"]').html()
+                            localStorage.setItem('district', district)
+                            localStorage.setItem('address_2_saved', address_2)
+                        })
+                    } else {
+                        $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>')
+                        district = $('select[name="calc_shipping_district"]').html()
+                        localStorage.setItem('district', district)
+                        localStorage.removeItem('address_1_saved', address_1)
+                    }
+                })
+            })
+        })
+    //]]></script>
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js' ></script>
+    <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js' ></script>
+    
+</body>
+</html>

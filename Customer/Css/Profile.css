@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  margin-top: 20px;
+  background-color: lightgray;
+}
+.main {
+  padding: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.slidebar {
+  background-color: #333;
+  color: white;
+  height: 100%;
+}
+.slidebar a {
+  margin-left: 10px;
+  display: block;
+  color: white;
+  padding-bottom: 10px;
+  font-size: 30px;
+  text-decoration: none;
+}
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: none;
+}
+.content {
+  background-color: whitesmoke;
+}
