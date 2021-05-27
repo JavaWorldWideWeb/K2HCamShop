@@ -25,5 +25,6 @@
         <mapping class="sv.iuh.project.model.ProductBrand"/>
         <mapping class="sv.iuh.project.model.ProductCategory"/>
         <mapping class="sv.iuh.project.model.UserShop"/>
+        <mapping class="sv.iuh.project.model.Country"/>
     </session-factory>
 </hibernate-configuration>

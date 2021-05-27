@@ -57,4 +57,14 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getNewProduct() {
         return productDao.getNewProduct();
     }
+
+    @Override
+    public List<Product> getListByBrand(int brandId, String name) {
+        return productDao.getListByBrand(brandId, name);
+    }
+
+    @Override
+    public List<Product> getListBrand(int brandId) {
+        return productDao.getListBrand(brandId);
+    }
 }

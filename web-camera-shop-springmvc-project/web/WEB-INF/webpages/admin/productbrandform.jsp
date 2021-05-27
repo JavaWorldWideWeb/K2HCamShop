@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="<c:url value="/resources/vendors/chartist/chartist.min.css"/>" rel='stylesheet' type='text/css'>
         <link rel="icon" href="<c:url value="/resources/images/LoadLogo.png"/>">
     </head>
-    
+
     <body>
         <!-- partial -->
         <div class="main-panel">
@@ -50,12 +50,19 @@
                             <input type="text" class="form-control" hidden="true" value="${productBrand.productBrandID}" id="exampleInputUsername1" name="id" placeholder="Nhập tên thương hiệu">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Tên Thương hiệu</label>
-                                <input type="text" class="form-control" id="exampleInputUsername1" value="${productBrand.productBrandName}" name="name" placeholder="Nhập tên thương hiệu">
+                                <input type="text" required="" class="form-control" id="exampleInputUsername1" value="${productBrand.productBrandName}" name="name" placeholder="Nhập tên thương hiệu">
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputConfirmPassword1">Quốc Gia</label>
-                                <input type="text" class="form-control" id="exampleInputConfirmPassword1" value="${productBrand.nationalProduction}" name="nation" placeholder="Nhập quốc gia">
+                                <select class="form-control" required name="nation">
+                                    <c:forEach items="${list}" var="n">
+                                        <option value="${n.nicename}" >${n.nicename}</option>
+                                        <c:if test="${productBrand!=null}">
+                                            <option value="${productBrand.nationalProduction}" hidden="true" selected="true">${productBrand.nationalProduction}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputConfirmPassword1">Logo</label>
@@ -78,9 +85,9 @@
         <script src="<c:url value="/resources/js/dashboard.js"/>"></script>
         <script src="<c:url value="/resources/js/misc.js"/>"></script>
         <script>
-        $(document).ready(function () {
-            $('.toast').toast('show');
-        });
-    </script>
+            $(document).ready(function () {
+                $('.toast').toast('show');
+            });
+        </script>
     </body>
 </html>

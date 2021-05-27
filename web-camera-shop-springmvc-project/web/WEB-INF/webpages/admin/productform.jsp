@@ -4,9 +4,10 @@
     Author     : Tuan Khang
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="header.jsp" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -76,7 +77,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
+                                            <label class="col-sm-3 col-form-label">Màu sản phẩm</label>
                                             <div class="col-sm-9">
                                                 <input type="text" required class="form-control"  value="${product.color}" name="color" placeholder="Nhập màu sản phẩm"/>
                                             </div>
@@ -86,11 +87,119 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Bộ cảm biến</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" required="" class="form-control" value="${product.sensor}" name="sensor" placeholder="Nhập bộ cảm biến" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Dãy ISO</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" required="" class="form-control" value="${product.iso}" name="iso" placeholder="Nhập dãy ISO"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Độ phân giải</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" required="" class="form-control" value="${product.resolution}" name="resolution" placeholder="Nhập độ phân giải" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Đo sáng</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" required="" class="form-control" value="${product.metering}" name="metering" placeholder="Nhập đo sáng"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Kích thước ảnh</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" required="true" name="sizephoto">
+                                                    <c:if test="${product!=null}">
+                                                        <option value="${product.sizephoto}" hidden="true" selected="true">${product.sizephoto}</option>
+                                                    </c:if>
+                                                    <option value="1051 x 1500">1051 x 1500</option>
+                                                    <option value="1205 x 1795">1205 x 1795</option>
+                                                    <option value="1500 x 2102">1500 x 2102</option>
+                                                    <option value="1795 x 2398">1795 x 2398</option>
+                                                    <option value="2398 x 3000">2398 x 3000</option>
+                                                    <option value="2398 x 3602">2398 x 3602</option>
+                                                    <option value="3000 x 3602">3000 x 3602</option>
+                                                    <option value="3000 x 4500">3000 x 4500</option>
+                                                    <option value="3295 x 4205">3295 x 4205</option>
+                                                    <option value="3295 x 5102">3295 x 5102</option>
+                                                    <option value="3602 x 4500">3602 x 4500</option>
+                                                    <option value="3295 x 4205">3295 x 4205</option>
+                                                    <option value="3295 x 5102">3295 x 5102</option>
+                                                    <option value="3602 x 4500">3602 x 4500</option>
+                                                    <option value="6000 x 9500">6000 x 9500</option>
+                                                    <option value="1748 x 1240">1748 x 1240</option>
+                                                    <option value="3496 x 2480">3496 x 2480</option>
+                                                    <option value="6992 x 4960">6992 x 4960</option>
+                                                    <option value="13984 x 9920">13984 x 9920</option>
+                                                    <option value="27968 x 19840">27968 x 19840</option>
+                                                </select>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Micro</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" required="true" name="micro">
+                                                    <option value="${product.micro}" hidden="true" selected="true">${product.micro}</option>
+                                                    <option value="Có">Có</option>
+                                                    <option value="Có">Không</option>
+                                                </select>                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Thương Hiệu</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" required="true" name="brand">
+                                                    <c:if test="${product!=null}">
+                                                        <option value="${product.productBrandID.productBrandID}" hidden="true" selected="true">${product.productBrandID.productBrandName}</option>
+                                                    </c:if>
+                                                    <c:forEach items="${listbrand}" var="pb">
+                                                        <option value="${pb.productBrandID}">${pb.productBrandName}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Thời gian bảo hành (Tháng)</label>
+                                            <div class="col-sm-9">
+                                                <input type="number" required class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Loại Sản Phẩm</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" required name="cate">
-                                                    <c:forEach items="${listcate}" var="pc">
+                                                    <c:if test="${product!=null}">
                                                         <option value="${product.productCategoryID.productCategoryID}" hidden="true" selected="true">${product.productCategoryID.productCategoryName}</option>
+                                                    </c:if>
+                                                    <c:forEach items="${listcate}" var="pc">
                                                         <option value="${pc.productCategoryID}">${pc.productCategoryName}</option>
                                                     </c:forEach>
                                                 </select>
@@ -110,37 +219,15 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Thương Hiệu</label>
-                                            <div class="col-sm-9">
-                                                <select class="form-control" required="true" name="brand">
-                                                    <c:forEach items="${listbrand}" var="pb">
-                                                        <option value="${product.productBrandID.productBrandID}" hidden="true" selected="true">${product.productBrandID.productBrandName}</option>
-                                                        <option value="${pb.productBrandID}">${pb.productBrandName}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Thời gian bảo hành (Tháng)</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" required class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Mô tả</label>
                                             <div class="col-sm-9">
                                                 <textarea class="form-control"  id="exampleTextarea1" rows="10" name="des"></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                       
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <img src="${pageContext.request.contextPath}/image/${product.img}" style="border-radius: 0px;width: 100%">
                                     </div>
                                 </div> 
                                 <div class="row">
@@ -155,8 +242,6 @@
                                     </div>
                                 </div> 
                         </div>
-                        
-                        
                         </form>
                     </div>
                 </div>

@@ -46,6 +46,7 @@ public class ProductController {
     public String viewAdmin(ModelMap mm, HttpSession session) {
         mm.put("list", productService.getListNav(0, 6));
         mm.put("totalItem", productService.totalItem() / 6);
+        mm.put("listbrand", productBrandService.getAll());
         return "admin/productmanage";
     }
 
@@ -53,6 +54,7 @@ public class ProductController {
     public String viewProductAdminByPage(ModelMap mm, HttpSession session, @PathVariable("page") int page) {
         mm.put("list", productService.getListNav((page - 1) * 6, 6));
         mm.put("totalItem", productService.totalItem() / 6);
+        mm.put("listbrand", productBrandService.getAll());
         return "admin/productmanage";
     }
 
@@ -61,6 +63,19 @@ public class ProductController {
         mm.put("list", productService.getAll());
         mm.put("listbrand", productBrandService.getAll());
         return "user/product";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String viewSearch(ModelMap mm, HttpSession session, @RequestParam("brandfilter") int id, @RequestParam(required = false) String name) {
+        if (name == "" && id == 0) {
+            return "redirect:/product/show";
+        } else {
+            mm.put("list", productService.getListByBrand(id, name));
+            mm.put("listbrand", productBrandService.getAll());
+            mm.put("brand", productBrandService.findById(id));
+            mm.put("s", name);
+            return "admin/productmanage";
+        }
     }
 
     //Phan trang
@@ -80,6 +95,14 @@ public class ProductController {
         return "user/product";
     }
 
+    @RequestMapping(value = "/filterBrand", method = RequestMethod.GET)
+    public String filterBrand(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
+        mm.put("list", productService.getListBrand(id));
+        mm.put("b", productBrandService.findById(id));
+        mm.put("listbrand", productBrandService.getAll());
+        return "user/product";
+    }
+
     //Luu san pham
     @RequestMapping(value = "save", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,
@@ -93,7 +116,13 @@ public class ProductController {
         ProductBrand productBrand = productBrandService.findById(Integer.parseInt(request.getParameter("brand")));
         ProductCategory productCategory = productCategoryService.findById(Integer.parseInt(request.getParameter("cate")));
         String warranTyperiod = request.getParameter("warranTyperiod");
-        Product product = new Product(name, price, quantity, color, description, warranTyperiod, saveFile(photo), productBrand, productCategory);
+        String sensor = request.getParameter("sensor");
+        String iso = request.getParameter("iso");
+        String resolution = request.getParameter("resolution");
+        String metering = request.getParameter("metering");
+        String sizephoto = request.getParameter("sizephoto");
+        String micro = request.getParameter("micro");
+        Product product = new Product(name, price, quantity, color, description, warranTyperiod, saveFile(photo), sensor, iso, resolution, sizephoto, micro, metering, productBrand, productCategory);
         if ("".equals(request.getParameter("id"))) {
             productService.create(product);
             mm.put("success", "Thêm thành công");

@@ -6,6 +6,7 @@
 package sv.iuh.project.service;
 
 import java.util.List;
+import sv.iuh.project.model.Country;
 import sv.iuh.project.model.ProductBrand;
 
 /**
@@ -27,4 +28,6 @@ public interface ProductBrandService {
 
     // load list category
     public List<ProductBrand> getAll();
+    
+    public List<Country> getAllCountry();
 }

@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
+import sv.iuh.project.model.Country;
 import sv.iuh.project.model.ProductBrand;
 import sv.iuh.project.model.ProductCategory;
 import sv.iuh.project.util.HibernateUtil;
@@ -19,7 +20,8 @@ import sv.iuh.project.util.HibernateUtil;
  * @author Tuan Khang
  */
 @Repository
-public class ProductBrandDAOImpl implements ProductBrandDao{
+public class ProductBrandDAOImpl implements ProductBrandDao {
+
     @Override
     public boolean create(ProductBrand object) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -38,7 +40,7 @@ public class ProductBrandDAOImpl implements ProductBrandDao{
             session.flush();
             session.close();
         }
-         return false;
+        return false;
     }
 
     @Override
@@ -114,6 +116,28 @@ public class ProductBrandDAOImpl implements ProductBrandDao{
             transaction = session.beginTransaction();
             Query query = session.createQuery("FROM ProductBrand");
             List<ProductBrand> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Country> getAllCountry() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Country");
+            List<Country> list = query.list();
             transaction.commit();
             return list;
         } catch (Exception ex) {

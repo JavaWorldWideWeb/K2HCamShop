@@ -10,6 +10,7 @@
     <class>sv.iuh.project.model.Comment</class>
     <class>sv.iuh.project.model.Product</class>
     <class>sv.iuh.project.model.ProductCategory</class>
+    <class>sv.iuh.project.model.Country</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=K2NCamShopDatabase"/>

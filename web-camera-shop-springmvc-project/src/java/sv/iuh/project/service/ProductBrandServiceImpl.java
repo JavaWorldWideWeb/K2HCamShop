@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sv.iuh.project.dao.ProductBrandDao;
+import sv.iuh.project.model.Country;
 import sv.iuh.project.model.ProductBrand;
 
 /**
@@ -43,5 +44,10 @@ public class ProductBrandServiceImpl implements ProductBrandService{
     @Override
     public List<ProductBrand> getAll() {
         return productBrandDao.getAll();
+    }
+
+    @Override
+    public List<Country> getAllCountry() {
+        return productBrandDao.getAllCountry();
     }
 }

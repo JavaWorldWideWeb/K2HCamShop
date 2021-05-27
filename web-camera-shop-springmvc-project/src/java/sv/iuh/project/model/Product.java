@@ -61,6 +61,18 @@ public class Product implements Serializable {
     private String warranTyperiod;
     @Column(name = "img", length = 255)
     private String img;
+    @Column(name = "Sensor", length = 50)
+    private String sensor;
+    @Column(name = "Iso", length = 50)
+    private String iso;
+    @Column(name = "Resolution", length = 50)
+    private String resolution;
+    @Column(name = "Sizephoto", length = 50)
+    private String sizephoto;
+    @Column(name = "Micro", length = 50)
+    private String micro;
+    @Column(name = "Metering", length = 50)
+    private String metering;
     @OneToMany(mappedBy = "productID")
     private List<OrderDetail> orderDetailList;
     @OneToMany(mappedBy = "productID")
@@ -75,6 +87,24 @@ public class Product implements Serializable {
     public Product() {
     }
 
+    public Product(String productName, Integer price, Integer quantity, String color, String description, String warranTyperiod, String img, String sensor, String iso, String resolution, String sizephoto, String micro, String metering, ProductBrand productBrandID, ProductCategory productCategoryID) {
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
+        this.color = color;
+        this.description = description;
+        this.warranTyperiod = warranTyperiod;
+        this.img = img;
+        this.sensor = sensor;
+        this.iso = iso;
+        this.resolution = resolution;
+        this.sizephoto = sizephoto;
+        this.micro = micro;
+        this.metering = metering;
+        this.productBrandID = productBrandID;
+        this.productCategoryID = productCategoryID;
+    }
+
     public Product(String productName, Integer price, Integer quantity, String color, String description, String warranTyperiod, String img, ProductBrand productBrandID, ProductCategory productCategoryID) {
         this.productName = productName;
         this.price = price;
@@ -85,6 +115,54 @@ public class Product implements Serializable {
         this.img = img;
         this.productBrandID = productBrandID;
         this.productCategoryID = productCategoryID;
+    }
+
+    public String getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(String sensor) {
+        this.sensor = sensor;
+    }
+
+    public String getIso() {
+        return iso;
+    }
+
+    public void setIso(String iso) {
+        this.iso = iso;
+    }
+
+    public String getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
+
+    public String getSizephoto() {
+        return sizephoto;
+    }
+
+    public void setSizephoto(String sizephoto) {
+        this.sizephoto = sizephoto;
+    }
+
+    public String getMicro() {
+        return micro;
+    }
+
+    public void setMicro(String micro) {
+        this.micro = micro;
+    }
+
+    public String getMetering() {
+        return metering;
+    }
+
+    public void setMetering(String metering) {
+        this.metering = metering;
     }
     
     public String getWarranTyperiod() {

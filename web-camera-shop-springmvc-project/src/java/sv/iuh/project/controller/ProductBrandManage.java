@@ -12,12 +12,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.hibernate.annotations.common.util.impl.Log_$logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,7 +40,9 @@ public class ProductBrandManage {
     }
 
     @RequestMapping(value = "/showform", method = RequestMethod.GET)
-    public String viewProductNew(ModelMap mm, HttpSession session) {
+    public String viewProductNew(ModelMap mm, HttpSession session,@RequestParam(required = false) String success) {
+        mm.put("list", productBrandService.getAllCountry());
+        mm.put("success", success);
         return "admin/productbrandform";
     }
 
@@ -59,8 +58,7 @@ public class ProductBrandManage {
         if ("".equals(request.getParameter("id"))) {
             productBrandService.create(productBrand);
             mm.put("listProductBrand", productBrandService.getAll());
-            mm.put("success", "Thêm thành công");
-            return "admin/productbrandform";
+            return "redirect:/productbrand/showform?success=Them thanh cong";
         } else {
             int id = Integer.parseInt(request.getParameter("id"));
             productBrand.setProductBrandID(id);
@@ -75,6 +73,7 @@ public class ProductBrandManage {
     public String showFormUdate(ModelMap mm,@RequestParam("id") int id,@RequestParam(required = false) String success) {
         ProductBrand productBrand=productBrandService.findById(id);
         mm.put("productBrand", productBrand);
+        mm.put("list", productBrandService.getAllCountry());
         mm.put("success", success);
         return "admin/productbrandform";
     }

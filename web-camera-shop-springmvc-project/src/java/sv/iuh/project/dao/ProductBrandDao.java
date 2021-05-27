@@ -6,6 +6,7 @@
 package sv.iuh.project.dao;
 
 import java.util.List;
+import sv.iuh.project.model.Country;
 import sv.iuh.project.model.ProductBrand;
 
 /**
@@ -25,4 +26,6 @@ public interface ProductBrandDao {
     public ProductBrand findById(int id);
     // load list brand
     public List<ProductBrand> getAll();
+    
+    public List<Country> getAllCountry();
 }

@@ -59,11 +59,10 @@
         <div style="padding:20px">
             <h3 align="center" style="font-weight: bold;">THƯƠNG HIỆU MÁY ẢNH</h3>
         </div>
-        <div class="row">
+        <div class="row" align="center">
             <c:forEach items="${listbrand}" var="lb">
                 <div class="col-2"><a href=""><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
-                    </c:forEach>
-
+            </c:forEach>
         </div>
 
         <div style="padding:10px">
@@ -137,7 +136,7 @@
                                 <div class="card-body pt-0 px-0">
                                     <div class="d-flex flex-row justify-content-between mb-0 px-3"> <small class="text-muted mt-1">Giá Bán</small>
                                         <h6><fmt:formatNumber type = "number" 
-                                                              maxFractionDigits = "3" value = "${p.price}"/> VND</h6>
+                                                          maxFractionDigits = "3" value = "${p.price}"/> VND</h6>
                                     </div>
                                     <hr class="mt-2 mx-3">
                                     <div class="d-flex flex-row justify-content-between px-3 pb-4">

@@ -21,11 +21,19 @@
         <link rel="icon" href="<c:url value="/resources/Image/LoadLogo.png"/>">
 
     </head>
+    <style>
+        a {
+            color: black;
+        }
+        a:hover{
+            color: black;
+        }
+    </style>
     <body>
         <div class="container-custom" style="margin-top: 20px;">
             <div class="row">
                 <c:forEach items="${listbrand}" var="lb">
-                    <div class="col-2"><a href=""><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
+                    <div class="col-2"><a href="${pageContext.request.contextPath}/product/filterBrand?id=${lb.productBrandID}"><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
                         </c:forEach>
             </div>
         </div>
@@ -82,8 +90,15 @@
                 </div>
                 <div class="col-9" >
                     <div>
-                        <h4>Các sản phẩm</h4>
+                        <h6><a href="${pageContext.request.contextPath}/product/productpage">Các sản phẩm</a>  
+                            <c:catch var="b"> 
+                                <c:if test="${b!=null}">
+                                    >><a href="">Thương hiệu ${b.productBrandName}</a>
+                                </c:if>
+                            </c:catch>
+                        </h6>
                     </div>
+                    <br>
                     <div class="row">
                         <c:forEach items="${list}" var="p">
                             <div class="col-3" style="padding-top: 10px">
@@ -106,11 +121,6 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="col-12" align="center" style="padding-top: 10px">
-                            <c:forEach var="i" begin="0" end="${totalItem}">    
-                                <a class="btn btn-success" href="${pageContext.request.contextPath}/product/productpage/${i+1}"><c:out value="${i+1}"/></a>
-                            </c:forEach>
-                        </div>
                     </div>
                 </div>
             </div>

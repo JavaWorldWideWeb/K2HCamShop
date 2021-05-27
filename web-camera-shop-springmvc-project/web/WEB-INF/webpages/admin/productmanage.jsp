@@ -35,9 +35,50 @@
                     <h4 class="card-title">QUẢN LÝ LOẠI SẢN PHẨM</h4>
                     <p class="card-description"><code>DANH SÁCH LOẠI SẢN PHẨM </code> 
                     </p>
-                    <form action="<c:url value="/product/showform"/>">
-                        <button type="submit" class="btn btn-success btn-fw">Thêm Sản Phẩm</button>
-                    </form>
+                    <div class="row">
+                        <div class="col-3">
+                            <form action="<c:url value="/product/showform"/>">
+                                <button type="submit" class="btn btn-success btn-fw">Thêm Sản Phẩm</button>
+                            </form>
+                        </div>
+                        <div class="col-9" align="right">
+                            <form method="get" action="<c:url value="/product/search"/>">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label"></label>
+                                    <label class="col-sm-2 col-form-label">Thương Hiệu</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" required="true" name="brandfilter">
+                                            <option value="0">Tất cả thương hiệu</option>
+                                            <c:catch var="brand">
+                                                <c:if test="${brand!=null}">
+                                                    <option value="${brand.productBrandID}" hidden="true" selected="true">${brand.productBrandName}</option>
+                                                </c:if>
+                                            </c:catch>
+
+                                            <c:forEach items="${listbrand}" var="pb">
+                                                <option value="${pb.productBrandID}">${pb.productBrandName}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <c:catch var="s">
+                                                    <input type="text" value="${s}" name="name" class="form-control" placeholder="Nhập tên sản phẩm cần tim " aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                </c:catch>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-sm btn-primary" type="submit">Tìm</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -76,7 +117,7 @@
                     </table>
                     <div class="col-12" align="center" style="padding-top: 10px">
                         <c:forEach var="i" begin="0" end="${totalItem}">    
-                            <a class="btn btn-danger" href="${pageContext.request.contextPath}/product/show/${i+1}"><c:out value="${i+1}"/></a>
+                            <a style="background-color: orange; padding-left: 10px;padding-right: 10px; color: black;border-radius: 3px;" href="${pageContext.request.contextPath}/product/show/${i+1}"><c:out value="${i+1}"/></a>
                         </c:forEach>
                     </div>
                 </div>

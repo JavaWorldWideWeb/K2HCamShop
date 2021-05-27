@@ -16,6 +16,7 @@ import sv.iuh.project.model.ProductCategory;
  */
 public interface ProductDao {
     public List<Product> getAll();
+    
     public List<Product> getNewProduct();
     
     // update
@@ -29,5 +30,10 @@ public interface ProductDao {
     
     public boolean create(Product object);
     public List<Product> getListNav(int start, int limit);
+    
+    public List<Product> getListByBrand(int brandId, String name);
+    
+    public List<Product> getListBrand(int brandId);
+    
     public Long totalItem();
 }
