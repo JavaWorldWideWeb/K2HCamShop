@@ -5,6 +5,9 @@
  */
 package sv.iuh.project.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -39,7 +42,7 @@ public class RegisterController {
     
     
     @RequestMapping(value = "/register/save", method = RequestMethod.POST)
-    public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,@RequestParam(value = "image",required = false) MultipartFile photo) throws UnsupportedEncodingException {
+    public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,@RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
         String fullName = request.getParameter("tendaydu");
         String name = request.getParameter("tendangnhap");
@@ -50,8 +53,10 @@ public class RegisterController {
         String tinh = request.getParameter("calc_shipping_provinces");
         String quan = request.getParameter("calc_shipping_district");
         String diachi = request.getParameter("diachi");
+        
         String address = " DiaChi " + diachi + " - Huyen/Quan " + quan + "- Tinh " + tinh;
         UserShop userShop = new UserShop();
+        userShop.setUserID(1);
         userShop.setFullName(fullName);
         userShop.setUsername(name);
         userShop.setPassword(pass);
@@ -61,6 +66,9 @@ public class RegisterController {
         userShop.setAddress(address);
         userShop.setRole("user");
         userShop.setActive(0);
+        userShop.setImg(saveFile(photo));
+//        userShop.setUserID(1);
+        
         //productBrand.setImg(saveFile(photo));
         
             registerService.create(userShop);
@@ -68,5 +76,32 @@ public class RegisterController {
             mm.put("success", "Bạn đã đăng kí thành công vui lòng đăng nhập !!!");
             return "user/login";
        
+    }
+    
+    
+    private String saveFile(MultipartFile file) {
+        if (null != file && !file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                String rootPath = System.getProperty("catalina.home");
+                File dir = new File(rootPath + File.separator + "assets/user/imguser");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                String name = String.valueOf(new java.util.Date().getTime() + ".jpg");
+                File serverFile = new File(dir.getAbsoluteFile() + File.separator + name);
+                System.out.println("Path on server: " + serverFile.getPath());
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+                return name;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Not exist");
+
+        }
+        return null;
     }
 }
