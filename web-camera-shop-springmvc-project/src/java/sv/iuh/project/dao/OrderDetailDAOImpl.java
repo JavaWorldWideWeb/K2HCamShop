@@ -32,6 +32,7 @@ public class OrderDetailDAOImpl implements OrderDetailDao{
             }
             ex.printStackTrace();
         } finally {
+            session.clear();    
             session.flush();
             session.close();
         }

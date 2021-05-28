@@ -1,5 +1,5 @@
-﻿use master
-CREATE Drop DATABASE K2NCamShopDatabase
+﻿
+CREATE DATABASE K2NCamShopDatabase
 GO
 USE K2NCamShopDatabase
 GO

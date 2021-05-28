@@ -20,11 +20,11 @@
         <link rel="stylesheet" href="<c:url value="/resources/vendors/flag-icon-css/css/flag-icon.min.css"/>" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<c:url value="/resources/vendors/daterangepicker/daterangepicker.css"/>" rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="<c:url value="/resources/vendors/chartist/chartist.min.css"/>" rel='stylesheet' type='text/css'>
-        
-        
+
+
         <link rel="icon" href="<c:url value="/resources/images/LoadLogo.png"/>">
         <link rel="stylesheet" href="<c:url value="/resources/Css/orderManagement.css"/>" rel='stylesheet' type='text/css'>
-        
+
     </head>
     <body>
         <div class="main-panel">
@@ -35,7 +35,7 @@
                         <font style="vertical-align: inherit;">
                         <font style="vertical-align: inherit;">Tạo đơn hàng</font></font></button>
                     <br/><br/>
-                    
+
                     <div class="tab">
                         <button class="tablinks" onclick="showContent(event, 'AllOrders')" id="defaultOpen">Tất cả đơn hàng</button>
                         <button class="tablinks" onclick="showContent(event, 'NewOrders')">Đơn hàng mới</button>
@@ -44,170 +44,196 @@
 
                     <div id="AllOrders" class="tabcontent">
                         <table class="table table-hover">
-                          <thead>
-                              <tr>
-                                  <th style="font-weight: bold;">Mã</th>
-                                  <th style="font-weight: bold;">Ngày đặt</th>
-                                  <th style="font-weight: bold;">Khách hàng</th>
-                                  <th style="font-weight: bold;">Thanh toán</th>
-                                  <th style="font-weight: bold;">Tổng tiền</th>
-                                  <th></th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <c:forEach items="${list}" var="od">
-                                  <tr class="onRow">
-                                      <td>${od.orderID}</td>
-                                      <td>${od.dateOrder}</td>
-                                      <td>${od.userID.fullName}</td>
-                                      <td>${od.statusOrder}</td>
-                                      <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${od.totalMoney}" /></td>
-                                      
-                                      <td>
-                                           <a class="detail" href="#" data-toggle="modal" data-target="#myModal" >xem chi tiết</a>
-                                      </td>
-                                  </tr>
-                              </c:forEach>
-                          </tbody>
-                      </table>
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold;">Mã</th>
+                                    <th style="font-weight: bold;">Ngày đặt</th>
+                                    <th style="font-weight: bold;">Khách hàng</th>
+                                    <th style="font-weight: bold;">Thanh toán</th>
+                                    <th style="font-weight: bold;">Tổng tiền</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${list}" var="od">
+                                    <tr class="onRow">
+                                        <td>${od.orderID}</td>
+                                        <td>${od.dateOrder}</td>
+                                        <td>${od.userID.fullName}</td>
+                                        <td>${od.statusOrder}</td>
+                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${od.totalMoney}" /></td>
+
+                                        <td>
+                                            <a class="detail" href="#" data-toggle="modal" data-target="#myModal" >xem chi tiết</a>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="delete" data-toggle="modal" data-target="#myModalDelete">
+                                                <i class="fas fa-trash" style="color: red" data-toggle="tooltip" title="Delete"></i>
+                                            </a>                 
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div id="NewOrders" class="tabcontent">
-                     <table class="table table-hover">
-                          <thead>
-                              <tr>
-                                  <th style="font-weight: bold;">Mã</th>
-                                  <th style="font-weight: bold;">Ngày đặt</th>
-                                  <th style="font-weight: bold;">Khách hàng</th>
-                                  <th style="font-weight: bold;">Thanh toán</th>
-                                  <th style="font-weight: bold;">Tổng tiền</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <c:forEach items="${newlist}" var="od">
-                                  <tr>
-                                      <td>${od.orderID}</td>
-                                      <td>${od.dateOrder}</td>
-                                      <td>${od.userID.fullName}</td>
-                                      <td>${od.statusOrder}</td>
-                                      <td>${od.totalMoney}</td>
-                                     
-                                  </tr>
-                              </c:forEach>
-                          </tbody>
-                      </table> 
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold;">Mã</th>
+                                    <th style="font-weight: bold;">Ngày đặt</th>
+                                    <th style="font-weight: bold;">Khách hàng</th>
+                                    <th style="font-weight: bold;">Thanh toán</th>
+                                    <th style="font-weight: bold;">Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${newlist}" var="od">
+                                    <tr>
+                                        <td>${od.orderID}</td>
+                                        <td>${od.dateOrder}</td>
+                                        <td>${od.userID.fullName}</td>
+                                        <td>${od.statusOrder}</td>
+                                        <td>${od.totalMoney}</td>
+
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table> 
                     </div>
-                    
+
                     <div id="Unpaid" class="tabcontent">
-                      <table class="table table-hover">
-                          <thead>
-                              <tr>
-                                  <th style="font-weight: bold;">Mã</th>
-                                  <th style="font-weight: bold;">Ngày đặt</th>
-                                  <th style="font-weight: bold;">Khách hàng</th>
-                                  <th style="font-weight: bold;">Thanh toán</th>
-                                  <th style="font-weight: bold;">Tổng tiền</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <c:forEach items="${unpaidlist}" var="od">
-                                  <tr>
-                                      <td>${od.orderID}</td>
-                                      <td>${od.dateOrder}</td>
-                                      <td>${od.userID.fullName}</td>
-                                      <td>${od.statusOrder}</td>
-                                      <td>${od.totalMoney}</td>
-                                     
-                                  </tr>
-                              </c:forEach>
-                          </tbody>
-                      </table>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="font-weight: bold;">Mã</th>
+                                    <th style="font-weight: bold;">Ngày đặt</th>
+                                    <th style="font-weight: bold;">Khách hàng</th>
+                                    <th style="font-weight: bold;">Thanh toán</th>
+                                    <th style="font-weight: bold;">Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${unpaidlist}" var="od">
+                                    <tr>
+                                        <td>${od.orderID}</td>
+                                        <td>${od.dateOrder}</td>
+                                        <td>${od.userID.fullName}</td>
+                                        <td>${od.statusOrder}</td>
+                                        <td>${od.totalMoney}</td>
+
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
-                    
+
                     <!-- The Modal -->
                     <div class="modal fade" id="myModal">
-                      <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                          <!-- Modal Header -->
-                          <div class="modal-header">
-                              <h4 class="modal-title" id="cusName" style="color: blue">Modal Heading</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          </div>
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="cusName" style="color: blue">Modal Heading</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                          <!-- Modal body -->
-                          <div class="modal-body">
-                            <table class="table table-hover">
-                          <thead>
-                              <tr>
-                                  <th style="font-weight: bold;">Mã sản phẩm</th>
-                                  <th style="font-weight: bold;">Tên sản phẩm</th>
-                                  <th style="font-weight: bold;">Hình ảnh</th>
-                                  <th style="font-weight: bold;">Số lượng</th>
-                                  <th style="font-weight: bold;">Đơn giá</th>
-                                  <th style="font-weight: bold;">Tổng tiền</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <c:forEach items="${unpaidlist}" var="od">
-                                  <tr>
-                                      <td>${od.orderID}</td>
-                                      <td>${od.dateOrder}</td>
-                                      <td>${od.userID.fullName}</td>
-                                      <td>${od.statusOrder}</td>
-                                      <td>${od.totalMoney}</td>
-                                     
-                                  </tr>
-                              </c:forEach>
-                          </tbody>
-                      </table>
-                          </div>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="font-weight: bold;">Mã sản phẩm</th>
+                                                <th style="font-weight: bold;">Tên sản phẩm</th>
+                                                <th style="font-weight: bold;">Hình ảnh</th>
+                                                <th style="font-weight: bold;">Số lượng</th>
+                                                <th style="font-weight: bold;">Đơn giá</th>
+                                                <th style="font-weight: bold;">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${unpaidlist}" var="od">
+                                                <tr>
+                                                    <td>${od.orderID}</td>
+                                                    <td>${od.dateOrder}</td>
+                                                    <td>${od.userID.fullName}</td>
+                                                    <td>${od.statusOrder}</td>
+                                                    <td>${od.totalMoney}</td>
 
-                          <!-- Modal footer -->
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                          </div>
-                          
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
                         </div>
-                      </div>
                     </div>
-  
+
+                    <div class="modal fade" id="myModalDelete">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <form action="<c:url value="/orderManagement/remove"/>" >
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Đơn hàng này sẽ bị xóa!!!</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-danger" >Xóa</button>
+                                        <input type="hidden" name="id" id="id">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <script>
             function showContent(evt, cityName) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tabcontent");
                 for (i = 0; i < tabcontent.length; i++) {
-                  tabcontent[i].style.display = "none";
+                    tabcontent[i].style.display = "none";
                 }
                 tablinks = document.getElementsByClassName("tablinks");
                 for (i = 0; i < tablinks.length; i++) {
-                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
                 }
                 document.getElementById(cityName).style.display = "block";
                 evt.currentTarget.className += " active";
             }
             document.getElementById("defaultOpen").click();
         </script>
-        
+
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript">
             $(function () {
                 $('.table tr').mouseover(function (e) {
                     var ma = $(this).closest('.onRow').find('td:nth-child(3)').text();
+                    var id = $(this).closest('.onRow').find('td:nth-child(1)').text();
                     $('.detail').click(function (e) {
                         /*e.preventDefault();*/
                         document.getElementById("cusName").innerHTML = "Chi tiết hóa đơn của khách hàng " + ma;
-                        
+                    });
+                    $('.fas').click(function (e){
+                        $('#id').val(id);
                     });
 
                 });
             });
         </script>
 
-        
+
         <!-- main-panel ends -->
         <script src="<c:url value="/resources/vendors/js/vendor.bundle.base.js"/>"></script>
         <script src="<c:url value="/resources/vendors/chart.js/Chart.min.js"/>"></script>

@@ -35,6 +35,7 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao{
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
             session.close();
         }
@@ -56,6 +57,7 @@ public class ProductCategoryDaoImpl implements ProductCategoryDao{
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
             session.close();
         }

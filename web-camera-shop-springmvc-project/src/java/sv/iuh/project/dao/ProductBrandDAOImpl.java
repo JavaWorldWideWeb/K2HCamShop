@@ -37,6 +37,7 @@ public class ProductBrandDAOImpl implements ProductBrandDao {
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
             session.close();
         }
@@ -58,6 +59,7 @@ public class ProductBrandDAOImpl implements ProductBrandDao {
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
             session.close();
         }

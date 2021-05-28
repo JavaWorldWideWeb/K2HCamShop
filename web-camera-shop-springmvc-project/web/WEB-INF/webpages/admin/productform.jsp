@@ -61,7 +61,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
                                             <div class="col-sm-9">
-                                                <input type="number" required="" class="form-control" value="${product.price}" name="price" placeholder="Nhập giá sản phẩm"/>
+                                                <input type="number" min="0" required="" class="form-control" value="${product.price}" name="price" placeholder="Nhập giá sản phẩm"/>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Số lượng sản phẩm</label>
                                             <div class="col-sm-9">
-                                                <input type="number" required="" class="form-control" value="${product.quantity}" name="quantity" placeholder="Nhập số lượng" />
+                                                <input type="number" min="0" required="" class="form-control" value="${product.quantity}" name="quantity" placeholder="Nhập số lượng" />
                                             </div>
                                         </div>
                                     </div>
@@ -105,9 +105,9 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label">Độ phân giải</label>
+                                            <label class="col-sm-3 col-form-label">Độ phân giải (MP)</label>
                                             <div class="col-sm-9">
-                                                <input type="number" required="" class="form-control" value="${product.resolution}" name="resolution" placeholder="Nhập độ phân giải" />
+                                                <input type="number" step="0.01" min="0" required="" class="form-control" value="${product.resolution}" name="resolution" placeholder="Nhập độ phân giải (Megapixel)" />
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,9 @@
                                             <label class="col-sm-3 col-form-label">Micro</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control" required="true" name="micro">
-                                                    <option value="${product.micro}" hidden="true" selected="true">${product.micro}</option>
+                                                    <c:if test="${product!=null}">
+                                                        <option value="${product.micro}" hidden="true" selected="true">${product.micro}</option>
+                                                    </c:if>
                                                     <option value="Có">Có</option>
                                                     <option value="Có">Không</option>
                                                 </select>                                            </div>
@@ -185,7 +187,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Thời gian bảo hành (Tháng)</label>
                                             <div class="col-sm-9">
-                                                <input type="number" required class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
+                                                <input type="number" required min="0" class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
                                             </div>
                                         </div>
                                     </div>
@@ -211,7 +213,9 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Hình Ảnh</label>
                                             <div class="col-sm-9">
-                                                <input type="file" class="form-control" required value="${pageContext.request.contextPath}/imgbrand/${product.img}" name="image" />
+                                                <c:catch var="r">
+                                                    <input type="file" class="form-control" ${r} value="${pageContext.request.contextPath}/imgbrand/${product.img}" name="image" />
+                                                </c:catch>
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +231,10 @@
                                     </div>
                                     <div class="col-md-2"></div>
                                     <div class="col-md-4">
-                                        <img src="${pageContext.request.contextPath}/image/${product.img}" style="border-radius: 0px;width: 100%">
+                                        <c:if test="${product!=null}">
+                                            <img src="${pageContext.request.contextPath}/image/${product.img}" style="border-radius: 0px;width: 100%">
+                                            <input type="hidden" value="${product.img}" name="imgUp"/>
+                                        </c:if>
                                     </div>
                                 </div> 
                                 <div class="row">

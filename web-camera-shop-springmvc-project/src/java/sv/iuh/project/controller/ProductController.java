@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import sv.iuh.project.model.Product;
 import sv.iuh.project.model.ProductBrand;
 import sv.iuh.project.model.ProductCategory;
+import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.ProductBrandService;
 import sv.iuh.project.service.ProductCategoryService;
 import sv.iuh.project.service.ProductService;
@@ -48,6 +49,7 @@ public class ProductController {
         mm.put("totalItem", productService.totalItem() / 6);
         mm.put("listbrand", productBrandService.getAll());
         return "admin/productmanage";
+        
     }
 
     @RequestMapping(value = "/show/{page}", method = RequestMethod.GET)
@@ -129,6 +131,12 @@ public class ProductController {
             return "redirect:/product/showform";
         } else {
             int id = Integer.parseInt(request.getParameter("id"));
+            String imgUp = request.getParameter("imgUp");
+            if (photo.isEmpty()) {
+                product.setImg(imgUp);
+            }else{
+                product.setImg(saveFile(photo));
+            }
             product.setProductID(id);
             productService.update(product);
             mm.put("productCategory", productCategory);
@@ -142,6 +150,8 @@ public class ProductController {
     public String viewProductNew(ModelMap mm, HttpSession session) {
         mm.put("listcate", productCategoryService.getAll());
         mm.put("listbrand", productBrandService.getAll());
+        String required = "required";
+        mm.put("r", required);
         return "admin/productform";
     }
 

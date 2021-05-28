@@ -24,6 +24,7 @@ import sv.iuh.project.util.HibernateUtil;
 public class ProductDaoImpl implements ProductDao {
 
     @Override
+    
     public List<Product> getAll() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -87,6 +88,7 @@ public class ProductDaoImpl implements ProductDao {
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
             session.close();
         }
@@ -108,6 +110,7 @@ public class ProductDaoImpl implements ProductDao {
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
             session.close();
         }

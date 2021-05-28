@@ -61,7 +61,7 @@ public class UserShop implements Serializable {
     private String username;
     @Column(name = "Role", length = 50)
     private String role;
-    @Column(name = "Addresss", length = 50)
+    @Column(name = "Addresss", length = 100)
     private String address;
     @Column(name = "Birthday")
     @Temporal(TemporalType.TIMESTAMP)

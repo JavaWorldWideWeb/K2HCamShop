@@ -95,7 +95,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"> <i class="fas fa-user"></i><span class="details">Hình ảnh </span></label>
-                                    <input class="form-control" type="file" required placeholder="nhập số điện thoại" name="sodt" autocomplete="off">
+                                    <input class="form-control" type="file" required placeholder="hinhanh" name="image" autocomplete="off">
                                 </div>
                             </div>
                         </div>

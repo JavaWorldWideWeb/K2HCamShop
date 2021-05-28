@@ -89,7 +89,6 @@
                                 <th>Màu sắc</th>
                                 <th>Thương hiệu</th>
                                 <th>Loại sản phẩm</th>
-                                <th>Mô tả</th>
                                 <th>Hình ảnh</th>
                                 <th>Action</th>
                             </tr>
@@ -104,7 +103,6 @@
                                     <td>${p.color}</td>
                                     <td>${p.productBrandID.productBrandName}</td>
                                     <td>${p.productCategoryID.productCategoryName}</td>
-                                    <td>${p.description}</td>
                                     <td><img src="${pageContext.request.contextPath}/image/${p.img}" style="border-radius: 0px;width: 150px;height: 80px"></td>
                                     <td><a href="#" class="delete" data-toggle="modal" data-target="#myModal"><i class="fas fa-trash" style="color: red" data-toggle
                                                                                                                  ="tooltip" title="Delete"></i></a>

@@ -39,7 +39,7 @@ public class ProductCategory implements Serializable {
     @Basic(optional = false)
     @Column(name = "ProductCategoryID", nullable = false)
     private Integer productCategoryID;
-    @Column(name = "ProductCategoryName", length = 50)
+    @Column(name = "ProductCategoryName", length = 100)
     private String productCategoryName;
     @OneToMany(mappedBy = "productCategoryID")
     private List<Product> productList;

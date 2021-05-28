@@ -47,7 +47,7 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "ProductID", nullable = false)
     private Integer productID;
-    @Column(name = "ProductName", length = 50)
+    @Column(name = "ProductName", length = 100)
     private String productName;
     @Column(name = "Price")
     private Integer price;
@@ -55,23 +55,23 @@ public class Product implements Serializable {
     private Integer quantity;
     @Column(name = "Color", length = 50)
     private String color;
-    @Column(name = "Description", length = 50)
+    @Column(name = "Description", length = 1000)
     private String description;
     @Column(name = "WarranTyperiod", length = 50)
     private String warranTyperiod;
     @Column(name = "img", length = 255)
     private String img;
-    @Column(name = "Sensor", length = 50)
+    @Column(name = "Sensor", length = 150)
     private String sensor;
-    @Column(name = "Iso", length = 50)
+    @Column(name = "Iso", length = 150)
     private String iso;
-    @Column(name = "Resolution", length = 50)
+    @Column(name = "Resolution", length = 150)
     private String resolution;
-    @Column(name = "Sizephoto", length = 50)
+    @Column(name = "Sizephoto", length = 150)
     private String sizephoto;
-    @Column(name = "Micro", length = 50)
+    @Column(name = "Micro", length = 150)
     private String micro;
-    @Column(name = "Metering", length = 50)
+    @Column(name = "Metering", length = 150)
     private String metering;
     @OneToMany(mappedBy = "productID")
     private List<OrderDetail> orderDetailList;
