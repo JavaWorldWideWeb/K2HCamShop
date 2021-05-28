@@ -10,7 +10,8 @@ GO
 CREATE TABLE ProductBrand(
 	ProductBrandID int identity primary key,
 	ProductBrandName nvarchar(50),
-	NationalProduction nvarchar(50)
+	NationalProduction nvarchar(50),
+	img nvarchar(50)
 )
 GO
 CREATE TABLE Product(
@@ -54,18 +55,18 @@ CREATE TABLE Comment(
 	Vote int 
 )
 GO
-CREATE TABLE [Order](
+CREATE TABLE OrderProduct(
 	OrderID int identity primary key,
-	DateOrder Datetime ,
+	DateOrder Date,
 	StatusOrder nvarchar(50),
 	TotalMoney float,
-	UserID int FOREIGN KEY REFERENCES UserShop(UserID),
+	UserID int FOREIGN KEY REFERENCES UserShop(UserID)
 )
 GO
 CREATE TABLE OrderDetail(
 	OrderDetailId int identity primary key,
 	ProductID int FOREIGN KEY REFERENCES Product(ProductID) ON DELETE CASCADE ,
-	OrderID int FOREIGN KEY REFERENCES [Order](OrderID) ON DELETE CASCADE ,
+	OrderID int FOREIGN KEY REFERENCES [OrderProduct](OrderID) ON DELETE CASCADE ,
 	Quantity int ,
 	StatusOrderDetail nvarchar(50)
 )
@@ -331,3 +332,5 @@ INSERT INTO country (id, iso, name, nicename, iso3, numcode, phonecode) VALUES
 (237, 'YE', 'YEMEN', 'Yemen', 'YEM', 887, 967),
 (238, 'ZM', 'ZAMBIA', 'Zambia', 'ZMB', 894, 260),
 (239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263);
+GO
+drop table OrderDetail

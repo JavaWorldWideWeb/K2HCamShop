@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -136,7 +137,9 @@ public class ControllerCart {
     }
 
     @RequestMapping("/checkoutshow")
-    public String viewPaid(ModelMap mm) {
+    public String viewPaid(ModelMap mm, HttpSession session) {      
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        mm.put("user", userShop);
         return "user/checkout";
     }
 
@@ -147,7 +150,7 @@ public class ControllerCart {
             cartItems = new HashMap<>();
         }
         OrderProduct orderProduct = new OrderProduct();
-        orderProduct.setDateOrder(new Timestamp(new Date().getTime()));
+        orderProduct.setDateOrder(new Date());
         orderProduct.setStatusOrder("Chưa thanh toan");
         UserShop userShop = (UserShop) session.getAttribute("userlogin");
         orderProduct.setUserID(userShop);
@@ -159,6 +162,7 @@ public class ControllerCart {
             orderDetail.setProductID(entry.getValue().getProduct());
             orderDetail.setQuantity(entry.getValue().getQuantity());
             orderDetail.setStatusOrderDetail("paid");
+           
             orderDetailService.create(orderDetail);
         }
         cartItems = new HashMap<>();

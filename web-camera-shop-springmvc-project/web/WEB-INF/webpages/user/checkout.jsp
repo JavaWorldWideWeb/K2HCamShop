@@ -7,6 +7,9 @@
 <%@include file="header.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
+<%@page import="sv.iuh.project.model.UserShop"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,68 +54,163 @@
     <body>
         </br></br>
         <div class="container">
-            <div class="row" id="cart">
-                <div class="col-lg-7" id="cartlist" style="background-color: GhostWhite">
-                    <h4>Danh sách sản phẩm</h4>
-                    <div class="cart_product_inner">
-                        <c:forEach var="map" items="${sessionScope.myCartItems}">
-                            <div class="container" style="border: 1px solid LightGray; padding:10px 5px 10px 15px;">
-                                <div class="row">
+            <form method="Post" action="<c:url value="/cart/orderItems.html"/>">
+                <div class="row" id="cart">
+                    <div class="col-lg-7" id="cartlist" style="border: 1px solid lightgray; padding: 10px 20px 10px 20px;">
+                        <h5>Danh sách sản phẩm</h5>
+                        <div class="cart_product_inner">
+                            <c:forEach var="map" items="${sessionScope.myCartItems}">
+                                <div class="container" style="border: 1px solid LightGray; padding:10px 5px 10px 15px;">
+                                    <div class="row">
 
-                                    <div class="col-lg-3">
-                                        <img src="${pageContext.request.contextPath}/image/${map.value.product.img}" />
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <a href="<c:url value="/product/detail?id=${map.value.product.productID}"/>" style="color:black; "><c:out value="${map.value.product.productName}"/></a>
-                                        <br /><br />
-                                        <div class="row" style="margin-right: -60px;">
-                                            <p style="color:red; font-weight:bold; margin-left: 20px">
-                                                <c:out value="${map.value.quantity}" /> x 
-                                                <c:out value="${map.value.product.price}" /> = 
-                                                <c:out value="${map.value.product.price}" /> VND
-                                            </p>
+                                        <div class="col-lg-3">
+                                            <img src="${pageContext.request.contextPath}/image/${map.value.product.img}" />
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <a href="<c:url value="/product/detail?id=${map.value.product.productID}"/>" style="color:black; "><c:out value="${map.value.product.productName}"/></a>
+                                            <br /><br />
+                                            <div class="row" style="margin-right: -60px;">
+                                                <p style="color:red; font-weight:bold; margin-left: 20px">
+                                                    <c:out value="${map.value.quantity}" /> x 
+                                                    <c:out value="${map.value.product.price}" /> = 
+                                                    <c:out value="${map.value.product.price}" /> VND
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            </br>
-                        </c:forEach>
-                     <hr />
-                     <p>
+                                </br>
+                            </c:forEach>
+                            <hr />
+                            <p>
                                 <span style="color:#6d6767">Tạm tính</span>
-                                <span style="float:right; color:black; font-weight:bold"><c:out value="${sessionScope.myCartTotal}" /> VNĐ</span>
+                                <span style="float:right; color:black; font-weight:bold"><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${sessionScope.myCartTotal}" /> VNĐ</span>
                             </p>
                             <hr />
                             <p>
                                 <span style="color:#6d6767">Thành Tiền</span>
-                                <span style="float:right; color:red; font-weight:bold; font-size: 22px"><c:out value="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}"/> VNĐ </span>
+                                <span style="float:right; color:red; font-weight:bold; font-size: 22px"><fmt:formatNumber type = "number" maxFractionDigits = "3" value ="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}" /> VNĐ </span>
                                 <br />
-                                <i style="float: right; color:#2c2929; font-size: 13px">(Đã bao gồm thuế VAT nếu có)</i>
+                                <i style="float: right; color:#2c2929; font-size: 13px; margin-right: -150px;">(Đã bao gồm thuế VAT nếu có)</i>
                             </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" style="margin-left:30px;" id="cartlist">
+                        <div class="row" style="border: 1px solid LightGray; padding: 10px 10px 10px 10px">
+                            <div class="col-lg-12">
+                                <h5 style="float:left">Thông tin khách hàng</h5>
+                                <button type="button" data-toggle="modal" data-target="#myModal" style="float:right; border: 1px solid LightGray;">Sửa</button>
+                                <br/><hr />
+                                <c:catch var="user">
+                                    <b>${user.fullName}</b><br/>
+                                    <p>${user.address}</p>
+                                    <p>Điện thoại: ${user.phoneNumber}</p>
+                                </c:catch>
+                            </div>
+                        </div>   
+                        <br/>
+                        <div class="row">
+                            <button type="submit" class="btn btn-danger btn-block" style="font-size: 25px">ĐẶT MUA</button>
+                            <p>(Xin vui lòng kiểm tra đơn hàng trước khi đặt mua)</p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-4" style="margin-left:30px;" id="cartlist">
-                    <h4>Thông tin khách hàng</h4>
-                    <div style="background-color:#f5f5f5; padding: 10px 10px 10px 10px">
-                        <form action="/action_page.php">
+            </form>
+        </div>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Thông tin khách hàng</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form action="/action_page.php" class="needs-validation" novalidate>
                             <div class="form-group">
-                                <label for="email">:</label>
-                                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                                <label for="uname">Họ tên:</label>
+                                <input type="text" class="form-control" id="uname" placeholder="Nhập họ tên" name="uname" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
                             <div class="form-group">
-                                <label for="pwd">Password:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                                <label for="utel">Họ tên:</label>
+                                <input type="tel" class="form-control" id="utel" placeholder="Nhập số điện thoại" name="utel" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
                             </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                                </label>
+                            <div class="form-group">
+                                <label for="province">Tỉnh/Thành phố:</label>
+                                <select class="form-control" id="province">
+                                    <option>Hà Nội</option>
+                                    <option>Thành phố Hồ Chí Minh</option>
+                                    <option>Đã Nẵng</option>
+                                    <option>Nha Trang</option>
+                                </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <div class="form-group">
+                                <label for="district">Quận/Huyện:</label>
+                                <select class="form-control" id="district">
+                                    <option>Quận 1</option>
+                                    <option>Quận 2</option>
+                                    <option>Quận 3</option>
+                                    <option>Quận 4</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ward">Quận/Huyện:</label>
+                                <select class="form-control" id="ward">
+                                    <option>Phường 1</option>
+                                    <option>Phường 2</option>
+                                    <option>Phường 3</option>
+                                    <option>Phường 4</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="uaddress">Địa chỉ:</label>
+                                <input type="text" class="form-control" id="uaddress" placeholder="Nhập địa chỉ" name="uaddress" required>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">Please fill out this field.</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </form>
                     </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
                 </div>
             </div>
         </div>
+
     </body>
+
+    <script>
+// Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
 </html>
