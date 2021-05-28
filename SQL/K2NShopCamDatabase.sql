@@ -1,34 +1,37 @@
-CREATE DATABASE K2NCamShopDatabase
+﻿use master
+CREATE Drop DATABASE K2NCamShopDatabase
 GO
 USE K2NCamShopDatabase
 GO
 CREATE TABLE ProductCategory(
 	ProductCategoryID int identity primary key,
-	ProductCategoryName nvarchar(50)
+	ProductCategoryName nvarchar(100)
 )
 GO
 CREATE TABLE ProductBrand(
 	ProductBrandID int identity primary key,
 	ProductBrandName nvarchar(50),
-	NationalProduction nvarchar(50)
+	NationalProduction nvarchar(50),
+	img nvarchar(50)
 )
 GO
 CREATE TABLE Product(
 	ProductID int identity primary key,
-	ProductName nvarchar(50) ,
+	ProductName nvarchar(100) ,
 	ProductCategoryID int FOREIGN KEY REFERENCES ProductCategory(ProductCategoryID) ON DELETE CASCADE ,
 	ProductBrandID int FOREIGN KEY REFERENCES ProductBrand(ProductBrandID) ON DELETE CASCADE ,
 	Price int ,
 	Quantity int,
 	Color nvarchar(50),
-	Description nvarchar(50),
+	Description nvarchar(1000),
 	img varchar(255),
-	Sensor nvarchar(50),
-	Iso nvarchar(50),
-	Resolution nvarchar(50),
-	Metering nvarchar(50),
-	Sizephoto nvarchar(50),
-	Micro nvarchar(50)
+	Sensor nvarchar(150),
+	Iso nvarchar(150),
+	Resolution nvarchar(150),
+	Metering nvarchar(150),
+	Sizephoto nvarchar(150),
+	Micro nvarchar(150),
+	WarranTyperiod nvarchar(50)
 )
 GO
 CREATE TABLE UserShop(
@@ -38,8 +41,8 @@ CREATE TABLE UserShop(
 	Password nvarchar(50),
 	Username nvarchar(50),
 	Role nvarchar(50),
-	Addresss nvarchar(50),
-	Birthday datetime,
+	Addresss nvarchar(100),
+	Birthday date,
 	FullName nvarchar(50),
 	Img nvarchar(255),
 	PhoneNumber nvarchar(50),
@@ -49,14 +52,14 @@ CREATE TABLE Comment(
 	CommentID int identity primary key,
 	UserID int FOREIGN KEY REFERENCES UserShop(UserID) ON DELETE CASCADE ,
 	ProductID int FOREIGN KEY REFERENCES Product(ProductID) ON DELETE CASCADE ,
-	CommentContent nvarchar(255),
-	RepComment nvarchar(255) null,
+	CommentContent nvarchar(1000),
+	RepComment nvarchar(1000) null,
 	Vote int 
 )
 GO
-CREATE TABLE [Order](
+CREATE TABLE [OrderProduct](
 	OrderID int identity primary key,
-	DateOrder Datetime ,
+	DateOrder Date ,
 	StatusOrder nvarchar(50),
 	TotalMoney float,
 	UserID int FOREIGN KEY REFERENCES UserShop(UserID),
@@ -65,7 +68,7 @@ GO
 CREATE TABLE OrderDetail(
 	OrderDetailId int identity primary key,
 	ProductID int FOREIGN KEY REFERENCES Product(ProductID) ON DELETE CASCADE ,
-	OrderID int FOREIGN KEY REFERENCES [Order](OrderID) ON DELETE CASCADE ,
+	OrderID int FOREIGN KEY REFERENCES [OrderProduct](OrderID) ON DELETE CASCADE ,
 	Quantity int ,
 	StatusOrderDetail nvarchar(50)
 )
@@ -74,7 +77,7 @@ CREATE TABLE Contact(
 	ContactID int identity primary key,
 	UserContactName nvarchar(50),
 	ContactEmail nvarchar(50),
-	ContactMessage nvarchar(255)
+	ContactMessage nvarchar(1000)
 )
 GO
 CREATE TABLE  country (
@@ -331,3 +334,32 @@ INSERT INTO country (id, iso, name, nicename, iso3, numcode, phonecode) VALUES
 (237, 'YE', 'YEMEN', 'Yemen', 'YEM', 887, 967),
 (238, 'ZM', 'ZAMBIA', 'Zambia', 'ZMB', 894, 260),
 (239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263);
+
+Insert into ProductBrand values('Canon','Japan','canon.jpg'),
+								('Kodak','Japan','kodak.jpg'),
+								('Nikon','Japan','nikon.jpg'),
+								('Olympus','Japan','olympus.jpg'),
+								('Panasonic','Japan','panasonic.jpg'),
+								('Sony','Japan','sony.jpg')
+Insert into ProductCategory values(N'Máy ảnh film (Máy ảnh cơ)'),
+									(N'Máy ảnh compact (Máy ảnh du lich)'),
+									(N'Máy ảnh bridge'),
+									(N'Máy ảnh DSLR (Máy ảnh phản xạ ống kính đơn kỹ thuật số) (Digital Single Lens Reflex)'),
+									(N'Máy ảnh mirrorless')
+Insert into Product values(N'Máy ảnh Sony ZV-1 (Black)',2,6,17000000,20,N'Đen',N'Quay Vlog giờ đây đã trở nên cực kỳ dễ dàng với Sony ZV-1
+chiếc máy ảnh compact nhỏ gọn được sinh ra để dành riêng cho các Vlogger sáng tạo 
+nội dung video hay những người hay livestream để bán hàng, sản xuất video chơi game... 
+Tốc độ lấy nét nhanh, Eye AF liên tục và một thiết kế nhỏ gọn để bạn có thể mang tới bất cứ nơi đâu trong chuyến đi của mình.','sony1.jpg','BSI CMOS 1 inch'
+,'100 đến 12800 (Mở rộng: 64 đến 25600)','20.1 MP','Average, Center-Weighted Average, Multi, Spot','3602 x 4500',N'Có',N'12 tháng')
+Insert into Product values('Sony DSC-RX0 Mark II',3,6,19000000,20,N'Đen',N'Quay Vlog giờ đây đã trở nên cực kỳ dễ dàng với Sony DSC-RX0 Mark II
+chiếc máy ảnh compact nhỏ gọn được sinh ra để dành riêng cho các Vlogger sáng tạo 
+nội dung video hay những người hay livestream để bán hàng, sản xuất video chơi game... 
+Tốc độ lấy nét nhanh, Eye AF liên tục và một thiết kế nhỏ gọn để bạn có thể mang tới bất cứ nơi đâu trong chuyến đi của mình.','sony2.jpg','BSI CMOS 1 inch'
+,'100 đến 12800 (Mở rộng: 64 đến 25600)','15.3 MP','Average, Center-Weighted Average, Multi, Spot','3602 x 4500',N'Có',N'12 tháng')
+Insert into Product values(N'Máy ảnh Canon EOS 800D',1,3,19000000,20,N'Đen',N'Quay Vlog giờ đây đã trở nên cực kỳ dễ dàng với Máy ảnh Canon EOS 800D
+chiếc máy ảnh compact nhỏ gọn được sinh ra để dành riêng cho các Vlogger sáng tạo 
+nội dung video hay những người hay livestream để bán hàng, sản xuất video chơi game... 
+Tốc độ lấy nét nhanh, Eye AF liên tục và một thiết kế nhỏ gọn để bạn có thể mang tới bất cứ nơi đâu trong chuyến đi của mình.','canon1.jpg','BSI CMOS 1 inch'
+,'100 đến 12800 (Mở rộng: 64 đến 25600)','15.3 MP','Center-Weighted Average, Evaluative, Partial, Spot','6000 x 4000',N'Có',N'12 tháng')
+insert into UserShop values(0,'admin@gmail.com','admin','Admin','admin','','',N'Quản trị viên','','')
+
