@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import sv.iuh.project.model.Cart;
 import sv.iuh.project.model.OrderDetail;
 import sv.iuh.project.model.OrderProduct;
@@ -74,6 +76,35 @@ public class ControllerCart {
         session.setAttribute("myCartNum", cartItems.size());
         return "redirect:/";
     }
+    
+    @RequestMapping(value = "/adds/{productID}.html", method = RequestMethod.POST)
+    public String viewAddFromProductDetail(ModelMap mm, HttpSession session, @PathVariable("productID") int productId, HttpServletRequest request){
+        HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
+        if (cartItems == null) {
+            cartItems = new HashMap<>();
+        }
+        Product product = productService.findById(productId);
+        System.out.println("----------------" +request.getParameter("qty") + "---------------");
+        //int qty = Integer.parseInt(request.getParameter("qty"));
+        if (product != null) {
+            if (cartItems.containsKey(productId)) {
+                Cart item = cartItems.get(productId);
+                item.setProduct(product);
+                item.setQuantity(item.getQuantity() + 1);
+                cartItems.put(productId, item);
+            } else {
+                Cart item = new Cart();
+                item.setProduct(product);
+                item.setQuantity(1);
+                cartItems.put(productId, item);
+            }
+        }
+        session.setAttribute("myCartItems", cartItems);
+        session.setAttribute("myCartTotal", totalPrice(cartItems));
+        session.setAttribute("myCartNum", cartItems.size());
+        return "redirect:/product/detail?id=" + productId;
+    }
+
 
     @RequestMapping(value = "/increase/{productID}.html", method = RequestMethod.GET)
     public String increaseQuantityInCart(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
@@ -139,6 +170,8 @@ public class ControllerCart {
     @RequestMapping("/checkoutshow")
     public String viewPaid(ModelMap mm, HttpSession session) {      
         UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if(userShop == null)
+            return "user/login";
         mm.put("user", userShop);
         return "user/checkout";
     }
@@ -151,7 +184,7 @@ public class ControllerCart {
         }
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setDateOrder(new Date());
-        orderProduct.setStatusOrder("Chưa thanh toan");
+        orderProduct.setStatusOrder("Chua thanh toan");
         UserShop userShop = (UserShop) session.getAttribute("userlogin");
         orderProduct.setUserID(userShop);
         orderProduct.setTotalMoney(totalPrice(cartItems));
@@ -162,8 +195,9 @@ public class ControllerCart {
             orderDetail.setProductID(entry.getValue().getProduct());
             orderDetail.setQuantity(entry.getValue().getQuantity());
             orderDetail.setStatusOrderDetail("paid");
-           
             orderDetailService.create(orderDetail);
+            Product product =  productService.findById(entry.getValue().getProduct().getProductID());
+            product.setQuantity(product.getQuantity() - entry.getValue().getQuantity());
         }
         cartItems = new HashMap<>();
         session.setAttribute("myCartItems", cartItems);

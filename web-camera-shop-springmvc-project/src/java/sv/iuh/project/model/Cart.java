@@ -11,7 +11,7 @@ package sv.iuh.project.model;
  */
 public class Cart{
 
-    private static final long serialVersionUID = 1L;
+   
     private Product product;
     private int quantity;
 
