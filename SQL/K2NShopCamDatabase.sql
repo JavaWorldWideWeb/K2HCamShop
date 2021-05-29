@@ -89,7 +89,7 @@ CREATE TABLE  country (
   numcode smallint DEFAULT NULL,
   phonecode int NOT NULL,
 ) 
-
+GO
 --
 -- Dumping data for table `country`
 --
@@ -334,6 +334,7 @@ INSERT INTO country (id, iso, name, nicename, iso3, numcode, phonecode) VALUES
 (237, 'YE', 'YEMEN', 'Yemen', 'YEM', 887, 967),
 (238, 'ZM', 'ZAMBIA', 'Zambia', 'ZMB', 894, 260),
 (239, 'ZW', 'ZIMBABWE', 'Zimbabwe', 'ZWE', 716, 263);
+GO
 
 Insert into ProductBrand values('Canon','Japan','canon.jpg'),
 								('Kodak','Japan','kodak.jpg'),
@@ -341,25 +342,36 @@ Insert into ProductBrand values('Canon','Japan','canon.jpg'),
 								('Olympus','Japan','olympus.jpg'),
 								('Panasonic','Japan','panasonic.jpg'),
 								('Sony','Japan','sony.jpg')
+GO								
 Insert into ProductCategory values(N'Máy ảnh film (Máy ảnh cơ)'),
 									(N'Máy ảnh compact (Máy ảnh du lich)'),
 									(N'Máy ảnh bridge'),
 									(N'Máy ảnh DSLR (Máy ảnh phản xạ ống kính đơn kỹ thuật số) (Digital Single Lens Reflex)'),
 									(N'Máy ảnh mirrorless')
+GO
+
 Insert into Product values(N'Máy ảnh Sony ZV-1 (Black)',2,6,17000000,20,N'Đen',N'Quay Vlog giờ đây đã trở nên cực kỳ dễ dàng với Sony ZV-1
 chiếc máy ảnh compact nhỏ gọn được sinh ra để dành riêng cho các Vlogger sáng tạo 
 nội dung video hay những người hay livestream để bán hàng, sản xuất video chơi game... 
 Tốc độ lấy nét nhanh, Eye AF liên tục và một thiết kế nhỏ gọn để bạn có thể mang tới bất cứ nơi đâu trong chuyến đi của mình.','sony1.jpg','BSI CMOS 1 inch'
 ,'100 đến 12800 (Mở rộng: 64 đến 25600)','20.1 MP','Average, Center-Weighted Average, Multi, Spot','3602 x 4500',N'Có',N'12 tháng')
+GO
+
 Insert into Product values('Sony DSC-RX0 Mark II',3,6,19000000,20,N'Đen',N'Quay Vlog giờ đây đã trở nên cực kỳ dễ dàng với Sony DSC-RX0 Mark II
 chiếc máy ảnh compact nhỏ gọn được sinh ra để dành riêng cho các Vlogger sáng tạo 
 nội dung video hay những người hay livestream để bán hàng, sản xuất video chơi game... 
 Tốc độ lấy nét nhanh, Eye AF liên tục và một thiết kế nhỏ gọn để bạn có thể mang tới bất cứ nơi đâu trong chuyến đi của mình.','sony2.jpg','BSI CMOS 1 inch'
 ,'100 đến 12800 (Mở rộng: 64 đến 25600)','15.3 MP','Average, Center-Weighted Average, Multi, Spot','3602 x 4500',N'Có',N'12 tháng')
+GO
+
 Insert into Product values(N'Máy ảnh Canon EOS 800D',1,3,19000000,20,N'Đen',N'Quay Vlog giờ đây đã trở nên cực kỳ dễ dàng với Máy ảnh Canon EOS 800D
 chiếc máy ảnh compact nhỏ gọn được sinh ra để dành riêng cho các Vlogger sáng tạo 
 nội dung video hay những người hay livestream để bán hàng, sản xuất video chơi game... 
 Tốc độ lấy nét nhanh, Eye AF liên tục và một thiết kế nhỏ gọn để bạn có thể mang tới bất cứ nơi đâu trong chuyến đi của mình.','canon1.jpg','BSI CMOS 1 inch'
 ,'100 đến 12800 (Mở rộng: 64 đến 25600)','15.3 MP','Center-Weighted Average, Evaluative, Partial, Spot','6000 x 4000',N'Có',N'12 tháng')
-insert into UserShop values(0,'admin@gmail.com','admin','Admin','admin','','',N'Quản trị viên','','')
+GO
 
+insert into UserShop values(0,'admin@gmail.com','admin','Admin','admin','','',N'Quản trị viên','','')
+GO
+
+select * from OrderDetail

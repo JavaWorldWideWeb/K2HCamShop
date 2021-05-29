@@ -46,7 +46,7 @@ public class OrderManagement {
             orderManagementService.delete(orderProduct);
         }
         mm.put("list", orderManagementService.getAll());
-        return "admin/orderManagement";
+        return "redirect:/orderManagement/show";
     }
 }
 
