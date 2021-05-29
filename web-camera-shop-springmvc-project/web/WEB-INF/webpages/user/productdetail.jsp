@@ -21,93 +21,6 @@
         <link rel="icon" href="<c:url value="/resources/Image/LoadLogo.png"/>">
     </head>
     <style>
-        @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
-
-        /* Styling h1 and links
-    ––––––––––––––––––––––––––––––––– */
-        h1[alt="Simple"] {
-            color: white;
-        }
-
-
-        .starrating>input {
-            display: none;
-        }
-
-        /* Remove radio buttons */
-
-        .starrating>label:before {
-            content: "\f005";
-            /* Star */
-            font-size: 2em;
-            font-family: FontAwesome;
-            display: inline-block;
-        }
-
-        .starrating>label {
-            color: #222222;
-            /* Start color when not clicked */
-        }
-
-        .starrating>input:checked~label {
-            color: #ffca08;
-        }
-
-
-        .starrating>input:hover~label {
-            color: #ffca08;
-        }
-
-        .qty .count {
-            color: #000;
-            display: inline-block;
-            vertical-align: top;
-            font-size: 20px;
-            font-weight: normal;
-            line-height: 30px;
-            padding: 0 2px;
-            min-width: 35px;
-            text-align: center;
-        }
-
-        .qty .plus {
-            cursor: pointer;
-            display: inline-block;
-            vertical-align: top;
-            color: white;
-            width: 25px;
-            height: 25px;
-            font: 25px/1 Arial, sans-serif;
-            text-align: center;
-            border-radius: 50%;
-        }
-
-        .qty .minus {
-            cursor: pointer;
-            display: inline-block;
-            vertical-align: top;
-            color: white;
-            width: 25px;
-            height: 25px;
-            font: 25px/1 Arial, sans-serif;
-            text-align: center;
-            border-radius: 50%;
-            background-clip: padding-box;
-        }
-
-
-        .minus:hover {
-            background-color: white !important;
-            border: black 1px solid;
-            color: black;
-        }
-
-        .plus:hover {
-            background-color: white !important;
-            border: black 1px solid;
-            color: black;
-        }
-
         span {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -128,6 +41,75 @@
         input:disabled {
             background-color: white;
         }
+        .quantity {
+            position: relative;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button
+        {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number]
+        {
+            -moz-appearance: textfield;
+        }
+
+        .quantity input {
+            width:70px;
+            height: 42px;
+            line-height: 1.65;
+            float: left;
+            display: block;
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+            border: 1px solid #eee;
+        }
+
+        .quantity input:focus {
+            outline: 0;
+        }
+
+        .quantity-nav {
+            float: left;
+            position: relative;
+            height: 42px;
+        }
+
+        .quantity-button {
+            position: relative;
+            cursor: pointer;
+            border-left: 1px solid #eee;
+            width: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 13px;
+            font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+            line-height: 1.7;
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        .quantity-button.quantity-up {
+            position: absolute;
+            height: 50%;
+            top: 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quantity-button.quantity-down {
+            position: absolute;
+            bottom: -1px;
+            height: 50%;
+        }
     </style>
     <body>
         <div class="container-custom">
@@ -138,139 +120,252 @@
                         <div style="border-top: 5px solid green; margin-top: 20px; margin-bottom: 20px; width: 59%;"></div>
                     </div>
                     <div class="col-7">
-                        <img src="${pageContext.request.contextPath}/image/${p.img}" alt="" width="100%" height="470vh">
+                        <img src="${pageContext.request.contextPath}/image/${p.img}" alt="" width="70%">
                     </div>
                     <div class="col-5">
-                        <div class="row">
-                            <div class="col-12" style="padding-top: 20px;">
-                                <b>${p.productName}</b>
-                                <div style="border-top: 5px solid red; margin-top: 20px; margin-bottom: 20px; width: 100%;">
-                                </div>
-                            </div>
-                            <div class="col-4" style="padding-top: 20px;">
-                                Mã sản phẩm
-                            </div>
-                            <div class="col-8" style="padding-top: 20px;">
-                                ${p.productID}
-                            </div>
-                            <div class="col-4" style="padding-top: 20px;">
-                                Số lượng còn
-                            </div>
-                            <div class="col-8" style="padding-top: 20px;">
-                                ${p.quantity}
-                            </div>
-                            <div class="col-4" style="padding-top: 20px;">
-                                Giá bán
-                            </div>
-                            <div class="col-8" style="color: red;padding-top: 20px;">
-                                <fmt:formatNumber type = "number" 
-                                                              maxFractionDigits = "3" value = "${p.price}"/> VND
-                            </div>
-                            <div class="col-4" style="padding-top: 20px;">
-                                Bảo hành
-                            </div>
-                            <div class="col-8" style="padding-top: 20px;">
-                                <b>${p.warranTyperiod}</b>
-                            </div>
-                            <div class="col-4" style="padding-top: 20px;">
-                                Xuất xứ
-                            </div>
-                            <div class="col-8" style="padding-top: 20px;">
-                                <b>${p.productBrandID.nationalProduction}</b>
-                            </div>
-                            <form action="${pageContext.request.contextPath}/cart/add/${p.productID}.html">
-                                <div class="col-12">
-                                    <div class="qty mt-5">
-                                        <span class="minus bg-dark"><i class="fas fa-minus"></i></span>
-                                        <input type="number" class="count" name="qty" value="1">
-                                        <span class="plus bg-dark"><i class="fas fa-plus"></i></span>
+                        <form action="${pageContext.request.contextPath}/cart/add/${p.productID}.html">
+                            <div class="row">
+
+                                <div class="col-12" style="padding-top: 20px;">
+                                    <b>${p.productName}</b>
+                                    <div style="border-top: 5px solid red; margin-top: 20px; margin-bottom: 20px; width: 100%;">
                                     </div>
                                 </div>
-                                <div class="col-12" style="margin-top: 30px;">
-                                    <button type="submit" class="btn btn-warning"
-                                            style="width: 200px; height: 50px; font-size: large ; font-weight: bold">Mua
-                                        ngay &nbsp;<i class="fas fa-shopping-cart"></i></button>
+                                <div class="col-4" style="padding-top: 20px;">
+                                    Số lượng còn
                                 </div>
-                            </form>
-                        </div>
+                                <div class="col-8" style="padding-top: 20px;">
+                                    ${p.quantity}
+                                </div>
+                                <div class="col-4" style="padding-top: 20px;">
+                                    Giá bán
+                                </div>
+                                <div class="col-8" style="color: red;padding-top: 20px;">
+                                    <fmt:formatNumber type = "number" 
+                                                      maxFractionDigits = "3" value = "${p.price}"/> VND
+                                </div>
+                                <div class="col-4" style="padding-top: 20px;">
+                                    Bảo hành
+                                </div>
+                                <div class="col-8" style="padding-top: 20px;">
+                                    <b>${p.warranTyperiod}</b>
+                                </div>
+                                <div class="col-4" style="padding-top: 20px;">
+                                    Xuất xứ
+                                </div>
+                                <div class="col-8" style="padding-top: 20px">
+                                    <b>${p.productBrandID.nationalProduction}</b>
+                                </div>
+                                <div class="col-4" style="padding-top: 20px;">
+                                    Nhập số lượng cần mua
+                                </div>
+                                <br><br>
+                                <div class="col-8" style="padding-top: 20px; padding-bottom: 20px">
+                                    <div class="quantity">
+                                        <input type="number" readonly="" min="1" max="${p.quantity}" step="1" value="1" name="qty">
+                                    </div>
+                                </div>
+                                <div class="col-12" style="padding-top: 20px">
+                                    <button type="submit" class="btn btn-warning"
+                                            style="font-weight: bold">
+                                        <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng </button>
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="container-custom">
-                <div class="row">
-                    <div class="col-12" style="padding-top: 20px;">
-                        <b>MÔ TẢ SẢN PHẨM</b>
-                    </div>
-                    <div class="col-12" style="padding-top: 20px;">
-                        ${p.description}
-                    </div>
-                </div>
-            </div>
-        </c:catch>
-        <form action="">
-            <div class="container-custom">
-                <div class="row">
-                    <div class="col-12" style="padding-top: 20px;">
-                        <b>Đánh giá sản phẩm</b>
-                    </div>
-                    <div class="col-12" style="padding-top: 20px;" style="width: 100%  !important;">
-                        <div class=" form-group" style="width: 100%  !important;">
-                            <label for="comment">Comment:</label>
-                            <textarea class="form-control" rows="5" cols="200" id="comment"
-                                      style="max-width: 100%"></textarea>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="container-custom">
-                <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                    <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
-                    <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
-                    <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
-                    <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
-                    <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
-                </div>
-
-            </div>
-            <div class="container-custom" style="margin-top: 5px; margin-bottom: 10px;">
-                <button type="submit" class="btn btn-danger" style="width: 150px; height: 40px; ">Bình luận</button>
-            </div>
-        </form>
-
-        <footer style="background-color: black; color: white; height: 200px; padding-left: 50px;">
+        </div>
+        <div class="container-custom">
             <div class="row">
-                <div class="col-9">
-                    <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
-                    <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
-                    <p class="pFooter">Điện thoại: 0976553787 - Email: K2NCamShop@gmail.vn </p>
-                    <p class="pFooter">&copy Copyright 2021</p>
+                <div class="col-12" style="padding-top: 20px;">
+                    <b>MÔ TẢ SẢN PHẨM</b>
                 </div>
-                <div class="col-3" style="padding-top: 20px;">
-                    <a href=""><img src="../Image/Logo/fb.png" style="width: 10%;"></a>
-                    <a href=""><img src="../Image/Logo/yt.png" style="width: 10%;"></a>
-                    <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
+                <div class="col-12" style="padding-top: 20px;">
+                    ${p.description}
                 </div>
             </div>
-        </footer>
-        <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $('.count').prop('disabled', true);
-                $(document).on('click', '.plus', function () {
-                    $('.count').val(parseInt($('.count').val()) + 1);
-                });
-                $(document).on('click', '.minus', function () {
-                    $('.count').val(parseInt($('.count').val()) - 1);
-                    if ($('.count').val() == 0) {
-                        $('.count').val(1);
-                    }
-                });
+        </div>
+    </c:catch>
+    <div class="container-custom">
+        <div style="border-top: 3px solid gray; margin-top: 20px; margin-bottom: 20px; width: 100%;"></div>
+    </div>
+    <div style="padding-top: 20px">
+        <ul class="container-custom nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" style="color: black" data-toggle="tab" href="#home">Bình luận</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" style="color: black" href="#menu1">Chi tiết sản phẩm</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="home" class="tab-pane active"><br>
+                <form action="">
+                    <div class="container-custom">
+                        <div class="row">
+                            <div class="col-12" style="padding-top: 20px;">
+                                <b>Đánh giá sản phẩm</b>
+                            </div>
+                            <div class="col-12" style="padding-top: 20px;" style="width: 100%  !important;">
+                                <div class=" form-group" style="width: 100%  !important;">
+                                    <label for="comment">Comment:</label>
+                                    <textarea class="form-control" rows="5" cols="200" id="comment"
+                                              style="max-width: 100%"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-custom">
+                        <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+                        </div>
+
+                    </div>
+                    <div class="container-custom" style="margin-top: 5px; margin-bottom: 10px;">
+                        <button type="submit" class="btn btn-danger" style="width: 150px; height: 40px; ">Bình luận</button>
+                    </div>
+                </form>
+            </div>
+            <div id="menu1" class="tab-pane fade"><br>
+                <div class="container-custom"><h6>THÔNG TIN SẢN PHẨM</h6></div>
+                <c:catch var="p">
+                    <div class="container-custom" style="width: 40%;margin-left:9%;">
+                        <table class="table table-striped" style="border:1px #D2D2D2 solid">
+                            <tr>
+                                <td>Tên sản phẩm</td>
+                                <td>${p.productName}</td>
+                            </tr>
+                            <tr>
+                                <td>Màu sản phẩm</td>
+                                <td>${p.color}</td>
+                            </tr>
+                            <tr>
+                                <td>Thời gian bảo hành</td>
+                                <td>${p.warranTyperiod}</td>
+                            </tr>
+                            <tr>
+                                <td>Hãng sản xuất</td>
+                                <td>${p.productBrandID.productBrandName}</td>
+                            </tr>
+                            <tr>
+                                <td>Loại máy ảnh</td>
+                                <td>${p.productCategoryID.productCategoryName}</td>
+                            </tr>
+                            <tr>
+                                <td>Đo sáng</td>
+                                <td>${p.metering}</td>
+                            </tr>
+                        </table>
+                    </c:catch>
+                </div>
+                <div class="container-custom"><h6>THÔNG SỐ KĨ THUẬT</h6></div>
+                <div class="container-custom" style="width: 40%;margin-left:9%;">
+
+                    <c:catch var="b">
+                        <table class="table table-striped" style="border:1px #D2D2D2 solid">
+                            <tr>
+                                <td>Bộ cảm biến</td>
+                                <td>${p.sensor}</td>
+                            </tr>
+                            <tr>
+                                <td>ISO</td>
+                                <td>${p.iso}</td>
+                            </tr>
+                            <tr>
+                                <td>Độ phân giải</td>
+                                <td>${p.resolution}</td>
+                            </tr>
+                            <tr>
+                                <td>Kích thước ảnh</td>
+                                <td>${p.sizephoto}</td>
+                            </tr>
+                            <tr>
+                                <td>Micro</td>
+                                <td>${p.micro}</td>
+                            </tr>
+                            <tr>
+                                <td>Đo sáng</td>
+                                <td>${p.metering}</td>
+                            </tr>
+                        </table>
+                    </c:catch>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer style="background-color: black; color: white; height: 200px; padding-left: 50px;">
+        <div class="row">
+            <div class="col-9">
+                <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
+                <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
+                <p class="pFooter">Điện thoại: 0976553787 - Email: K2NCamShop@gmail.vn </p>
+                <p class="pFooter">&copy Copyright 2021</p>
+            </div>
+            <div class="col-3" style="padding-top: 20px;">
+                <a href=""><img src="../Image/Logo/fb.png" style="width: 10%;"></a>
+                <a href=""><img src="../Image/Logo/yt.png" style="width: 10%;"></a>
+                <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.count').prop('disabled', true);
+            $(document).on('click', '.plus', function () {
+                $('.count').val(parseInt($('.count').val()) + 1);
             });
-        </script>
-    </body>
+            $(document).on('click', '.minus', function () {
+                $('.count').val(parseInt($('.count').val()) - 1);
+                if ($('.count').val() == 0) {
+                    $('.count').val(1);
+                }
+            });
+        });
+        jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+        jQuery('.quantity').each(function () {
+            var spinner = jQuery(this),
+                    input = spinner.find('input[type="number"]'),
+                    btnUp = spinner.find('.quantity-up'),
+                    btnDown = spinner.find('.quantity-down'),
+                    min = input.attr('min'),
+                    max = input.attr('max');
+
+            btnUp.click(function () {
+                var oldValue = parseFloat(input.val());
+                if (oldValue >= max) {
+                    var newVal = oldValue;
+                } else {
+                    var newVal = oldValue + 1;
+                }
+                spinner.find("input").val(newVal);
+                spinner.find("input").trigger("change");
+            });
+
+            btnDown.click(function () {
+                var oldValue = parseFloat(input.val());
+                if (oldValue <= min) {
+                    var newVal = oldValue;
+                } else {
+                    var newVal = oldValue - 1;
+                }
+                spinner.find("input").val(newVal);
+                spinner.find("input").trigger("change");
+            });
+
+        });
+    </script>
+</body>
 </html>

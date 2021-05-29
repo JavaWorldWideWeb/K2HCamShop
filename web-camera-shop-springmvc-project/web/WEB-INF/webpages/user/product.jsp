@@ -58,19 +58,16 @@
                         <h6 style="border-top: 1px;">SẮP XẾP THEO</h6>
                         <form action="/action_page.php">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="example1">
-                                <label class="custom-control-label" for="customRadio">Mặc định</label>
-                                <input type="radio" class="custom-control-input" name="example1">
-                                <label class="custom-control-label" for="customRadio">Mặc định</label>
-                                <input type="radio" class="custom-control-input" name="example1">
-                                <label class="custom-control-label" for="customRadio">Mặc định</label>
+                                <input type="radio" name="sort" value="asc"> Giá tăng dần
                             </div>
-                            
-                        </form>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" name="sort" value="desc"> Giá giảm dần
+                            </div>
+                        
                         <div style="border-top: 1px solid gray; margin-top: 20px; margin-bottom: 20px;">
                         </div>
                         <h6>Khoảng giá</h6>
-                        <form>
+                        
                             <div class="form-row">
                                 <div class="col">
                                     <input type="text" class="form-control" id="email" placeholder="đ TỪ" name="email">
@@ -103,8 +100,9 @@
                             <c:forEach items="${list}" var="p">
                                 <c:if test="${!empty p}">
                                     <div class="col-3" style="padding-top: 10px">
-                                        <div class="card"> <img src="${pageContext.request.contextPath}/image/${p.img}" class="card-img-top" width="100%" height="160vh">
+                                        <div class="card"> <img src="${pageContext.request.contextPath}/image/${p.img}" class="card-img-top" width="90%" height="180vh">
                                             <div class="card-body pt-0 px-0">
+                                                <small class="text-muted key pl-3" style="color: black;font-weight: bold">${p.productName} </small>
                                                 <div class="d-flex flex-row justify-content-between mb-0 px-3"> <small class="text-muted mt-1">Giá Bán</small>
                                                     <h6><fmt:formatNumber type = "number" 
                                                                       maxFractionDigits = "3" value = "${p.price}"/> VND</h6>
@@ -142,30 +140,30 @@
                                     </c:forEach>
                                 </div>
                             </c:if>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer style="background-color: black; color: white; height: 200px; padding-left: 50px; margin-top: 10px;">
-                <div class="row">
-                    <div class="col-9">
-                        <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
-                        <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
-                        <p class="pFooter">Điện thoại: 0976553787 - Email: K2NCamShop@gmail.vn </p>
-                        <p class="pFooter">&copy Copyright 2021</p>
-                    </div>
-                    <div class="col-3" style="padding-top: 20px;">
-                        <a href=""><img src="../Image/Logo/fb.png" style="width: 10%;"></a>
-                        <a href=""><img src="../Image/Logo/yt.png" style="width: 10%;"></a>
-                        <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
-                    </div>
+        </div>
+        <footer style="background-color: black; color: white; height: 200px; padding-left: 50px; margin-top: 10px;">
+            <div class="row">
+                <div class="col-9">
+                    <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
+                    <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
+                    <p class="pFooter">Điện thoại: 0976553787 - Email: K2NCamShop@gmail.vn </p>
+                    <p class="pFooter">&copy Copyright 2021</p>
                 </div>
-            </footer>
-            <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <div class="col-3" style="padding-top: 20px;">
+                    <a href=""><img src="../Image/Logo/fb.png" style="width: 10%;"></a>
+                    <a href=""><img src="../Image/Logo/yt.png" style="width: 10%;"></a>
+                    <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
+                </div>
+            </div>
+        </footer>
+        <script src="https://kit.fontawesome.com/041bd10679.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        </body>
-    </html>
+    </body>
+</html>
