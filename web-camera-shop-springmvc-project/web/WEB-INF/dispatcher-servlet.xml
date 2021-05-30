@@ -51,6 +51,8 @@
     <bean id="LoginDao" class="sv.iuh.project.dao.LoginDaoImpl" />
     <bean id="RegisterService" class="sv.iuh.project.service.RegisterServiceImpl" />
     <bean id="RegisterDao" class="sv.iuh.project.dao.RegisterImpl" />
+    <bean id="CommentService" class="sv.iuh.project.service.CommentServiceImpl" />
+    <bean id="CommentDao" class="sv.iuh.project.dao.CommentDaoImpl" />
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
     <mvc:annotation-driven />
 </beans>

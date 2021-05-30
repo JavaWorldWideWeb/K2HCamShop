@@ -10,9 +10,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,7 @@ import sv.iuh.project.model.Product;
 import sv.iuh.project.model.ProductBrand;
 import sv.iuh.project.model.ProductCategory;
 import sv.iuh.project.model.UserShop;
+import sv.iuh.project.service.CommentService;
 import sv.iuh.project.service.ProductBrandService;
 import sv.iuh.project.service.ProductCategoryService;
 import sv.iuh.project.service.ProductService;
@@ -42,6 +45,8 @@ public class ProductController {
     private ProductCategoryService productCategoryService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping("/show")
     public String viewAdmin(ModelMap mm, HttpSession session) {
@@ -49,7 +54,7 @@ public class ProductController {
         mm.put("totalItem", productService.totalItem() / 6);
         mm.put("listbrand", productBrandService.getAll());
         return "admin/productmanage";
-        
+
     }
 
     @RequestMapping(value = "/show/{page}", method = RequestMethod.GET)
@@ -64,6 +69,7 @@ public class ProductController {
     public String viewProduct(ModelMap mm) {
         mm.put("list", productService.getAll());
         mm.put("listbrand", productBrandService.getAll());
+        mm.put("listcate", productCategoryService.getAll());
         return "user/product";
     }
 
@@ -80,12 +86,52 @@ public class ProductController {
         }
     }
 
+    @RequestMapping(value = "/searchpro", method = RequestMethod.GET)
+    public String viewSearchUser(ModelMap mm, HttpSession session, @RequestParam("ten") String name) {
+        mm.put("list", productService.getListByBrand(0, name));
+        mm.put("listbrand", productBrandService.getAll());
+        mm.put("listcate", productCategoryService.getAll());
+        mm.put("s", name);
+        return "user/product";
+    }
+
+    @RequestMapping(value = "/filter", method = RequestMethod.GET)
+    public String viewFilterUser(ModelMap mm, HttpSession session, @RequestParam("lb") String lb,
+            @RequestParam("lc") String lc, @RequestParam("sort") String sort, HttpServletRequest request) {
+        if (request.getParameter("minprice").equals("") && request.getParameter("maxprice").equals("")) {
+            mm.put("list", productService.getFilter(lb, lc, 0, 1000000000, sort));
+            mm.put("listbrand", productBrandService.getAll());
+            mm.put("listcate", productCategoryService.getAll());
+            return "user/product";
+        } else if (request.getParameter("minprice").equals("")) {
+            Integer maxprice = Integer.parseInt(request.getParameter("maxprice"));
+            mm.put("list", productService.getFilter(lb, lc, 0, maxprice, sort));
+            mm.put("listbrand", productBrandService.getAll());
+            mm.put("listcate", productCategoryService.getAll());
+            return "user/product";
+        } else if (request.getParameter("maxprice").equals("")) {
+            Integer minprice = Integer.parseInt(request.getParameter("minprice"));
+            mm.put("list", productService.getFilter(lb, lc, minprice, 1000000000, sort));
+            mm.put("listbrand", productBrandService.getAll());
+            mm.put("listcate", productCategoryService.getAll());
+            return "user/product";
+        } else {
+            Integer minprice = Integer.parseInt(request.getParameter("minprice"));
+            Integer maxprice = Integer.parseInt(request.getParameter("maxprice"));
+            mm.put("list", productService.getFilter(lb, lc, minprice, maxprice, sort));
+            mm.put("listbrand", productBrandService.getAll());
+            mm.put("listcate", productCategoryService.getAll());
+            return "user/product";
+        }
+    }
+
     //Phan trang
     @RequestMapping(value = "/productpage", method = RequestMethod.GET)
     public String viewProductList(ModelMap mm, HttpSession session) {
         mm.put("listbrand", productBrandService.getAll());
         mm.put("list", productService.getListNav(0, 8));
         mm.put("totalItem", productService.totalItem() / 8);
+        mm.put("listcate", productCategoryService.getAll());
         return "user/product";
     }
 
@@ -94,6 +140,7 @@ public class ProductController {
         mm.put("listbrand", productBrandService.getAll());
         mm.put("list", productService.getListNav((page - 1) * 8, 8));
         mm.put("totalItem", productService.totalItem() / 8);
+        mm.put("listcate", productCategoryService.getAll());
         return "user/product";
     }
 
@@ -102,6 +149,7 @@ public class ProductController {
         mm.put("list", productService.getListBrand(id));
         mm.put("b", productBrandService.findById(id));
         mm.put("listbrand", productBrandService.getAll());
+        mm.put("listcate", productCategoryService.getAll());
         return "user/product";
     }
 
@@ -134,7 +182,7 @@ public class ProductController {
             String imgUp = request.getParameter("imgUp");
             if (photo.isEmpty()) {
                 product.setImg(imgUp);
-            }else{
+            } else {
                 product.setImg(saveFile(photo));
             }
             product.setProductID(id);
@@ -208,10 +256,18 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/detail")
-    public String showDetailProduct(ModelMap mm, @RequestParam("id") int id) {
-
-        Product product = productService.findById(id);
-        mm.put("p", product);
-        return "user/productdetail";
+    public String showDetailProduct(ModelMap mm, @RequestParam("id") int id, HttpSession session) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop == null) {
+            Product product = productService.findById(id);
+            mm.put("p", product);
+            return "user/productdetail";
+        } else {
+            List<Object[]> order = commentService.roleComment(userShop.getUserID(), id);
+            Product product = productService.findById(id);
+            mm.put("list", order);
+            mm.put("p", product);
+            return "user/productdetail";
+        }
     }
 }

@@ -34,8 +34,10 @@ public interface ProductService {
     public Long totalItem();
 
     public List<Product> getNewProduct();
-    
+
     public List<Product> getListByBrand(int brandId, String name);
-    
+
     public List<Product> getListBrand(int brandId);
+
+    public List<Product> getFilter(String brandId, String cateId, int minPrice, int maxPrice, String sort);
 }

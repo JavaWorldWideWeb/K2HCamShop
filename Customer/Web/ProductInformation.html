@@ -34,7 +34,7 @@
     .starrating>label:before {
         content: "\f005";
         /* Star */
-        font-size: 2em;
+        font-size: 1em;
         font-family: FontAwesome;
         display: inline-block;
     }
@@ -278,6 +278,36 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid" style="width: 84% !important">
+        <div class="row">
+            <div class="col-xl-12">
+                <h6>Tất cả bình luận</h6>
+            </div>
+            <div class="col-xl-1" c>
+                <p>K</p>
+            </div>
+            <div class="col-xl-11">
+                <h6 style="color: #2908a4; font-weight: bold;">Khang</h6>
+                <p>Sản phẩm tuyệt vời sẽ tiếp tục ủng
+                    hộaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaa aaaaaaa aaaa aaaaaaaaaaa
+                    aaa aa aaaa
+                </p>
+                <span style="cursor: pointer; color: gray;" onclick="myFunction()"><i
+                        class="fas fa-comment"></i>&nbsp;&nbsp;Trả lời</span>
+            </div>
+            <div class="col-xl-1" c>
+            </div>
+            <div class="col-11" id="myDIV" style="display: none;">
+                <form action="">
+                    <div class=" form-group">
+                        <textarea class="form-control" rows="2" cols="200" id="comment"
+                            placeholder="Nhập bình luận trả lời của bạn"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <form action="">
         <div class="container-custom">
             <div class="row">
@@ -289,9 +319,7 @@
                         <label for="comment">Comment:</label>
                         <textarea class="form-control" rows="5" cols="200" id="comment"
                             style="max-width: 100%"></textarea>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -325,6 +353,16 @@
             </div>
         </div>
     </footer>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>

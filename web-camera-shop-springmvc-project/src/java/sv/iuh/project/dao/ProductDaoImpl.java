@@ -24,7 +24,7 @@ import sv.iuh.project.util.HibernateUtil;
 public class ProductDaoImpl implements ProductDao {
 
     @Override
-    
+
     public List<Product> getAll() {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -253,6 +253,37 @@ public class ProductDaoImpl implements ProductDao {
             List<Product> obj = new ArrayList<Product>();
             Query query = session.createQuery("FROM Product WHERE ProductBrandID = :ProductBrandID");
             query.setInteger("ProductBrandID", brandId);
+            obj = query.list();
+            transaction.commit();
+            return obj;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Product> getFilter(String brandId, String cateId, int minPrice, int maxPrice, String sort) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            List<Product> obj = new ArrayList<Product>();
+            Query query = session.createQuery("FROM Product WHERE ProductBrandID like:ProductBrandID and "
+                                            + "ProductCategoryID like:ProductCategoryID and "
+                                            + "Price >=:minPrice and Price <=:maxPrice "
+                                            + "order by price " +sort);
+            query.setString("ProductBrandID", "%" + brandId + "%");
+            query.setString("ProductCategoryID", "%" + cateId + "%");
+            query.setInteger("minPrice", minPrice);
+            query.setInteger("maxPrice", maxPrice);
+           
             obj = query.list();
             transaction.commit();
             return obj;

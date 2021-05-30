@@ -21,6 +21,42 @@
         <link rel="icon" href="<c:url value="/resources/Image/LoadLogo.png"/>">
     </head>
     <style>
+        @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+        /* Styling h1 and links
+    ––––––––––––––––––––––––––––––––– */
+        h1[alt="Simple"] {
+            color: white;
+        }
+
+
+        .starrating>input {
+            display: none;
+        }
+
+        /* Remove radio buttons */
+
+        .starrating>label:before {
+            content: "\f005";
+            /* Star */
+            font-size: 2em;
+            font-family: FontAwesome;
+            display: inline-block;
+        }
+
+        .starrating>label {
+            color: #222222;
+            /* Start color when not clicked */
+        }
+
+        .starrating>input:checked~label {
+            color: #ffca08;
+        }
+
+
+        .starrating>input:hover~label {
+            color: #ffca08;
+        }
         span {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -202,36 +238,72 @@
         <!-- Tab panes -->
         <div class="tab-content">
             <div id="home" class="tab-pane active"><br>
-                <form action="">
-                    <div class="container-custom">
-                        <div class="row">
-                            <div class="col-12" style="padding-top: 20px;">
-                                <b>Đánh giá sản phẩm</b>
-                            </div>
-                            <div class="col-12" style="padding-top: 20px;" style="width: 100%  !important;">
-                                <div class=" form-group" style="width: 100%  !important;">
-                                    <label for="comment">Comment:</label>
-                                    <textarea class="form-control" rows="5" cols="200" id="comment"
-                                              style="max-width: 100%"></textarea>
+                <div class="container-fluid" style="width: 84% !important;padding-bottom: 30px">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h6>Tất cả bình luận</h6>
+                        </div>
+                        <div class="col-xl-1" c>
+                            <p>K</p>
+                        </div>
+                        <div class="col-xl-11">
+                            <h6 style="color: #2908a4; font-weight: bold;">Khang</h6>
+                            <p>Sản phẩm tuyệt vời sẽ tiếp tục ủng
+                                hộaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaa aaaaaaa aaaa aaaaaaaaaaa
+                                aaa aa aaaa
+                            </p>
+                            <span style="cursor: pointer; color: gray;" onclick="myFunction()"><i
+                                    class="fas fa-comment"></i>&nbsp;&nbsp;Trả lời</span>
+                        </div>
+                        <div class="col-xl-1" c>
+                        </div>
+                        <div class="col-11" id="myDIV" style="display: none;">
+                            <form action="">
+                                <div class=" form-group">
+                                    <textarea class="form-control" rows="2" cols="200" id="comment"
+                                              placeholder="Nhập bình luận trả lời của bạn"></textarea>
                                 </div>
-
+                                <button type="button" class="btn btn-warning">Gửi câu trả lờis</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <c:set var = "list" scope = "session" value = "${list}"/>
+                <c:if test="${!empty list}">
+                    <form action="${pageContext.request.contextPath}/comment/save" method="post">"
+                        <div class="container-custom">
+                            <div class="row">
+                                <c:catch var="p">
+                                    <input type="hidden" value="${p.productID}" name="productId"/>
+                                </c:catch>
+                                <div class="col-12" style="padding-top: 20px;">
+                                    <b>Đánh giá sản phẩm</b>
+                                </div>
+                                <div class="col-12" style="padding-top: 20px;" style="width: 100%  !important;">
+                                    <div class=" form-group" style="width: 100%  !important;">
+                                        <label for="comment">Comment:</label>
+                                        <textarea class="form-control" rows="5" cols="200" id="comment" name="cmt"
+                                                  style="max-width: 100%"></textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container-custom">
-                        <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
-                        </div>
+                        <div class="container-custom">
+                            <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+                            </div>
 
-                    </div>
-                    <div class="container-custom" style="margin-top: 5px; margin-bottom: 10px;">
-                        <button type="submit" class="btn btn-danger" style="width: 150px; height: 40px; ">Bình luận</button>
-                    </div>
-                </form>
+                        </div>
+                        <div class="container-custom" style="margin-top: 5px; margin-bottom: 10px;">
+                            <button type="submit" class="btn btn-danger" style="width: 150px; height: 40px; ">Bình luận</button>
+                        </div>
+                    </form>
+                </c:if>
             </div>
             <div id="menu1" class="tab-pane fade"><br>
                 <div class="container-custom"><h6>THÔNG TIN SẢN PHẨM</h6></div>
@@ -322,50 +394,60 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.count').prop('disabled', true);
-            $(document).on('click', '.plus', function () {
-                $('.count').val(parseInt($('.count').val()) + 1);
-            });
-            $(document).on('click', '.minus', function () {
-                $('.count').val(parseInt($('.count').val()) - 1);
-                if ($('.count').val() == 0) {
-                    $('.count').val(1);
-                }
-            });
-        });
-        jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
-        jQuery('.quantity').each(function () {
-            var spinner = jQuery(this),
-                    input = spinner.find('input[type="number"]'),
-                    btnUp = spinner.find('.quantity-up'),
-                    btnDown = spinner.find('.quantity-down'),
-                    min = input.attr('min'),
-                    max = input.attr('max');
+                    $(document).ready(function () {
+                        $('.count').prop('disabled', true);
+                        $(document).on('click', '.plus', function () {
+                            $('.count').val(parseInt($('.count').val()) + 1);
+                        });
+                        $(document).on('click', '.minus', function () {
+                            $('.count').val(parseInt($('.count').val()) - 1);
+                            if ($('.count').val() == 0) {
+                                $('.count').val(1);
+                            }
+                        });
+                    });
+                    jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+                    jQuery('.quantity').each(function () {
+                        var spinner = jQuery(this),
+                                input = spinner.find('input[type="number"]'),
+                                btnUp = spinner.find('.quantity-up'),
+                                btnDown = spinner.find('.quantity-down'),
+                                min = input.attr('min'),
+                                max = input.attr('max');
 
-            btnUp.click(function () {
-                var oldValue = parseFloat(input.val());
-                if (oldValue >= max) {
-                    var newVal = oldValue;
-                } else {
-                    var newVal = oldValue + 1;
-                }
-                spinner.find("input").val(newVal);
-                spinner.find("input").trigger("change");
-            });
+                        btnUp.click(function () {
+                            var oldValue = parseFloat(input.val());
+                            if (oldValue >= max) {
+                                var newVal = oldValue;
+                            } else {
+                                var newVal = oldValue + 1;
+                            }
+                            spinner.find("input").val(newVal);
+                            spinner.find("input").trigger("change");
+                        });
 
-            btnDown.click(function () {
-                var oldValue = parseFloat(input.val());
-                if (oldValue <= min) {
-                    var newVal = oldValue;
-                } else {
-                    var newVal = oldValue - 1;
-                }
-                spinner.find("input").val(newVal);
-                spinner.find("input").trigger("change");
-            });
+                        btnDown.click(function () {
+                            var oldValue = parseFloat(input.val());
+                            if (oldValue <= min) {
+                                var newVal = oldValue;
+                            } else {
+                                var newVal = oldValue - 1;
+                            }
+                            spinner.find("input").val(newVal);
+                            spinner.find("input").trigger("change");
+                        });
 
-        });
+                    });
+    </script>
+     <script>
+        function myFunction() {
+            var x = document.getElementById("myDIV");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
     </script>
 </body>
 </html>
