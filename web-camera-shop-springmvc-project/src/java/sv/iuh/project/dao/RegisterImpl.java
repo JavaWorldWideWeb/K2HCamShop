@@ -35,7 +35,9 @@ public class RegisterImpl implements RegisterDao {
             }
             ex.printStackTrace();
         } finally {
+            session.clear();
             session.flush();
+          
             session.close();
         }
          return false;
@@ -56,6 +58,7 @@ public class RegisterImpl implements RegisterDao {
             }
             ex.printStackTrace();
         } finally {
+            // session.clear();
             session.flush();
             session.close();
         }
@@ -100,6 +103,7 @@ public class RegisterImpl implements RegisterDao {
             }
             ex.printStackTrace();
         } finally {
+           // session.clear();
             session.flush();
             session.close();
         }

@@ -13,9 +13,14 @@ import java.sql.Date;
 import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,10 +45,9 @@ public class RegisterController {
         return "user/register";
     }
     
-    
     @RequestMapping(value = "/register/save", method = RequestMethod.POST)
-    public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,@RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
+    public String viewProductSave(ModelMap mm,HttpSession session, HttpServletRequest request,@RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
+        
         String fullName = request.getParameter("tendaydu");
         String name = request.getParameter("tendangnhap");
         String pass = request.getParameter("matkhau");
@@ -67,15 +71,15 @@ public class RegisterController {
         userShop.setRole("user");
         userShop.setActive(0);
         userShop.setImg(saveFile(photo));
-//        userShop.setUserID(1);
         
-        //productBrand.setImg(saveFile(photo));
+        registerService.create(userShop);
+            //return "user/login";
         
-            registerService.create(userShop);
-//            mm.put("listUserShop", registerService.getAll());
-            mm.put("success", "Bạn đã đăng kí thành công vui lòng đăng nhập !!!");
-            return "user/login";
-       
+   
+            //registerService.create(userShop);
+
+         mm.put("success", "Bạn đã đăng kí thành công vui lòng đăng nhập !!!");
+         return "user/login";
     }
     
     

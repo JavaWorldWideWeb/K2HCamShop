@@ -18,7 +18,11 @@
         <link href="<c:url value="/resources/Css/body.css"/>" rel='stylesheet' type='text/css'/>
         <link href="<c:url value="/resources/register/signup.css"/>" rel='stylesheet' type='text/css'/>
         <link rel="icon" href="<c:url value="/resources/Image/LoadLogo.png"/>">
+        
+        
     </head>
+    
+    
     <style>
         span{
             margin-left: 5px;
@@ -28,6 +32,10 @@
         }
     </style>
     <body>
+        
+        
+        
+        
         <div class="row" style="padding-top: 50px;padding-bottom: 50px;">
             <div class="col-12">
                 <div class="container"  style="width: 50%;border: 1px #DFE5E2 solid;border-radius:5%; height: auto" >
@@ -36,12 +44,12 @@
                         <div class="title">ĐĂNG KÍ</div>
                     </div>
 
-                    <form action="<c:url value="/register/save"/>" method="POST" enctype="multipart/form-data">
+                    <form action="<c:url value="/register/save"/>" id="form" method="POST" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"><i class="fas fa-pen"></i></span>Tên đầy đủ:</label>
-                                    <input class="form-control"type="text" required placeholder="Nhập họ tên" name="tendaydu" autocomplete="off">
+                                    <input class="form-control"type="text" id="tendaydu" required  placeholder="Nhập họ tên" name="tendaydu" autocomplete="off">
 
                                 </div>
                             </div>
@@ -49,7 +57,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"> <i class="fas fa-user-alt"></i><span class="details">Tên đăng nhập </span></label>
-                                    <input class="form-control" type="text" required placeholder="Nhập tên đăng nhập " name="tendangnhap" autocomplete="off">
+                                    <input class="form-control" type="text" id="tendangnhap" required  placeholder="Nhập tên đăng nhập " name="tendangnhap" autocomplete="off">
 
                                 </div>
                             </div>
@@ -58,14 +66,14 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"><i class="fas fa-key"></i></span>Mật khẩu:</label>
-                                    <input class="form-control" type="password" required placeholder="Nhập mật khẩu" name="matkhau" autocomplete="off">
+                                    <input class="form-control" type="password" id="matkhau" required  placeholder="Nhập mật khẩu" name="matkhau" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"> <i class="fas fa-envelope-square"></i><span class="details">Email </span></label>
-                                    <input class="form-control" type="email" required placeholder="Nhập email" name="email" autocomplete="off">
+                                    <input class="form-control" type="email" id="email" required  placeholder="Nhập email" name="email" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -73,14 +81,14 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"><i class="fas fa-key"></i></span>Xác nhận mật khẩu:</label>
-                                    <input class="form-control" type="password" required placeholder="Nhập lại mật khẩu" autocomplete="off">
+                                    <input class="form-control" type="password" id="xnmatkhau" required name="xnmatkhau" placeholder="Nhập lại mật khẩu" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"> <i class="fas fa-mobile-alt"></i><span class="details">Số điện thoại </span></label>
-                                    <input class="form-control" required placeholder="Nhập số điện thoại" name="sodt" autocomplete="off">
+                                    <input class="form-control"  id="sodt" required placeholder="Nhập số điện thoại" name="sodt" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -88,14 +96,14 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"> <i class="fas fa-calendar"></i></span>Chọn ngày sinh:</label>
-                                    <input class="form-control" type="date" required  name="ngaysinh" autocomplete="off">
+                                    <input class="form-control" type="date" required id="ngaysinh" name="ngaysinh" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="pwd"> <i class="fas fa-user"></i><span class="details">Hình ảnh </span></label>
-                                    <input class="form-control" type="file" required placeholder="hinhanh" name="image" autocomplete="off">
+                                    <input class="form-control" type="file" placeholder="hinhanh" name="image" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -106,7 +114,7 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <input class="form-control" type="text" required placeholder="Nhập địa chỉ" name="diachi">
+                                    <input class="form-control" type="text" placeholder="Nhập địa chỉ" name="diachi">
                                 </div>
                                 <div class="col-4">
                                     <select class="form-control" name="calc_shipping_provinces" required="">
@@ -122,7 +130,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <br>
-                                    <button class="btn btn-warning" type="submit" style="width: 100%; font-weight: bold">Đăng kí</button>
+                                    <button class="btn btn-warning" id="btnRegis" type="submit" style="width: 100%; font-weight: bold">Đăng kí</button>
                                 </div>
                             </div>
 
@@ -230,5 +238,37 @@
             })
         })
         //]]></script>
+    
+    
+    
+<!--    <script language="javascript" >
+                var form = document.getElementById("form");
+                var fullName = document.getElementById("tendaydu").value;
+                var userName = document.getElementById("tendangnhap").value;
+                var passWord = document.getElementById("matkhau").value;
+                var confirm = document.getElementById("xnmatkhau").value;
+                var email = document.getElementById("email");
+                var phone = document.getElementById("sodt");
+                var date = document.getElementById("ngaysinh").value;
+                //var btn = document.getElementById("btnRegis");
+//                if(fullName == "" || userName=="" || passWord ==""||confirm =="" || email=="" || phone==""||date=="" ){
+//                   window.confirm("Vui lòng điền đầy đủ thông tin ");
+//                    //break;
+//                }
+                form.addEventListener('submit',(e)=>{
+                    
+                    filterPhone = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                  if(filterPhone.test(phone)){
+                    alert("Số điện thoại sai định dạng ");
+                   
+                } 
+                 if(phone.length<10){
+                      alert("Số điện thoại chỉ có 10 số ");
+                    }
+                    
+                });
+                        
+   
+        </script>-->
 </body>
 </html>

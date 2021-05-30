@@ -20,8 +20,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+//import org.hibernate.validator.constraints.Email;
+//import org.hibernate.validator.constraints.NotBlank;
+//import org.hibernate.validator.constraints.NotEmpty;
+
 
 /**
  *
@@ -54,10 +60,14 @@ public class UserShop implements Serializable {
     @Column(name = "Active")
     private Integer active;
     @Column(name = "Email", length = 50)
+    //@Email(message = "Email không được trống")
+   
     private String email;
     @Column(name = "Password", length = 50)
+    //@NotBlank(message = "Mật khẩu không được trống")
     private String password;
     @Column(name = "Username", length = 50)
+    //@NotBlank(message="Tài khoản không được trống")
     private String username;
     @Column(name = "Role", length = 50)
     private String role;
@@ -65,12 +75,17 @@ public class UserShop implements Serializable {
     private String address;
     @Column(name = "Birthday")
     @Temporal(TemporalType.TIMESTAMP)
+    //@Past
+    //@NotBlank(message = "Ngày sinh không trống và trước ngày hiện tại")
     private Date birthday;
     @Column(name = "FullName", length = 50)
     private String fullName;
     @Column(name = "Img", length = 255)
     private String img;
     @Column(name = "PhoneNumber", length = 50)
+
+    //@NotEmpty(message = "Số điện thoại không được trống")
+    
     private String phoneNumber;
     @OneToMany(mappedBy = "userID")
     private List<OrderProduct> orderProductList;
