@@ -5,6 +5,9 @@
  */
 package sv.iuh.project.service;
 
+import java.util.List;
+import sv.iuh.project.model.OrderDetail;
+
 /**
  *
  * @author Thanh Hoai
@@ -12,4 +15,10 @@ package sv.iuh.project.service;
 public interface OrderDetailService {
     
     public boolean create (Object object);
+    
+    public List<OrderDetail> getOrdersOfUser(int id);
+    
+    public boolean delete (OrderDetail orderDetail);
+    
+    public OrderDetail findById(int id);
 }

@@ -6,6 +6,7 @@
 package sv.iuh.project.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -41,6 +44,11 @@ public class OrderDetail implements Serializable {
     private Integer orderDetailId;
     @Column(name = "Quantity")
     private Integer quantity;
+    @Column(name = "DateOrder")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOrder;
+    @Column(name = "Total", precision = 53)
+    private Double total;
     @Column(name = "StatusOrderDetail", length = 50)
     private String statusOrderDetail;
     @JoinColumn(name = "OrderID", referencedColumnName = "OrderID")
@@ -71,6 +79,22 @@ public class OrderDetail implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Date getDateOrder() {
+        return dateOrder;
+    }
+
+    public void setDateOrder(Date dateOrder) {
+        this.dateOrder = dateOrder;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public String getStatusOrderDetail() {
@@ -115,6 +139,11 @@ public class OrderDetail implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public void tinhTien(){
+        double total = getQuantity() *  getProductID().getPrice();
+        setTotal(total);
     }
 
     @Override

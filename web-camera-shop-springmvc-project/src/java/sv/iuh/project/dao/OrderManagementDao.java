@@ -26,5 +26,7 @@ public interface OrderManagementDao {
     
     public List<OrderProduct> getOrdersByDate(String date);
     
-    public List<OrderProduct> getOrdersUnpaid();
+    public List<OrderProduct> getOrdersUnpaid() ;
+    
+    public List<OrderProduct> getOrderIdByUser(int id);
 }
