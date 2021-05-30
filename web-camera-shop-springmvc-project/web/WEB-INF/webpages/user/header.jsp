@@ -31,6 +31,29 @@
             .dropdown:hover .dropdown-content {
                 display: block;
             }
+
+            #dropdown:hover > .dropdown-menu{
+                display: block;
+            }
+
+            #dropdown .dropdown-menu{
+                margin-top: -5px; 
+                padding: 0px 10px 10px 10px; 
+                font-size: 16px;
+            }
+            
+            #dropdown .dropdown-menu  > li > a{
+                color: black;
+            }
+            
+            #dropdown .dropdown-menu  > li{
+                margin-top: 10px;
+            }
+            
+            #dropdown .dropdown-menu  > li:hover{
+                background-color: lightgray;
+            }
+            
         </style>
     </head>
     <body>
@@ -113,8 +136,8 @@
                                 <p>
                                     <span style="color:#6d6767">Thành Tiền</span>
                                     <span style="float:right; color:red; font-weight:bold; font-size: 16px"><fmt:formatNumber type = "number" maxFractionDigits = "3" value ="${sessionScope.myCartTotal + (sessionScope.myCartTotal * 0.1)}" /> VNĐ</span>
-                                <br />
-                                <i style="float: right; color:#2c2929; font-size: 10px">(Đã bao gồm thuế VAT nếu có)</i>
+                                    <br />
+                                    <i style="float: right; color:#2c2929; font-size: 10px">(Đã bao gồm thuế VAT nếu có)</i>
                                 </p>
 
 
@@ -126,11 +149,18 @@
                     <%
                         UserShop userShop = (UserShop) session.getAttribute("userlogin");
                     %>
+
                     <c:set var = "usershop" scope = "session" value = "<%=userShop%>"/>
                     <c:if test="${usershop!=null}">
                         <c:catch var="userShop">
                             <li class="nav-item">
-                                <a class="nav-link" href="<c:url value="/login/logout"/>"><%=userShop.getFullName()%></a>
+                                <div class="dropdown" id="dropdown">
+                                    <a class="nav-link" href="#" data-toggle="dropdown"><%=userShop.getFullName()%></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="<c:url value="/orderList/show" />" style="text-decoration: none">Đơn hàng của tôi</a></li>
+                                        <li><a href="<c:url value="/login/logout"/>" style="text-decoration: none;">Thoát tài khoản</a></li>
+                                    </ul>
+                                </div>
                             </li>
                         </c:catch>
                     </c:if>

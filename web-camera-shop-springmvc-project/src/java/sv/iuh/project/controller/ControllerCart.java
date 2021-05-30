@@ -84,18 +84,18 @@ public class ControllerCart {
             cartItems = new HashMap<>();
         }
         Product product = productService.findById(productId);
-        System.out.println("----------------" +request.getParameter("qty") + "---------------");
-        //int qty = Integer.parseInt(request.getParameter("qty"));
+        //System.out.println("----------------" +request.getParameter("qty") + "---------------");
+        int qty = Integer.parseInt(request.getParameter("qty"));
         if (product != null) {
             if (cartItems.containsKey(productId)) {
                 Cart item = cartItems.get(productId);
                 item.setProduct(product);
-                item.setQuantity(item.getQuantity() + 1);
+                item.setQuantity(item.getQuantity() + qty);
                 cartItems.put(productId, item);
             } else {
                 Cart item = new Cart();
                 item.setProduct(product);
-                item.setQuantity(1);
+                item.setQuantity(qty);
                 cartItems.put(productId, item);
             }
         }
@@ -115,7 +115,8 @@ public class ControllerCart {
         Product product = productService.findById(productId);
         Cart item = cartItems.get(productId);
         item.setProduct(product);
-        item.setQuantity(item.getQuantity() + 1);
+        if(product.getQuantity() > item.getQuantity())
+            item.setQuantity(item.getQuantity() + 1);
         cartItems.put(productId, item);
         session.setAttribute("myCartItems", cartItems);
         session.setAttribute("myCartTotal", totalPrice(cartItems));
@@ -132,7 +133,8 @@ public class ControllerCart {
         Product product = productService.findById(productId);
         Cart item = cartItems.get(productId);
         item.setProduct(product);
-        item.setQuantity(item.getQuantity() - 1);
+        if(item.getQuantity() > 1)
+            item.setQuantity(item.getQuantity() - 1);
         cartItems.put(productId, item);
 
         session.setAttribute("myCartItems", cartItems);
@@ -195,9 +197,12 @@ public class ControllerCart {
             orderDetail.setProductID(entry.getValue().getProduct());
             orderDetail.setQuantity(entry.getValue().getQuantity());
             orderDetail.setStatusOrderDetail("paid");
+            orderDetail.setDateOrder(new Date());
+            orderDetail.tinhTien();
             orderDetailService.create(orderDetail);
             Product product =  productService.findById(entry.getValue().getProduct().getProductID());
             product.setQuantity(product.getQuantity() - entry.getValue().getQuantity());
+            productService.update(product);
         }
         cartItems = new HashMap<>();
         session.setAttribute("myCartItems", cartItems);

@@ -123,7 +123,7 @@
                         <img src="${pageContext.request.contextPath}/image/${p.img}" alt="" width="70%">
                     </div>
                     <div class="col-5">
-                        <form action="${pageContext.request.contextPath}/cart/add/${p.productID}.html">
+                        <form action="${pageContext.request.contextPath}/cart/adds/${p.productID}.html" method="Post">
                             <div class="row">
 
                                 <div class="col-12" style="padding-top: 20px;">

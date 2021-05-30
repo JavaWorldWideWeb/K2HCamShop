@@ -5,9 +5,11 @@
  */
 package sv.iuh.project.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sv.iuh.project.dao.OrderDetailDao;
+import sv.iuh.project.model.OrderDetail;
 
 /**
  *
@@ -22,6 +24,21 @@ public class OrderDetailServiceImpl implements OrderDetailService{
     @Override
     public boolean create(Object object) {
         return orderDetailDao.create(object);
+    }
+
+    @Override
+    public List<OrderDetail> getOrdersOfUser(int id) {
+        return orderDetailDao.getOrdersOfUser(id);
+    }
+
+    @Override
+    public boolean delete(OrderDetail orderDetail) {
+        return orderDetailDao.delete(orderDetail);
+    }
+
+    @Override
+    public OrderDetail findById(int id) {
+        return orderDetailDao.findById(id);
     }
   
 }

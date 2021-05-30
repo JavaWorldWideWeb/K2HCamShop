@@ -70,7 +70,9 @@ CREATE TABLE OrderDetail(
 	ProductID int FOREIGN KEY REFERENCES Product(ProductID) ON DELETE CASCADE ,
 	OrderID int FOREIGN KEY REFERENCES [OrderProduct](OrderID) ON DELETE CASCADE ,
 	Quantity int ,
-	StatusOrderDetail nvarchar(50)
+	StatusOrderDetail nvarchar(50),
+	DateOrder Date,
+	Total money
 )
 GO
 CREATE TABLE Contact(
