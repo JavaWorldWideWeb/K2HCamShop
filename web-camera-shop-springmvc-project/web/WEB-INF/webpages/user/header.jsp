@@ -85,7 +85,7 @@
                         <a class="nav-link" href="<c:url value="/about"/>">Giới thiệu về chúng tôi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Liên hệ</a>
+                        <a class="nav-link" href="<c:url value="/contact/show" />">Liên hệ</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav" style="padding-right: 7vw;">

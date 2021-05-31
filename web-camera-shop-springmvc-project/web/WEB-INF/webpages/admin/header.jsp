@@ -135,7 +135,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="<c:url value="/contact/managementShow" />">
                             <span class="menu-title">Liên hệ từ khách hàng</span>
                             <i class="icon-phone menu-icon"></i>
                         </a>
