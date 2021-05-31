@@ -94,6 +94,47 @@ public class UserController {
     
     
     
+     //Luu san pham
+    @RequestMapping(value = "saveUser", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public String viewUserSave(ModelMap mm, HttpSession session, HttpServletRequest request,
+            @RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        
+        String fullName = request.getParameter("fullname");
+        //String userName = request.getParameter("userName");
+        String passWord = request.getParameter("password");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+       //Date birth =  java.sql.Date.valueOf(request.getParameter("birthday"));
+       
+        String address = request.getParameter("address");
+        
+        
+        UserShop userShop = new UserShop(email, passWord, address, fullName, saveFile(photo), phone);
+        userShop.setRole("user");
+        userShop.setActive(0);
+        if ("".equals(request.getParameter("id"))) {
+            userService.create(userShop);
+            mm.put("success", "Thêm thành công");
+            return "redirect:/user/showform";
+        } else {
+            int id = Integer.parseInt(request.getParameter("id"));
+            String imgUp = request.getParameter("imgUp");
+            if (photo.isEmpty()) {
+                userShop.setImg(imgUp);
+            } else {
+                userShop.setImg(saveFile(photo));
+            }
+            userShop.setUserID(id);
+            userService.update(userShop);
+            
+            String inf = "Sua thanh cong";
+            return "redirect:/user/showformuserupdate?id=" + id + "&success=" + inf + "";
+        }
+    }
+    
+    
+  
     
     
     @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -110,6 +151,16 @@ public class UserController {
     }
     
     //hiển thị form
+    
+    @RequestMapping(value = "/showuserform", method = RequestMethod.GET)
+    public String viewUserUpdateNew(ModelMap mm, HttpSession session) {
+        mm.put("list", userService.getAll());
+        String required = "required";
+        mm.put("r", required);
+        return "user/useredit";
+    }
+    
+    
     
     @RequestMapping(value = "/showform", method = RequestMethod.GET)
     public String viewUserNew(ModelMap mm, HttpSession session) {
@@ -128,6 +179,20 @@ public class UserController {
         mm.put("userShop", userShop);
         mm.put("success", success);
         return "admin/userform";
+    }
+    
+    
+    @RequestMapping(value = "/showformuserupdate")
+    public String showFormUserUdate(ModelMap mm ,HttpSession session) {
+        
+        UserShop userShop=(UserShop) session.getAttribute("userlogin");
+         //int id = Integer.parseInt(request.getParameter("id"));
+        //UserShop userShop = userService.findById(id);
+      
+        
+        mm.put("userShop", userShop);
+      
+         return "user/useredit";
     }
     
      private String saveFile(MultipartFile file) {

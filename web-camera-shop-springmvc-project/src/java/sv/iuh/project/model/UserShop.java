@@ -106,7 +106,17 @@ public class UserShop implements Serializable {
         this.phoneNumber = phoneNumber;
     }
     
-    
+   
+     public UserShop(String email, String password, String address,  String fullName, String img, String phoneNumber) {
+        this.email = email;
+        this.password = password;
+        //this.username = username;
+        this.address = address;
+        //this.birthday = birthday;
+        this.fullName = fullName;
+        this.img = img;
+        this.phoneNumber = phoneNumber;
+    }
 
     public UserShop(Integer userID) {
         this.userID = userID;
