@@ -32,8 +32,8 @@
                     <c:catch var="user">
                         <p>${user.username}</p>
                     </c:catch>
-                    <h4 class="card-title">QUẢN LÝ LOẠI SẢN PHẨM</h4>
-                    <p class="card-description"><code>DANH SÁCH LOẠI SẢN PHẨM </code> 
+                    <h4 class="card-title">QUẢN LÝ SẢN PHẨM</h4>
+                    <p class="card-description"><code>DANH SÁCH SẢN PHẨM </code> 
                     </p>
                     <div class="row">
                         <div class="col-3">
@@ -103,7 +103,7 @@
                                     <td>${p.color}</td>
                                     <td>${p.productBrandID.productBrandName}</td>
                                     <td>${p.productCategoryID.productCategoryName}</td>
-                                    <td><img src="${pageContext.request.contextPath}/image/${p.img}" style="border-radius: 0px;width: 150px;height: 80px"></td>
+                                    <td><img src="${pageContext.request.contextPath}/image/${p.img}" style="border-radius: 0px;width: 150px;height: 90px"></td>
                                     <td><a href="#" class="delete" data-toggle="modal" data-target="#myModal"><i class="fas fa-trash" style="color: red" data-toggle
                                                                                                                  ="tooltip" title="Delete"></i></a>
                                         <input type="hidden" name="id" id="id" value="${p.productID}">
