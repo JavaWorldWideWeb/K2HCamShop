@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import sv.iuh.project.model.Comment;
 import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.CommentService;
@@ -74,5 +75,33 @@ public class CommentController {
         mm.put("list", commentService.getAll());
         return "admin/commentmanage";
     }
-
+    @RequestMapping(value = "remove")
+    public String viewRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
+        Comment p = commentService.findById(id);
+        if (p != null) {
+            commentService.delete(p);
+        }
+        mm.put("list", commentService.getAll());
+        return "admin/commentmanage";
+    }
+    @RequestMapping(value = "/repadmin", method = RequestMethod.POST)
+    public String viewProductRepAdmin(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        int productId = Integer.parseInt(request.getParameter("pId"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        int userId = Integer.parseInt(request.getParameter("uId"));
+        int vote = Integer.parseInt(request.getParameter("vote"));
+        String cmt=request.getParameter("cmtC");
+        String repcmt=request.getParameter("rep");
+        Comment comment= new Comment();
+        comment.setCommentID(id);
+        comment.setRepComment(repcmt);
+        comment.setUserID(registerService.findById(userId));
+        comment.setCommentContent(cmt);
+        comment.setProductID(productService.findById(productId));
+        comment.setVote(vote);
+        commentService.update(comment);
+        mm.put("listComment", commentService.getCommentProduct(productId));
+        return "redirect:/comment/show";
+    }
 }

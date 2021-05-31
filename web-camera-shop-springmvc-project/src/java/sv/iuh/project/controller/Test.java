@@ -16,6 +16,7 @@ import sv.iuh.project.model.Product;
 import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.ProductBrandService;
 import sv.iuh.project.service.ProductService;
+import sv.iuh.project.service.StatisticalService;
 
 /**
  *
@@ -28,7 +29,8 @@ public class Test {
     private ProductBrandService productBrandService;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private StatisticalService statisticalService;
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String viewHome(ModelMap mm, HttpSession session) {
         mm.put("listbrand", productBrandService.getAll());
@@ -47,13 +49,18 @@ public class Test {
     }
 
     @RequestMapping("/admin")
-    public String adminDashboard(HttpSession session) {
+    public String adminDashboard(ModelMap mm, HttpSession session) {
         UserShop userShop = (UserShop) session.getAttribute("userlogin");
         if (userShop != null) {
             if (userShop.getRole().equals("user")) {
                 return "redirect:/";
             }
             if (userShop.getRole().equals("admin")) {
+                mm.put("tuser", statisticalService.totalUserShop());
+                mm.put("tbrand", statisticalService.totalProductBrand());
+                mm.put("torder", statisticalService.totalOrderDetail());
+                mm.put("tproduct", statisticalService.totalProduct());
+                mm.put("listOr",statisticalService.newFiveOrder());
                 return "admin/dashboard";
             } else {
                 return "redirect:/";

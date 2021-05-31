@@ -53,8 +53,13 @@
     <bean id="RegisterDao" class="sv.iuh.project.dao.RegisterImpl" />
     <bean id="CommentService" class="sv.iuh.project.service.CommentServiceImpl" />
     <bean id="CommentDao" class="sv.iuh.project.dao.CommentDaoImpl" />
+    <bean id="UserService" class="sv.iuh.project.service.UserServiceImpl" />
+    <bean id="UserDao" class="sv.iuh.project.dao.UserDaoImpl" />
+    <bean id="StatisticalService" class="sv.iuh.project.service.StatisticalServiceImpl" />
+    <bean id="StatisticalDao" class="sv.iuh.project.dao.StatisticalDaoImpl" />
     <bean id="ContactService" class="sv.iuh.project.service.ContactServiceImpl" />
     <bean id="ContactDao" class="sv.iuh.project.dao.ContactDAOImpl" />
+
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
     <mvc:annotation-driven />
 </beans>
