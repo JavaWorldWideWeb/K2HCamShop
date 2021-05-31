@@ -5,6 +5,7 @@
  */
 package sv.iuh.project.controller;
 
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,7 @@ public class ControllDetailManagement {
     }
     
     @RequestMapping(value = "remove")
-    public String viewOrderProductRemoveAdmin(ModelMap mm, HttpSession session, @RequestParam("id") int id, @RequestParam("orderID") int orderID) {
+    public String viewOrderProductRemoveAdmin(ModelMap mm, HttpSession session, @RequestParam("id") int id, @RequestParam("orderID") int orderID, @RequestParam(required = false) String success) {
          OrderDetail orderDetail = orderDetailService.findById(id);
          double total = orderDetail.getTotal();
         if (orderDetail != null) {
@@ -47,7 +48,13 @@ public class ControllDetailManagement {
         OrderProduct orderProduct = orderManagementService.findById(orderID);
         orderProduct.setTotalMoney(orderProduct.getTotalMoney() - total);
         orderManagementService.update(orderProduct);
-        mm.put("listDetail", orderDetailService.getOrdersOfUser(orderID));
+        if(orderProduct.getTotalMoney()==0)
+            orderManagementService.delete(orderProduct);
+        mm.put("success", "Xóa thành công");
+        List<OrderDetail> list = orderDetailService.getOrdersOfUser(orderID);
+        mm.put("listDetail", list);
+        if(list.size()==0)
+            return "redirect:/orderManagement/show";
         return "admin/orderDetailManagement";
     }
 }

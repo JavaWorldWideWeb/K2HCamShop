@@ -29,9 +29,7 @@
             <div class="card">
                 <div class="card-body">
                     <h1 style="margin:0; display: inline-block; color: #007bff"><i class="icon-list" style="color: #007bff"></i>  Danh sách đơn hàng</h1>
-                    <button type="button" class="btn btn-primary btn-fw" style="float:right;">
-                        <font style="vertical-align: inherit;">
-                        <font style="vertical-align: inherit;">Tạo đơn hàng</font></font></button>
+                    
                     <br/><br/>
 
                     <div class="tab">

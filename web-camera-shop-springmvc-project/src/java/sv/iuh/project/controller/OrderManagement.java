@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sv.iuh.project.model.OrderProduct;
+import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.OrderDetailService;
 import sv.iuh.project.service.OrderManagementService;
 
@@ -34,7 +35,10 @@ public class OrderManagement {
     private OrderDetailService orderDetailService;
     
     @RequestMapping("/show")
-    public String viewHome(ModelMap mm){
+    public String viewHome(ModelMap mm, HttpSession session){
+        String link = adminDashboard(session);
+        if(link != null)
+            return link;
         mm.put("list", orderManagementService.getAll());
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -53,6 +57,22 @@ public class OrderManagement {
         }
         mm.put("list", orderManagementService.getAll());
         return "redirect:/orderManagement/show";
+    }
+    
+    public String adminDashboard(HttpSession session) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                return null;
+            } else {
+                return "redirect:/";
+            }
+        }else{
+            return "redirect:/";
+        }
     }
 }
 

@@ -74,4 +74,5 @@ public class CommentController {
         mm.put("list", commentService.getAll());
         return "admin/commentmanage";
     }
+
 }
