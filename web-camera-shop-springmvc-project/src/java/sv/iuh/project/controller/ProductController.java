@@ -261,12 +261,15 @@ public class ProductController {
         if (userShop == null) {
             Product product = productService.findById(id);
             mm.put("p", product);
+            mm.put("listComment", commentService.getCommentProduct(id));
             return "user/productdetail";
         } else {
             List<Object[]> order = commentService.roleComment(userShop.getUserID(), id);
             Product product = productService.findById(id);
             mm.put("list", order);
             mm.put("p", product);
+            mm.put("userShop", userShop);
+            mm.put("listComment", commentService.getCommentProduct(id));
             return "user/productdetail";
         }
     }

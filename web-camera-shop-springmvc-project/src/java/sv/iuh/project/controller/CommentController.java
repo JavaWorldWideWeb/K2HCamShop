@@ -17,6 +17,7 @@ import sv.iuh.project.model.Comment;
 import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.CommentService;
 import sv.iuh.project.service.ProductService;
+import sv.iuh.project.service.RegisterService;
 
 /**
  *
@@ -29,6 +30,8 @@ public class CommentController {
     private CommentService commentService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private RegisterService registerService;
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
@@ -42,7 +45,33 @@ public class CommentController {
         comment.setCommentContent(cmt);
         comment.setVote(rating);
         commentService.create(comment);
-        mm.put("listComment", commentService.getAll());
+        mm.put("listComment", commentService.getCommentProduct(productId));
         return "redirect:/product/detail?id="+productId+"";
+    }
+    @RequestMapping(value = "/rep", method = RequestMethod.POST)
+    public String viewProductRep(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
+        request.setCharacterEncoding("UTF-8");
+        UserShop userShop=(UserShop) session.getAttribute("userlogin");
+        int productId = Integer.parseInt(request.getParameter("productId"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int vote = Integer.parseInt(request.getParameter("vote"));
+        String cmt=request.getParameter("cmt");
+        String repcmt=request.getParameter("repCmt");
+        Comment comment= new Comment();
+        comment.setCommentID(id);
+        comment.setRepComment(repcmt);
+        comment.setUserID(registerService.findById(userId));
+        comment.setCommentContent(cmt);
+        comment.setProductID(productService.findById(productId));
+        comment.setVote(vote);
+        commentService.update(comment);
+        mm.put("listComment", commentService.getCommentProduct(productId));
+        return "redirect:/product/detail?id="+productId+"";
+    }
+    @RequestMapping("/show")
+    public String viewHome(ModelMap mm) {
+        mm.put("list", commentService.getAll());
+        return "admin/commentmanage";
     }
 }

@@ -41,19 +41,19 @@
                 padding: 0px 10px 10px 10px; 
                 font-size: 16px;
             }
-            
+
             #dropdown .dropdown-menu  > li > a{
                 color: black;
             }
-            
+
             #dropdown .dropdown-menu  > li{
                 margin-top: 10px;
             }
-            
+
             #dropdown .dropdown-menu  > li:hover{
                 background-color: lightgray;
             }
-            
+
         </style>
     </head>
     <body>
@@ -157,8 +157,11 @@
                                 <div class="dropdown" id="dropdown">
                                     <a class="nav-link" href="#" data-toggle="dropdown"><%=userShop.getFullName()%></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="<c:url value="/orderList/show" />" style="text-decoration: none">Đơn hàng của tôi</a></li>
-                                        <li><a href="<c:url value="/login/logout"/>" style="text-decoration: none;">Thoát tài khoản</a></li>
+                                        <li><a class="dropdown-item" href="<c:url value="/orderList/show" />" style="text-decoration: none"><i class="fas fa-shopping-bag"></i> Đơn hàng của tôi</a></li>
+                                            <c:if test="${usershop.role=='admin'}">
+                                            <li><a class="dropdown-item" href="<c:url value="/admin"/>" style="text-decoration: none;"><i class="fas fa-tasks"></i> Đến trang quản lý</a></li>
+                                            </c:if>
+                                        <li><a class="dropdown-item" href="<c:url value="/login/logout"/>" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                                     </ul>
                                 </div>
                             </li>

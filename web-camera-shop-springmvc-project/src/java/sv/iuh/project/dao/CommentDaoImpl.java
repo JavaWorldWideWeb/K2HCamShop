@@ -178,4 +178,27 @@ public class CommentDaoImpl implements CommentDao {
         }
         return null;
     }
+
+    @Override
+    public List<Comment> getCommentProduct(int productId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Comment Where ProductID=:ProductID");
+            query.setInteger("ProductID", productId);
+            List<Comment> list = query.list();
+            transaction.commit();
+            return list;
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return null;
+    }
 }

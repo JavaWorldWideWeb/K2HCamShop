@@ -54,4 +54,9 @@ public class CommentServiceImpl implements CommentService{
     public List<Object[]> roleComment(int userId, int productId) {
         return commentDao.roleComment(userId, productId);
     }
+
+    @Override
+    public List<Comment> getCommentProduct(int productId) {
+        return commentDao.getCommentProduct(productId);
+    }
 }

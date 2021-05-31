@@ -4,6 +4,7 @@
     Author     : Tuan Khang
 --%>
 
+<%@page import="sv.iuh.project.model.UserShop"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -36,73 +37,27 @@
             <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
                 <h5 class="mb-0 font-weight-medium d-none d-lg-flex">Chào mừng bạn đến với trang quản lý của chúng tôi</h5>
                 <ul class="navbar-nav navbar-nav-right ml-auto">
-                    <form class="search-form d-none d-md-block" action="#">
-                        <i class="icon-magnifier"></i>
-                        <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-                    </form>
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="icon-basket-loaded"></i></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><i class="icon-chart"></i></a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator message-dropdown" id="messageDropdown" href="#" data-toggle="dropdown"
-                           aria-expanded="false">
-                            <i class="icon-speech"></i>
-                            <span class="count">7</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
-                             aria-labelledby="messageDropdown">
-                            <a class="dropdown-item py-3">
-                                <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
-                                <span class="badge badge-pill badge-primary float-right">View all</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="<c:url value="/resources/images/faces/faces10.jpg"/>" alt="image" class="img-sm profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow py-2">
-                                    <p class="preview-subject ellipsis font-weight-medium text-dark">Marian Garner </p>
-                                    <p class="font-weight-light small-text"> The meeting is cancelled </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face12.jpg" alt="image" class="img-sm profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow py-2">
-                                    <p class="preview-subject ellipsis font-weight-medium text-dark">David Grey </p>
-                                    <p class="font-weight-light small-text"> The meeting is cancelled </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face1.jpg" alt="image" class="img-sm profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow py-2">
-                                    <p class="preview-subject ellipsis font-weight-medium text-dark">Travis Jenkins </p>
-                                    <p class="font-weight-light small-text"> The meeting is cancelled </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+                    <%
+                        UserShop userShop1 = (UserShop) session.getAttribute("userlogin");
+                    %>
 
+                    <c:set var = "usershop" scope = "session" value = "<%=userShop1%>"/>
+                    <c:catch var="usershop">
                     <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
                         <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                             <img class="img-xs rounded-circle ml-2" src="<c:url value="/resources/images/faces/face8.jpg"/>" alt="Profile image"> <span
-                                class="font-weight-normal"> Tuấn Khang </span></a>
+                                class="font-weight-normal"> ${usershop.fullName} </span></a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                             <div class="dropdown-header text-center">
                                 <img class="img-md rounded-circle" src="<c:url value="/resources/images/faces/face8.jpg"/>" alt="Profile image">
-                                <p class="mb-1 mt-3">Tuấn Khang</p>
-                                <p class="font-weight-light text-muted mb-0">Khangletuan098@gmail.com</p>
+                                <p class="mb-1 mt-3">${usershop.fullName}</p>
+                                <p class="font-weight-light text-muted mb-0">${usershop.email}</p>
                             </div>
-                            <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> Thông tin của tôi <span
-                                    class="badge badge-pill badge-danger">1</span></a>
-                            <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Tin nhắn</a>
                             <a class="dropdown-item" href="<c:url value="/"/>"><i class="dropdown-item-icon icon-energy text-primary"></i> Quay về trang chính</a>
-                            <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Hoạt động</a>
-                            <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Đăng xuất</a>
+                            <a class="dropdown-item" href="<c:url value="/login/logout"/>"><i class="dropdown-item-icon icon-power text-primary"></i>Đăng xuất</a>
                         </div>
                     </li>
+                    </c:catch>
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                         data-toggle="offcanvas">
@@ -174,7 +129,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="<c:url value="/comment/show"/>">
                             <span class="menu-title">Quản lý bình luận</span>
                             <i class="icon-bubbles menu-icon"></i>
                         </a>
@@ -185,7 +140,7 @@
                             <i class="icon-phone menu-icon"></i>
                         </a>
                     </li>
-                    
+
                 </ul>
             </nav>
     </body>

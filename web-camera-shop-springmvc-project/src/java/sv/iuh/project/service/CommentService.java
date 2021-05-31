@@ -29,4 +29,6 @@ public interface CommentService {
     public List<Comment> getCommentUser(int userId,int productId);
     
     public List<Object[]> roleComment(int userId,int productId);
+    
+    public List<Comment> getCommentProduct(int productId);
 }

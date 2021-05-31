@@ -243,30 +243,65 @@
                         <div class="col-xl-12">
                             <h6>Tất cả bình luận</h6>
                         </div>
-                        <div class="col-xl-1" c>
-                            <p>K</p>
-                        </div>
-                        <div class="col-xl-11">
-                            <h6 style="color: #2908a4; font-weight: bold;">Khang</h6>
-                            <p>Sản phẩm tuyệt vời sẽ tiếp tục ủng
-                                hộaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaa aaaaa aaaaaaa aaaa aaaaaaaaaaa
-                                aaa aa aaaa
-                            </p>
-                            <span style="cursor: pointer; color: gray;" onclick="myFunction()"><i
-                                    class="fas fa-comment"></i>&nbsp;&nbsp;Trả lời</span>
-                        </div>
-                        <div class="col-xl-1" c>
-                        </div>
-                        <div class="col-11" id="myDIV" style="display: none;">
-                            <form action="">
-                                <div class=" form-group">
-                                    <textarea class="form-control" rows="2" cols="200" id="comment"
-                                              placeholder="Nhập bình luận trả lời của bạn"></textarea>
+                        <c:forEach items="${listComment}" var="cmt">
+                            <div class="col-xl-1" style="padding-top: 40px">
+                                <p>K</p>
+                            </div>
+                            <div class="col-xl-11" style="padding-top: 40px">
+                                <h6 style="color: #2908a4; font-weight: bold;">${cmt.userID.fullName} <small style="color: black">Đã đánh giá ${cmt.vote}<i style="color: orange" class="fas fa-star"></i></small></h6>
+                                <p>Đã bình luận: ${cmt.commentContent}
+                                </p>
+                                <%     
+                                    UserShop userShop1 = (UserShop) session.getAttribute("userlogin");
+                                %>
+
+                                <c:set var = "usershop" scope = "session" value = "<%=userShop1%>"/>
+                             
+                                <c:if test="${cmt.repComment==null}">
+                                    <c:if test="${userShop.role=='admin'}">
+                                        <span style="cursor: pointer; color: gray;" onclick="myFunction${cmt.commentID}()"><i
+                                                class="fas fa-comment"></i>&nbsp;&nbsp;Trả lời</span>
+                                        
+                                    </c:if>
+                                </c:if>
+                                    <c:if test="${cmt.repComment!=null}">
+
+                                    <div class="row">
+                                        <div class="col-1">
+                                        </div>
+                                        <div class="col-11" style="border-left: 1px #D2D2D2 solid;">
+                                            <h6 style="color: #2908a4; font-weight: bold;">Quản trị viên</h6>
+                                            <p><i class="fas fa-reply" style="transform: rotate(180deg);"></i>&nbsp;Đã trả lời: ${cmt.repComment}</p>
+                                        </div>
+                                    </div>
+                                </c:if>
+                            </div>
+                            <div class="row" style="padding-top: 10px">
+                                <div class="col-1">
                                 </div>
-                                <button type="button" class="btn btn-warning">Gửi câu trả lờis</button>
-                            </form>
-                        </div>
+                                <div class="col-11" id="myDIV${cmt.commentID}" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-1">
+
+                                        </div>
+                                        <div class="col-11">
+                                            <form action="${pageContext.request.contextPath}/comment/rep" method="post">
+                                                <input type="hidden" value="${cmt.commentID}" name="id"/>
+                                                <input type="hidden" value="${cmt.productID.productID}" name="productId"/>
+                                                <input type="hidden" value="${cmt.userID.userID}" name="userId"/>
+                                                <input type="hidden" value="${cmt.vote}" name="vote"/>
+                                                <input type="hidden" value="${cmt.commentContent}" name="cmt"/>
+                                                <div class=" form-group">
+                                                    <textarea required="" name="repCmt" class="form-control" rows="2" cols="200" id="comment"
+                                                              placeholder="Nhập bình luận trả lời của bạn"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-warning">Gửi câu trả lờis</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
                 <c:set var = "list" scope = "session" value = "${list}"/>
@@ -394,60 +429,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-                    $(document).ready(function () {
-                        $('.count').prop('disabled', true);
-                        $(document).on('click', '.plus', function () {
-                            $('.count').val(parseInt($('.count').val()) + 1);
-                        });
-                        $(document).on('click', '.minus', function () {
-                            $('.count').val(parseInt($('.count').val()) - 1);
-                            if ($('.count').val() == 0) {
-                                $('.count').val(1);
-                            }
-                        });
-                    });
-                    jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
-                    jQuery('.quantity').each(function () {
-                        var spinner = jQuery(this),
-                                input = spinner.find('input[type="number"]'),
-                                btnUp = spinner.find('.quantity-up'),
-                                btnDown = spinner.find('.quantity-down'),
-                                min = input.attr('min'),
-                                max = input.attr('max');
+                                            $(document).ready(function () {
+                                                $('.count').prop('disabled', true);
+                                                $(document).on('click', '.plus', function () {
+                                                    $('.count').val(parseInt($('.count').val()) + 1);
+                                                });
+                                                $(document).on('click', '.minus', function () {
+                                                    $('.count').val(parseInt($('.count').val()) - 1);
+                                                    if ($('.count').val() == 0) {
+                                                        $('.count').val(1);
+                                                    }
+                                                });
+                                            });
+                                            jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter('.quantity input');
+                                            jQuery('.quantity').each(function () {
+                                                var spinner = jQuery(this),
+                                                        input = spinner.find('input[type="number"]'),
+                                                        btnUp = spinner.find('.quantity-up'),
+                                                        btnDown = spinner.find('.quantity-down'),
+                                                        min = input.attr('min'),
+                                                        max = input.attr('max');
 
-                        btnUp.click(function () {
-                            var oldValue = parseFloat(input.val());
-                            if (oldValue >= max) {
-                                var newVal = oldValue;
-                            } else {
-                                var newVal = oldValue + 1;
-                            }
-                            spinner.find("input").val(newVal);
-                            spinner.find("input").trigger("change");
-                        });
+                                                btnUp.click(function () {
+                                                    var oldValue = parseFloat(input.val());
+                                                    if (oldValue >= max) {
+                                                        var newVal = oldValue;
+                                                    } else {
+                                                        var newVal = oldValue + 1;
+                                                    }
+                                                    spinner.find("input").val(newVal);
+                                                    spinner.find("input").trigger("change");
+                                                });
 
-                        btnDown.click(function () {
-                            var oldValue = parseFloat(input.val());
-                            if (oldValue <= min) {
-                                var newVal = oldValue;
-                            } else {
-                                var newVal = oldValue - 1;
-                            }
-                            spinner.find("input").val(newVal);
-                            spinner.find("input").trigger("change");
-                        });
+                                                btnDown.click(function () {
+                                                    var oldValue = parseFloat(input.val());
+                                                    if (oldValue <= min) {
+                                                        var newVal = oldValue;
+                                                    } else {
+                                                        var newVal = oldValue - 1;
+                                                    }
+                                                    spinner.find("input").val(newVal);
+                                                    spinner.find("input").trigger("change");
+                                                });
 
-                    });
+                                            });
     </script>
-     <script>
-        function myFunction() {
-            var x = document.getElementById("myDIV");
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
+    <c:forEach items="${listComment}" var="cmt">
+        <script>
+            function myFunction${cmt.commentID}() {
+                var x = document.getElementById("myDIV${cmt.commentID}");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
             }
-        }
-    </script>
+        </script>
+    </c:forEach>
+
 </body>
 </html>
