@@ -47,7 +47,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" required="true" placeholder="Username" id="usr" name="pass">
+                    <input type="password" class="form-control" required="true" placeholder="Password" id="usr" name="pass">
                 </div>
                 <button type="submit" class="btn btn-warning" style="width: 100%;font-weight: bold">Đăng nhập</button>
             </form>
