@@ -196,7 +196,7 @@ public class ControllerCart {
             orderDetail.setOrderID(orderProduct);
             orderDetail.setProductID(entry.getValue().getProduct());
             orderDetail.setQuantity(entry.getValue().getQuantity());
-            orderDetail.setStatusOrderDetail("paid");
+            orderDetail.setStatusOrderDetail("Chua thanh toan");
             orderDetail.setDateOrder(new Date());
             orderDetail.tinhTien();
             orderDetailService.create(orderDetail);

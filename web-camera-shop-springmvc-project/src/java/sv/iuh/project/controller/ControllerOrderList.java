@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import sv.iuh.project.model.OrderDetail;
 import sv.iuh.project.model.OrderProduct;
 import sv.iuh.project.model.UserShop;
@@ -45,5 +46,19 @@ public class ControllerOrderList {
         }   
         mm.put("list",  orderDetailList);
         return "user/orderList";
+    }
+    
+    @RequestMapping(value = "remove")
+    public String viewOrderProductRemoveUser(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
+         OrderDetail orderDetail = orderDetailService.findById(id);
+         double total = orderDetail.getTotal();
+         int orderID = orderDetail.getOrderID().getOrderID();
+        if (orderDetail != null) {
+            orderDetailService.delete(orderDetail);
+        }
+        OrderProduct orderProduct = orderManagementService.findById(orderID);
+        orderProduct.setTotalMoney(orderProduct.getTotalMoney() - total);
+        orderManagementService.update(orderProduct);
+        return viewHome(mm, session);
     }
 }

@@ -37,8 +37,8 @@ public class ControllDetailManagement {
         return "admin/orderDetailManagement";
     }
     
-     @RequestMapping(value = "remove")
-    public String viewOrderProductRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id, @RequestParam("orderID") int orderID) {
+    @RequestMapping(value = "remove")
+    public String viewOrderProductRemoveAdmin(ModelMap mm, HttpSession session, @RequestParam("id") int id, @RequestParam("orderID") int orderID) {
          OrderDetail orderDetail = orderDetailService.findById(id);
          double total = orderDetail.getTotal();
         if (orderDetail != null) {
