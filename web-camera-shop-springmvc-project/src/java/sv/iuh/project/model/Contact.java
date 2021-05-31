@@ -52,6 +52,14 @@ public class Contact implements Serializable {
         this.contactID = contactID;
     }
 
+    public Contact(String userContactName, String contactEmail, String contactMessage) {
+        this.userContactName = userContactName;
+        this.contactEmail = contactEmail;
+        this.contactMessage = contactMessage;
+    }
+    
+    
+
     public Integer getContactID() {
         return contactID;
     }
