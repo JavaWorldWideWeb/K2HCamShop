@@ -9,6 +9,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import sv.iuh.project.model.UserShop;
+import sv.iuh.project.service.LoginService;
 import sv.iuh.project.service.UserService;
 
 /**
@@ -34,6 +36,8 @@ public class UserController {
     
       @Autowired
       private UserService userService;
+       @Autowired
+      private LoginService loginService;
       @RequestMapping("/show")
     public String viewUser(ModelMap mm, HttpSession session) {
         //mm.put("list", userService.getListNav(0, 6));
@@ -96,41 +100,40 @@ public class UserController {
     
      //Luu san pham
     @RequestMapping(value = "saveUser", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-    public String viewUserSave(ModelMap mm, HttpSession session, HttpServletRequest request,
-            @RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
+    public String viewUserSave(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
-        
-        String fullName = request.getParameter("fullname");
-        //String userName = request.getParameter("userName");
-        String passWord = request.getParameter("password");
+        int id=Integer.parseInt(request.getParameter("id"));
+        String fullName = request.getParameter("tendaydu");
+        String name = request.getParameter("tendangnhap");
+        String pass = request.getParameter("pass");
         String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-       //Date birth =  java.sql.Date.valueOf(request.getParameter("birthday"));
-       
-        String address = request.getParameter("address");
-        
-        
-        UserShop userShop = new UserShop(email, passWord, address, fullName, saveFile(photo), phone);
+        String phone = request.getParameter("sodt");
+        java.sql.Date birth =  java.sql.Date.valueOf(request.getParameter("ngaysinh"));
+        String diachi = request.getParameter("diachi");
+        String img = request.getParameter("img");
+        String address = diachi;
+        UserShop userShop = new UserShop();
+        userShop.setUserID(id);
+        userShop.setFullName(fullName);
+        userShop.setUsername(name);
+        userShop.setPassword(pass);
+        userShop.setEmail(email);
+        userShop.setPhoneNumber(phone);
+        userShop.setBirthday(birth);
+        userShop.setAddress(address);
         userShop.setRole("user");
         userShop.setActive(0);
-        if ("".equals(request.getParameter("id"))) {
-            userService.create(userShop);
-            mm.put("success", "Thêm thành công");
-            return "redirect:/user/showform";
-        } else {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String imgUp = request.getParameter("imgUp");
-            if (photo.isEmpty()) {
-                userShop.setImg(imgUp);
-            } else {
-                userShop.setImg(saveFile(photo));
-            }
-            userShop.setUserID(id);
-            userService.update(userShop);
-            
-            String inf = "Sua thanh cong";
-            return "redirect:/user/showformuserupdate?id=" + id + "&success=" + inf + "";
+        userShop.setImg(img);
+        userService.update(userShop);
+        session.removeAttribute("userlogin");
+        UserShop user = loginService.login(name, pass);
+        if (user == null) {
+            mm.put("mess", "Tài khoản hoặc mật khẩu không chính xác");
+            return "user/login";
         }
+        session.setAttribute("userlogin", user);
+        mm.addAttribute("user",session.getAttribute("userlogin"));
+        return "redirect:/user/showformuserupdate";
     }
     
     
@@ -175,8 +178,11 @@ public class UserController {
     public String showFormUdate(ModelMap mm, @RequestParam("id") int id, @RequestParam(required = false) String success) {
         UserShop userShop = userService.findById(id);
       
-        
+        SimpleDateFormat sm= new SimpleDateFormat("yyy-MM-dd");
+        String date =sm.format(userShop.getBirthday());
+        System.out.println("-------------------------"+date);
         mm.put("userShop", userShop);
+        mm.put("date",date);
         mm.put("success", success);
         return "admin/userform";
     }
