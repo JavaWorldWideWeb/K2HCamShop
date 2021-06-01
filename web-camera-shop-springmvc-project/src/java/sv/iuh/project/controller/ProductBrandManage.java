@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import sv.iuh.project.model.ProductBrand;
+import sv.iuh.project.model.UserShop;
 import sv.iuh.project.service.ProductBrandService;
 
 /**
@@ -34,13 +35,19 @@ public class ProductBrandManage {
     private ProductBrandService productBrandService;
 
     @RequestMapping("/show")
-    public String viewHome(ModelMap mm) {
+    public String viewHome(ModelMap mm, HttpSession session) {
+        String link = adminDashboard(session);
+        if(link != null)
+            return link;
         mm.put("list", productBrandService.getAll());
         return "admin/productbrandmanage";
     }
 
     @RequestMapping(value = "/showform", method = RequestMethod.GET)
     public String viewProductNew(ModelMap mm, HttpSession session,@RequestParam(required = false) String success) {
+        String link = adminDashboard(session);
+        if(link != null)
+            return link;
         mm.put("list", productBrandService.getAllCountry());
         mm.put("success", success);
         return "admin/productbrandform";
@@ -48,6 +55,9 @@ public class ProductBrandManage {
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,@RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
+        String link = adminDashboard(session);
+        if(link != null)
+            return link;
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         String nation = request.getParameter("nation");
@@ -70,7 +80,10 @@ public class ProductBrandManage {
         }
     }
     @RequestMapping(value = "/showformupdate")
-    public String showFormUdate(ModelMap mm,@RequestParam("id") int id,@RequestParam(required = false) String success) {
+    public String showFormUdate(ModelMap mm, HttpSession session,@RequestParam("id") int id,@RequestParam(required = false) String success) {
+        String link = adminDashboard(session);
+        if(link != null)
+            return link;
         ProductBrand productBrand=productBrandService.findById(id);
         mm.put("productBrand", productBrand);
         mm.put("list", productBrandService.getAllCountry());
@@ -79,6 +92,9 @@ public class ProductBrandManage {
     }
     @RequestMapping(value = "remove")
     public String viewProductRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
+        String link = adminDashboard(session);
+        if(link != null)
+            return link;
         ProductBrand p = productBrandService.findById(id);
         if (p != null) {
             productBrandService.delete(p);
@@ -110,5 +126,21 @@ public class ProductBrandManage {
 
         }
         return null;
+    }
+    
+    public String adminDashboard(HttpSession session) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                return null;
+            } else {
+                return "redirect:/";
+            }
+        }else{
+            return "redirect:/";
+        }
     }
 }
