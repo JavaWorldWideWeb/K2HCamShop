@@ -104,6 +104,32 @@ public class ControllerCart {
         session.setAttribute("myCartNum", cartItems.size());
         return "redirect:/product/detail?id=" + productId;
     }
+    
+    @RequestMapping(value = "/addList/{productID}.html", method = RequestMethod.GET)
+    public String viewAddFromProductList(ModelMap mm, HttpSession session, @PathVariable("productID") int productId) {
+        HashMap<Integer, Cart> cartItems = (HashMap<Integer, Cart>) session.getAttribute("myCartItems");
+        if (cartItems == null) {
+            cartItems = new HashMap<>();
+        }
+        Product product = productService.findById(productId);
+        if (product != null) {
+            if (cartItems.containsKey(productId)) {
+                Cart item = cartItems.get(productId);
+                item.setProduct(product);
+                item.setQuantity(item.getQuantity() + 1);
+                cartItems.put(productId, item);
+            } else {
+                Cart item = new Cart();
+                item.setProduct(product);
+                item.setQuantity(1);
+                cartItems.put(productId, item);
+            }
+        }
+        session.setAttribute("myCartItems", cartItems);
+        session.setAttribute("myCartTotal", totalPrice(cartItems));
+        session.setAttribute("myCartNum", cartItems.size());
+        return "redirect:/product/productpage";
+    }
 
 
     @RequestMapping(value = "/increase/{productID}.html", method = RequestMethod.GET)

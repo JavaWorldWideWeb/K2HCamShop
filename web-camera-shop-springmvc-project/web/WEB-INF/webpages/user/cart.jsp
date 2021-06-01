@@ -155,22 +155,39 @@
 
         </div>    
 
+        <br/><br/><br />
+        <footer style="background-color: black; color: white; height: 200px; padding-left: 50px;">
+            <div class="row">
+                <div class="col-9">
+                    <h4 style="padding-top: 20px;padding-bottom: 20px;">CỬA HÀNG MÁY ẢNH K2NCamShop</h4>
+                    <p class="pFooter">Địa chỉ: số 8 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP Hồ Chí Minh</p>
+                    <p class="pFooter">Điện thoại: 0976553787 - Email: K2NCamShop@gmail.vn </p>
+                    <p class="pFooter">&copy Copyright 2021</p>
+                </div>
+                <div class="col-3" style="padding-top: 20px;">
+                    <a href=""><img src="../Image/Logo/fb.png" style="width: 10%;"></a>
+                    <a href=""><img src="../Image/Logo/yt.png" style="width: 10%;"></a>
+                    <a href=""><img src="../Image/Logo/ins.png" style="width: 10%;"></a>
+                </div>
+            </div>
+        </footer>
+    </body>            
 
-        <br/><br/>
+    <br/><br/>
 
-        <script>
-            var count = document.getElementById("cart_count").innerHTML;
-            if (count == '') {
-                document.getElementById("cart_count").innerHTML = '0';
-                count = 0;
-            }
-            if (count == '0') {
-                document.getElementById("empty").style.display = 'block';
-                document.getElementById("cart").style.display = 'none';
-            } else {
-                document.getElementById("empty").style.display = 'none';
-                document.getElementById("cartlist").style.display = 'block';
-            }
-        </script>
-    </body>
+    <script>
+        var count = document.getElementById("cart_count").innerHTML;
+        if (count == '') {
+            document.getElementById("cart_count").innerHTML = '0';
+            count = 0;
+        }
+        if (count == '0') {
+            document.getElementById("empty").style.display = 'block';
+            document.getElementById("cart").style.display = 'none';
+        } else {
+            document.getElementById("empty").style.display = 'none';
+            document.getElementById("cartlist").style.display = 'block';
+        }
+    </script>
+</body>
 </html>

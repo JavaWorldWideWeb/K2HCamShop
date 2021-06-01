@@ -161,6 +161,7 @@
                                             <c:if test="${usershop.role=='admin'}">
                                             <li><a class="dropdown-item" href="<c:url value="/admin"/>" style="text-decoration: none;"><i class="fas fa-tasks"></i> Đến trang quản lý</a></li>
                                             </c:if>
+                                         <li><a class="dropdown-item" href="<c:url value="/user/showformuserupdate"/>" style="text-decoration: none;"><i class="fas fa-user-edit"></i> Xem thông tin cá nhân</a></li>   
                                         <li><a class="dropdown-item" href="<c:url value="/login/logout"/>" style="text-decoration: none;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                                     </ul>
                                 </div>

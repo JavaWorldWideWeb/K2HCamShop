@@ -36,12 +36,8 @@
                     <p class="card-description"><code>DANH SÁCH KHÁCH HÀNG </code> 
                     </p>
                     <div class="row">
-                        <div class="col-3">
-                            <form action="<c:url value="/user/showform"/>">
-                                <button type="submit" class="btn btn-success btn-fw">Thêm Khách Hàng</button>
-                            </form>
-                        </div>
-                        <div class="col-9" align="right">
+                        
+                        <div class="col-12" align="right">
                             <form method="get" action="<c:url value="/user/search"/>">
                                
                                     <div class="col-sm-5">
@@ -93,7 +89,7 @@
                                     <td><a href="#" class="delete" data-toggle="modal" data-target="#myModal"><i class="fas fa-trash" style="color: red" data-toggle
                                                                                                                  ="tooltip" title="Delete"></i></a>
                                        <input type="hidden" name="id" id="id" value="${u.userID}">
-                                        <a href="${pageContext.request.contextPath}/user/showformupdate?id=${u.userID}" title="Detail"><i class="fas fa-pen-square"></i></a>
+                                        
                                     </td>
                                 </tr>
                             </c:forEach>
