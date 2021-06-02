@@ -57,7 +57,7 @@
                             <a class="dropdown-item" href="<c:url value="/login/logout"/>"><i class="dropdown-item-icon icon-power text-primary"></i>Đăng xuất</a>
                         </div>
                     </li>
-                    </c:catch>
+                    
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                         data-toggle="offcanvas">
@@ -77,8 +77,8 @@
                                 <div class="dot-indicator bg-success"></div>
                             </div>
                             <div class="text-wrapper">
-                                <p class="profile-name">Tuấn Khang</p>
-                                <p class="designation">Quản trị viên</p>
+                                <p class="profile-name">${usershop.fullName}</p>
+                                <p class="designation">${usershop.role}</p>
                             </div>
                             <div class="icon-container">
                                 <i class="icon-bubbles"></i>
@@ -86,6 +86,7 @@
                             </div>
                         </a>
                     </li>
+                    </c:catch>
                     <li class="nav-item nav-category">
                         <span class="nav-link">Dashboard</span>
                     </li>

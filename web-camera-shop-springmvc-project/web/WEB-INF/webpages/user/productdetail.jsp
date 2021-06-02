@@ -245,7 +245,7 @@
                         </div>
                         <c:forEach items="${listComment}" var="cmt">
                             <div class="col-xl-1" style="padding-top: 40px">
-                                <p>K</p>
+                                <img style="border-radius: 50%;width: 30px" src="${pageContext.request.contextPath}/imageuser/${userShop.img}" class="card-img-top"  height="30">
                             </div>
                             <div class="col-xl-11" style="padding-top: 40px">
                                 <h6 style="color: #2908a4; font-weight: bold;">${cmt.userID.fullName} <small style="color: black">Đã đánh giá ${cmt.vote}<i style="color: orange" class="fas fa-star"></i></small></h6>
@@ -318,7 +318,7 @@
                                 <div class="col-12" style="padding-top: 20px;" style="width: 100%  !important;">
                                     <div class=" form-group" style="width: 100%  !important;">
                                         <label for="comment">Comment:</label>
-                                        <textarea class="form-control" rows="5" cols="200" id="comment" name="cmt"
+                                        <textarea required="" class="form-control" rows="5" cols="200" id="comment" name="cmt"
                                                   style="max-width: 100%"></textarea>
                                     </div>
                                 </div>
@@ -326,11 +326,11 @@
                         </div>
                         <div class="container-custom">
                             <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
-                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
-                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
-                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
-                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+                                <input type="radio" required="" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                                <input type="radio" required="" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                                <input type="radio" required="" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                                <input type="radio" required="" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                                <input type="radio" required="" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
                             </div>
 
                         </div>

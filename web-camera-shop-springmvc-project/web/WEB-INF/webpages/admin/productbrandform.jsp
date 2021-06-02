@@ -45,12 +45,21 @@
                 <div class="card-body">
 
                     <h4 class="card-title">Nhập thông tin thương hiệu</h4>
+                    <c:catch var="err">
+                        <c:if test="${err!=null}">
+                            <div class="alert alert-danger">
+                                <strong>Cảnh báo!</strong> ${err}
+                            </div>
+                        </c:if>
+                    </c:catch>
+
                     <form method="Post" class="forms-sample" action="<c:url value="/productbrand/save"/>" enctype="multipart/form-data">
                         <c:catch var="productBrand">
                             <input type="text" class="form-control" hidden="true" value="${productBrand.productBrandID}" id="exampleInputUsername1" name="id" placeholder="Nhập tên thương hiệu">
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Tên Thương hiệu</label>
-                                <input type="text" required="" class="form-control" id="exampleInputUsername1" value="${productBrand.productBrandName}" name="name" placeholder="Nhập tên thương hiệu">
+                                <input type="text"  pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+$"
+        title="Tên thương hiệu không chứ kí tự đặc biệt" required="" class="form-control" id="exampleInputUsername1" value="${productBrand.productBrandName}" name="name" placeholder="Nhập tên thương hiệu">
                             </div>
 
                             <div class="form-group">
@@ -66,8 +75,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputConfirmPassword1">Logo</label>
-                                <input type="file" class="form-control" value="${product.img}" name="image">
+                                <input type="file" required="" class="form-control" value="${product.img}" accept=".png, .jpg, .jpeg" name="image">
                             </div>
+
+                            <input type="hidden" value="${productBrand.img}" name="imgUp"/>
+
                             <button type="submit" class="btn btn-primary mr-2">Lưu</button>
                             <button class="btn btn-light" type="reset">Hủy</button>
                         </c:catch>

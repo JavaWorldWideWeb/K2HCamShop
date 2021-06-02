@@ -22,7 +22,7 @@
         <link rel="icon" href="<c:url value="/resources/Image/LoadLogo.png"/>">
     </head>
     <body>
-        <div class="container-fluid" style="width: 85%">
+        <div class="container-fluid" style="width: 85%; padding-top: 30px">
             <c:catch var="userShop" >
                 <div class="card">
                     <div class="card-body">
@@ -30,11 +30,13 @@
                         <form class="form-sample" autocomplete="off" action="<c:url value="/user/saveUser"/>" enctype="multipart/form-data" method="post">
                             <p class="card-description"> Thông tin khách hàng </p>
                             <div class="row">
+                                <div class="col-5"></div>
+                                <div class="col-2"><img style="border-radius: 50%" src="${pageContext.request.contextPath}/imageuser/${userShop.img}" class="card-img-top" width="150vw" height="180vh"></div>
+                                <div class="col-5"></div>
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="pwd"><i class="fas fa-pen"></i></span>Tên đầy đủ:</label>
                                         <input class="form-control"type="text" id="tendaydu" required value="${userShop.fullName}"  placeholder="Nhập họ tên" name="tendaydu" autocomplete="off">
-
                                     </div>
                                 </div>
 

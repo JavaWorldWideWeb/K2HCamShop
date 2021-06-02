@@ -53,7 +53,8 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Tên sản phẩm</label>
                                             <div class="col-sm-9">
-                                                <input type="text" required="" class="form-control" value="${product.productName}" name="name" placeholder="Nhập tên sản phẩm" />
+                                                <input type="text" required=""
+        class="form-control" value="${product.productName}" name="name" placeholder="Nhập tên sản phẩm" />
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +62,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Giá sản phẩm</label>
                                             <div class="col-sm-9">
-                                                <input type="number" min="0" required="" class="form-control" value="${product.price}" name="price" placeholder="Nhập giá sản phẩm"/>
+                                                <input type="number" min="0" max="1000000000" required="" class="form-control" value="${product.price}" name="price" placeholder="Nhập giá sản phẩm"/>
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +72,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Số lượng sản phẩm</label>
                                             <div class="col-sm-9">
-                                                <input type="number" min="0" required="" class="form-control" value="${product.quantity}" name="quantity" placeholder="Nhập số lượng" />
+                                                <input type="number" min="0" max="1000000000" required="" class="form-control" value="${product.quantity}" name="quantity" placeholder="Nhập số lượng" />
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +80,8 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Màu sản phẩm</label>
                                             <div class="col-sm-9">
-                                                <input type="text" required class="form-control"  value="${product.color}" name="color" placeholder="Nhập màu sản phẩm"/>
+                                                <input type="text" pattern="^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+$"
+        title="Màu sản phẩm không chứ kí tự đặc biệt" required class="form-control"  value="${product.color}" name="color" placeholder="Nhập màu sản phẩm"/>
                                             </div>
                                         </div>
                                     </div>
@@ -107,7 +109,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Độ phân giải (MP)</label>
                                             <div class="col-sm-9">
-                                                <input type="number" step="0.01" min="0" required="" class="form-control" value="${product.resolution}" name="resolution" placeholder="Nhập độ phân giải (Megapixel)" />
+                                                <input type="number" step="0.01" max="1000000000" min="0" required="" class="form-control" value="${product.resolution}" name="resolution" placeholder="Nhập độ phân giải (Megapixel)" />
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +189,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Thời gian bảo hành (Tháng)</label>
                                             <div class="col-sm-9">
-                                                <input type="number" required min="0" class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
+                                                <input type="number" required max="1000000000" min="0" class="form-control"  value="${product.warranTyperiod}" name="warranTyperiod" placeholder="Nhập thời gian bào hành (tháng)"/>
                                             </div>
                                         </div>
                                     </div>
@@ -225,14 +227,14 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Mô tả</label>
                                             <div class="col-sm-9">
-                                                <textarea class="form-control"  id="exampleTextarea1" rows="10" name="des"></textarea>
+                                                <textarea class="form-control" style="font-size: 14px" id="exampleTextarea1" rows="10" name="des">${product.description}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
                                     <div class="col-md-4">
                                         <c:if test="${product!=null}">
-                                            <img src="${pageContext.request.contextPath}/image/${product.img}" style="border-radius: 0px;width: 100%">
+                                            <img src="${pageContext.request.contextPath}/image/${product.img}" accept=".png, .jpg, .jpeg" style="border-radius: 0px;width: 100%">
                                             <input type="hidden" value="${product.img}" name="imgUp"/>
                                         </c:if>
                                     </div>

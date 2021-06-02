@@ -50,19 +50,44 @@ public class ProductController {
 
     @RequestMapping("/show")
     public String viewAdmin(ModelMap mm, HttpSession session) {
-        mm.put("list", productService.getListNav(0, 6));
-        mm.put("totalItem", productService.totalItem() / 6);
-        mm.put("listbrand", productBrandService.getAll());
-        return "admin/productmanage";
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                mm.put("list", productService.getListNav(0, 6));
+                mm.put("totalItem", productService.totalItem() / 6);
+                mm.put("listbrand", productBrandService.getAll());
+                return "admin/productmanage";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
 
     }
 
     @RequestMapping(value = "/show/{page}", method = RequestMethod.GET)
     public String viewProductAdminByPage(ModelMap mm, HttpSession session, @PathVariable("page") int page) {
-        mm.put("list", productService.getListNav((page - 1) * 6, 6));
-        mm.put("totalItem", productService.totalItem() / 6);
-        mm.put("listbrand", productBrandService.getAll());
-        return "admin/productmanage";
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                mm.put("list", productService.getListNav((page - 1) * 6, 6));
+                mm.put("totalItem", productService.totalItem() / 6);
+                mm.put("listbrand", productBrandService.getAll());
+                return "admin/productmanage";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+
     }
 
     @RequestMapping("/showproductuser")
@@ -75,15 +100,28 @@ public class ProductController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String viewSearch(ModelMap mm, HttpSession session, @RequestParam("brandfilter") int id, @RequestParam(required = false) String name) {
-        if (name == "" && id == 0) {
-            return "redirect:/product/show";
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                if (name == "" && id == 0) {
+                    return "redirect:/product/show";
+                } else {
+                    mm.put("list", productService.getListByBrand(id, name));
+                    mm.put("listbrand", productBrandService.getAll());
+                    mm.put("brand", productBrandService.findById(id));
+                    mm.put("s", name);
+                    return "admin/productmanage";
+                }
+            } else {
+                return "redirect:/";
+            }
         } else {
-            mm.put("list", productService.getListByBrand(id, name));
-            mm.put("listbrand", productBrandService.getAll());
-            mm.put("brand", productBrandService.findById(id));
-            mm.put("s", name);
-            return "admin/productmanage";
+            return "redirect:/";
         }
+
     }
 
     @RequestMapping(value = "/searchpro", method = RequestMethod.GET)
@@ -196,26 +234,51 @@ public class ProductController {
 
     @RequestMapping(value = "/showform", method = RequestMethod.GET)
     public String viewProductNew(ModelMap mm, HttpSession session) {
-        mm.put("listcate", productCategoryService.getAll());
-        mm.put("listbrand", productBrandService.getAll());
-        String required = "required";
-        mm.put("r", required);
-        return "admin/productform";
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                mm.put("listcate", productCategoryService.getAll());
+                mm.put("listbrand", productBrandService.getAll());
+                String required = "required";
+                mm.put("r", required);
+                return "admin/productform";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+
     }
 
     @RequestMapping(value = "/showformupdate")
-    public String showFormUdate(ModelMap mm, @RequestParam("id") int id, @RequestParam(required = false) String success) {
+    public String showFormUdate(ModelMap mm, HttpSession session, @RequestParam("id") int id, @RequestParam(required = false) String success) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                Product product = productService.findById(id);
+                ProductCategory productCategory = productCategoryService.findById(product.getProductCategoryID().getProductCategoryID());
+                ProductBrand productBrand = productBrandService.findById(product.getProductBrandID().getProductBrandID());
+                mm.put("listcate", productCategoryService.getAll());
+                mm.put("listbrand", productBrandService.getAll());
+                mm.put("category", productCategory);
+                mm.put("product", product);
+                mm.put("brand", productBrand);
+                mm.put("success", success);
+                return "admin/productform";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
 
-        Product product = productService.findById(id);
-        ProductCategory productCategory = productCategoryService.findById(product.getProductCategoryID().getProductCategoryID());
-        ProductBrand productBrand = productBrandService.findById(product.getProductBrandID().getProductBrandID());
-        mm.put("listcate", productCategoryService.getAll());
-        mm.put("listbrand", productBrandService.getAll());
-        mm.put("category", productCategory);
-        mm.put("product", product);
-        mm.put("brand", productBrand);
-        mm.put("success", success);
-        return "admin/productform";
     }
 
     private String saveFile(MultipartFile file) {
@@ -247,12 +310,25 @@ public class ProductController {
 
     @RequestMapping(value = "remove")
     public String viewRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
-        Product p = productService.findById(id);
-        if (p != null) {
-            productService.delete(p);
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                Product p = productService.findById(id);
+                if (p != null) {
+                    productService.delete(p);
+                }
+                mm.put("list", productService.getAll());
+                return "admin/productmanage";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
         }
-        mm.put("list", productService.getAll());
-        return "admin/productmanage";
+
     }
 
     @RequestMapping(value = "/detail")

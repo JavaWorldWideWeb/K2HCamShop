@@ -63,14 +63,14 @@
     </style>
     <body>
         <div>
-            <div class="container-custom" style="margin-top: 20px;">
+            <div class="container-fluid" style="margin-top: 20px; width: 86%">
                 <div class="row">
                     <c:forEach items="${listbrand}" var="lb">
                         <div class="col-2"><a href="${pageContext.request.contextPath}/product/filterBrand?id=${lb.productBrandID}"><img src="${pageContext.request.contextPath}/imgbrand/${lb.img}" style="width: 100%;"></a></div>     
                             </c:forEach>
                 </div>
             </div>
-            <div class="container-custom" style="padding-top: 20px;">
+            <div class="container-fluid" style="padding-top: 20px;width: 86%">
                 <div class="row">
                     <div class="col-3" style="border-right: 1px #D2D2D2 solid;">
                         <form action="${pageContext.request.contextPath}/product/searchpro"/>

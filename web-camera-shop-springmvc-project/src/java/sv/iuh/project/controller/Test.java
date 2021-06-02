@@ -31,6 +31,7 @@ public class Test {
     private ProductService productService;
     @Autowired
     private StatisticalService statisticalService;
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String viewHome(ModelMap mm, HttpSession session) {
         mm.put("listbrand", productBrandService.getAll());
@@ -44,8 +45,16 @@ public class Test {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String viewLogin(ModelMap mm) {
-        return "user/login";
+    public String viewLogin(ModelMap mm, HttpSession session) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            return "redirect:/";
+
+        } else {
+
+            return "user/login";
+        }
+
     }
 
     @RequestMapping("/admin")
@@ -60,12 +69,12 @@ public class Test {
                 mm.put("tbrand", statisticalService.totalProductBrand());
                 mm.put("torder", statisticalService.totalOrderDetail());
                 mm.put("tproduct", statisticalService.totalProduct());
-                mm.put("listOr",statisticalService.newFiveOrder());
+                mm.put("listOr", statisticalService.newFiveOrder());
                 return "admin/dashboard";
             } else {
                 return "redirect:/";
             }
-        }else{
+        } else {
             return "redirect:/";
         }
     }

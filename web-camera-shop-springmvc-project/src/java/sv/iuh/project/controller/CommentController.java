@@ -27,39 +27,42 @@ import sv.iuh.project.service.RegisterService;
 @Controller
 @RequestMapping("/comment")
 public class CommentController {
+
     @Autowired
     private CommentService commentService;
     @Autowired
     private ProductService productService;
     @Autowired
     private RegisterService registerService;
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
-        UserShop userShop=(UserShop) session.getAttribute("userlogin");
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
         int productId = Integer.parseInt(request.getParameter("productId"));
-        String cmt=request.getParameter("cmt");
-        int rating=Integer.parseInt(request.getParameter("rating"));
-        Comment comment= new Comment();
+        String cmt = request.getParameter("cmt");
+        int rating = Integer.parseInt(request.getParameter("rating"));
+        Comment comment = new Comment();
         comment.setProductID(productService.findById(productId));
         comment.setUserID(userShop);
         comment.setCommentContent(cmt);
         comment.setVote(rating);
         commentService.create(comment);
         mm.put("listComment", commentService.getCommentProduct(productId));
-        return "redirect:/product/detail?id="+productId+"";
+        return "redirect:/product/detail?id=" + productId + "";
     }
+
     @RequestMapping(value = "/rep", method = RequestMethod.POST)
     public String viewProductRep(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
         request.setCharacterEncoding("UTF-8");
-        UserShop userShop=(UserShop) session.getAttribute("userlogin");
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
         int productId = Integer.parseInt(request.getParameter("productId"));
         int id = Integer.parseInt(request.getParameter("id"));
         int userId = Integer.parseInt(request.getParameter("userId"));
         int vote = Integer.parseInt(request.getParameter("vote"));
-        String cmt=request.getParameter("cmt");
-        String repcmt=request.getParameter("repCmt");
-        Comment comment= new Comment();
+        String cmt = request.getParameter("cmt");
+        String repcmt = request.getParameter("repCmt");
+        Comment comment = new Comment();
         comment.setCommentID(id);
         comment.setRepComment(repcmt);
         comment.setUserID(registerService.findById(userId));
@@ -68,40 +71,82 @@ public class CommentController {
         comment.setVote(vote);
         commentService.update(comment);
         mm.put("listComment", commentService.getCommentProduct(productId));
-        return "redirect:/product/detail?id="+productId+"";
+        return "redirect:/product/detail?id=" + productId + "";
     }
+
     @RequestMapping("/show")
-    public String viewHome(ModelMap mm) {
-        mm.put("list", commentService.getAll());
-        return "admin/commentmanage";
+    public String viewHome(ModelMap mm, HttpSession session) {
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                mm.put("list", commentService.getAll());
+                return "admin/commentmanage";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+
     }
+
     @RequestMapping(value = "remove")
     public String viewRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
-        Comment p = commentService.findById(id);
-        if (p != null) {
-            commentService.delete(p);
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                Comment p = commentService.findById(id);
+                if (p != null) {
+                    commentService.delete(p);
+                }
+                mm.put("list", commentService.getAll());
+                return "admin/commentmanage";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
         }
-        mm.put("list", commentService.getAll());
-        return "admin/commentmanage";
+
     }
+
     @RequestMapping(value = "/repadmin", method = RequestMethod.POST)
     public String viewProductRepAdmin(ModelMap mm, HttpSession session, HttpServletRequest request) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("UTF-8");
-        int productId = Integer.parseInt(request.getParameter("pId"));
-        int id = Integer.parseInt(request.getParameter("id"));
-        int userId = Integer.parseInt(request.getParameter("uId"));
-        int vote = Integer.parseInt(request.getParameter("vote"));
-        String cmt=request.getParameter("cmtC");
-        String repcmt=request.getParameter("rep");
-        Comment comment= new Comment();
-        comment.setCommentID(id);
-        comment.setRepComment(repcmt);
-        comment.setUserID(registerService.findById(userId));
-        comment.setCommentContent(cmt);
-        comment.setProductID(productService.findById(productId));
-        comment.setVote(vote);
-        commentService.update(comment);
-        mm.put("listComment", commentService.getCommentProduct(productId));
-        return "redirect:/comment/show";
+        UserShop userShop = (UserShop) session.getAttribute("userlogin");
+        if (userShop != null) {
+            if (userShop.getRole().equals("user")) {
+                return "redirect:/";
+            }
+            if (userShop.getRole().equals("admin")) {
+                request.setCharacterEncoding("UTF-8");
+                int productId = Integer.parseInt(request.getParameter("pId"));
+                int id = Integer.parseInt(request.getParameter("id"));
+                int userId = Integer.parseInt(request.getParameter("uId"));
+                int vote = Integer.parseInt(request.getParameter("vote"));
+                String cmt = request.getParameter("cmtC");
+                String repcmt = request.getParameter("rep");
+                Comment comment = new Comment();
+                comment.setCommentID(id);
+                comment.setRepComment(repcmt);
+                comment.setUserID(registerService.findById(userId));
+                comment.setCommentContent(cmt);
+                comment.setProductID(productService.findById(productId));
+                comment.setVote(vote);
+                commentService.update(comment);
+                mm.put("listComment", commentService.getCommentProduct(productId));
+                return "redirect:/comment/show";
+            } else {
+                return "redirect:/";
+            }
+        } else {
+            return "redirect:/";
+        }
+
     }
 }

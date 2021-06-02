@@ -37,27 +37,30 @@ public class ProductBrandManage {
     @RequestMapping("/show")
     public String viewHome(ModelMap mm, HttpSession session) {
         String link = adminDashboard(session);
-        if(link != null)
+        if (link != null) {
             return link;
+        }
         mm.put("list", productBrandService.getAll());
         return "admin/productbrandmanage";
     }
 
     @RequestMapping(value = "/showform", method = RequestMethod.GET)
-    public String viewProductNew(ModelMap mm, HttpSession session,@RequestParam(required = false) String success) {
+    public String viewProductNew(ModelMap mm, HttpSession session, @RequestParam(required = false) String success) {
         String link = adminDashboard(session);
-        if(link != null)
+        if (link != null) {
             return link;
+        }
         mm.put("list", productBrandService.getAllCountry());
         mm.put("success", success);
         return "admin/productbrandform";
     }
 
     @RequestMapping(value = "save", method = RequestMethod.POST)
-    public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request,@RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
+    public String viewProductSave(ModelMap mm, HttpSession session, HttpServletRequest request, @RequestParam(value = "image") MultipartFile photo) throws UnsupportedEncodingException {
         String link = adminDashboard(session);
-        if(link != null)
+        if (link != null) {
             return link;
+        }
         request.setCharacterEncoding("UTF-8");
         String name = request.getParameter("name");
         String nation = request.getParameter("nation");
@@ -65,36 +68,61 @@ public class ProductBrandManage {
         productBrand.setProductBrandName(name);
         productBrand.setNationalProduction(nation);
         productBrand.setImg(saveFile(photo));
+        int a = 0;
+        for (int i = 0; i < productBrandService.getAll().size(); i++) {
+            if (name.equalsIgnoreCase(productBrandService.getAll().get(i).getProductBrandName())) {
+                a++;
+            }
+        }
         if ("".equals(request.getParameter("id"))) {
-            productBrandService.create(productBrand);
-            mm.put("listProductBrand", productBrandService.getAll());
-            return "redirect:/productbrand/showform?success=Them thanh cong";
-        } else {
+            if (a > 0) {
+                mm.put("err", "Thương hiệu này đã tồn tại");
+                mm.put("list", productBrandService.getAllCountry());
+                return "admin/productbrandform";
+            } else {
+
+                productBrandService.create(productBrand);
+                mm.put("listProductBrand", productBrandService.getAll());
+                return "redirect:/productbrand/showform?success=Them thanh cong";
+            }
+        }
+        if (!"".equals(request.getParameter("id"))) {
             int id = Integer.parseInt(request.getParameter("id"));
+            String imgUp = request.getParameter("imgUp");
+            if (photo.isEmpty()) {
+                productBrand.setImg(imgUp);
+            } else {
+                productBrand.setImg(saveFile(photo));
+            }
             productBrand.setProductBrandID(id);
             productBrandService.update(productBrand);
             mm.put("productBrand", productBrand);
             mm.put("listProductBrand", productBrandService.getAll());
-            String inf="Sua thanh cong";
-            return "redirect:/productbrand/showformupdate?id="+id+"&success="+inf+"";
+            String inf = "Sua thanh cong";
+            return "redirect:/productbrand/showformupdate?id=" + id + "&success=" + inf + "";
         }
+        return "admin/productbrandmanage";
     }
+
     @RequestMapping(value = "/showformupdate")
-    public String showFormUdate(ModelMap mm, HttpSession session,@RequestParam("id") int id,@RequestParam(required = false) String success) {
+    public String showFormUdate(ModelMap mm, HttpSession session, @RequestParam("id") int id, @RequestParam(required = false) String success) {
         String link = adminDashboard(session);
-        if(link != null)
+        if (link != null) {
             return link;
-        ProductBrand productBrand=productBrandService.findById(id);
+        }
+        ProductBrand productBrand = productBrandService.findById(id);
         mm.put("productBrand", productBrand);
         mm.put("list", productBrandService.getAllCountry());
         mm.put("success", success);
         return "admin/productbrandform";
     }
+
     @RequestMapping(value = "remove")
     public String viewProductRemove(ModelMap mm, HttpSession session, @RequestParam("id") int id) {
         String link = adminDashboard(session);
-        if(link != null)
+        if (link != null) {
             return link;
+        }
         ProductBrand p = productBrandService.findById(id);
         if (p != null) {
             productBrandService.delete(p);
@@ -102,6 +130,7 @@ public class ProductBrandManage {
         mm.put("list", productBrandService.getAll());
         return "admin/productbrandmanage";
     }
+
     private String saveFile(MultipartFile file) {
         if (null != file && !file.isEmpty()) {
             try {
@@ -127,7 +156,7 @@ public class ProductBrandManage {
         }
         return null;
     }
-    
+
     public String adminDashboard(HttpSession session) {
         UserShop userShop = (UserShop) session.getAttribute("userlogin");
         if (userShop != null) {
@@ -139,7 +168,7 @@ public class ProductBrandManage {
             } else {
                 return "redirect:/";
             }
-        }else{
+        } else {
             return "redirect:/";
         }
     }
