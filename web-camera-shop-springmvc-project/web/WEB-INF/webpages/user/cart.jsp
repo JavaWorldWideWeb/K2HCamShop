@@ -97,7 +97,7 @@
                                                         <a href="${pageContext.request.contextPath}/cart/decrease/${map.value.product.productID}.html">
                                                             <input type="button" class="decrease" value="-" style="margin-right:-6px" />
                                                         </a>
-                                                        <input type="tel" class="quantity" name="quantity" value="<c:out value="${map.value.quantity}"/>" style="text-align: center" size="1" onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <= 57))" />
+                                                        <input type="tel" class="quantity" readonly name="quantity" value="<c:out value="${map.value.quantity}"/>" style="text-align: center" size="1" onkeypress="return (event.charCode != 8 && event.charCode == 0 || (event.charCode >= 48 && event.charCode <= 57))" />
                                                         <a href="${pageContext.request.contextPath}/cart/increase/${map.value.product.productID}.html">
                                                             <input type="button" class="increase" value="+" style="margin-left:-6px" />
                                                         </a>
